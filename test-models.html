@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MuleRouter Model Comparison</title>
+  <title>Image Model Comparison</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -16,16 +16,30 @@
 
     h1 {
       font-size: 24px;
-      margin-bottom: 16px;
+      margin-bottom: 8px;
       color: #ffd700;
+    }
+
+    h2 {
+      font-size: 18px;
+      margin: 40px 0 20px;
+      color: #ffd700;
+      border-bottom: 1px solid #333;
+      padding-bottom: 8px;
+    }
+
+    .subtitle {
+      color: #888;
+      font-size: 14px;
+      margin-bottom: 24px;
     }
 
     .prompt {
       background: #2a2a2a;
       padding: 20px;
-      margin-bottom: 40px;
+      margin-bottom: 24px;
       border-left: 4px solid #ffd700;
-      font-size: 14px;
+      font-size: 13px;
       line-height: 1.6;
     }
 
@@ -39,16 +53,8 @@
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 24px;
-    }
-
-    @media (max-width: 1200px) {
-      .grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 800px) {
-      .grid { grid-template-columns: 1fr; }
     }
 
     .card {
@@ -58,7 +64,7 @@
     }
 
     .card-header {
-      padding: 16px;
+      padding: 12px 16px;
       background: #333;
       display: flex;
       justify-content: space-between;
@@ -67,12 +73,15 @@
 
     .model-name {
       font-weight: bold;
-      font-size: 14px;
+      font-size: 13px;
     }
 
     .model-vendor {
-      font-size: 11px;
+      font-size: 10px;
       color: #888;
+      padding: 4px 8px;
+      background: #222;
+      border-radius: 4px;
     }
 
     .card-image {
@@ -81,6 +90,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      cursor: pointer;
+      position: relative;
     }
 
     .card-image img {
@@ -95,28 +106,31 @@
       font-size: 14px;
     }
 
+    .card-image:hover::before {
+      content: 'Click to enlarge';
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.8);
+      padding: 4px 12px;
+      font-size: 11px;
+      color: #fff;
+    }
+
     .card-footer {
-      padding: 16px;
-      font-size: 12px;
+      padding: 12px 16px;
+      font-size: 11px;
     }
-
-    .metric {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 8px;
-    }
-
-    .metric-label { color: #888; }
-    .metric-value { color: #fff; }
 
     .rating {
       display: flex;
       gap: 4px;
-      margin-top: 16px;
     }
 
     .rating button {
-      padding: 8px 16px;
+      flex: 1;
+      padding: 8px;
       background: #333;
       border: 1px solid #444;
       color: #fff;
@@ -124,241 +138,351 @@
       font-size: 12px;
     }
 
-    .rating button:hover {
-      background: #444;
-    }
-
-    .rating button.selected {
-      background: #ffd700;
-      color: #000;
-      border-color: #ffd700;
-    }
+    .rating button:hover { background: #444; }
+    .rating button.selected { background: #ffd700; color: #000; border-color: #ffd700; }
 
     .criteria {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .criterion {
+      padding: 12px 16px;
+      background: #2a2a2a;
+      border: 1px solid #333;
+      text-align: center;
+    }
+
+    .criterion-icon { font-size: 20px; margin-bottom: 4px; }
+    .criterion-name { font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: #888; }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.95);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .lightbox.active { display: flex; }
+
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+    }
+
+    .lightbox-label {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #ffd700;
+      color: #000;
+      padding: 8px 16px;
+      font-weight: bold;
+    }
+
+    .summary {
       margin-top: 40px;
       padding: 24px;
       background: #2a2a2a;
       border: 2px solid #333;
     }
 
-    .criteria h2 {
-      font-size: 16px;
-      margin-bottom: 16px;
-      color: #ffd700;
-    }
+    .summary h2 { margin: 0 0 16px; border: none; padding: 0; }
 
-    .criteria-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 16px;
-    }
-
-    .criterion {
-      text-align: center;
-      padding: 16px;
-      background: #333;
-    }
-
-    .criterion-icon {
-      font-size: 24px;
-      margin-bottom: 8px;
-    }
-
-    .criterion-name {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .notes {
-      margin-top: 40px;
-      padding: 24px;
-      background: #2a2a2a;
-    }
-
-    .notes h2 {
-      font-size: 16px;
-      margin-bottom: 16px;
-      color: #ffd700;
-    }
-
-    .notes textarea {
+    table {
       width: 100%;
-      height: 150px;
-      background: #1a1a1a;
-      border: 1px solid #444;
-      color: #fff;
-      padding: 16px;
-      font-family: inherit;
-      font-size: 14px;
-      resize: vertical;
+      border-collapse: collapse;
+      font-size: 12px;
     }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #333;
+    }
+
+    th { color: #888; font-weight: normal; text-transform: uppercase; font-size: 10px; }
+    td.score { color: #ffd700; font-weight: bold; }
   </style>
 </head>
 <body>
-  <h1>MuleRouter Model Comparison</h1>
+  <h1>Image Model Comparison</h1>
+  <p class="subtitle">Testing text rendering and detail quality for tarot card printing</p>
 
   <div class="prompt">
     <div class="prompt-label">Test Prompt</div>
-    <div id="promptText">Tarot card titled GROWTH with the word GROWTH in gold letters at the bottom, featuring a mystical tree with roots and branches forming an infinity symbol, ornate art nouveau border with Celtic knotwork, rich jewel tones, professional card game art, high detail</div>
+    Tarot card titled GROWTH with the word GROWTH in gold letters at the bottom, featuring a mystical tree with roots and branches forming an infinity symbol, ornate art nouveau border with Celtic knotwork, rich jewel tones, professional card game art, high detail
   </div>
 
   <div class="criteria">
-    <h2>Evaluation Criteria</h2>
-    <div class="criteria-grid">
-      <div class="criterion">
-        <div class="criterion-icon">Aa</div>
-        <div class="criterion-name">Text Legibility</div>
-      </div>
-      <div class="criterion">
-        <div class="criterion-icon">✧</div>
-        <div class="criterion-name">Fine Detail</div>
-      </div>
-      <div class="criterion">
-        <div class="criterion-icon">◐</div>
-        <div class="criterion-name">Color Richness</div>
-      </div>
-      <div class="criterion">
-        <div class="criterion-icon">▭</div>
-        <div class="criterion-name">Aspect Ratio</div>
-      </div>
-      <div class="criterion">
-        <div class="criterion-icon">☆</div>
-        <div class="criterion-name">Print Ready</div>
-      </div>
-    </div>
+    <div class="criterion"><div class="criterion-icon">Aa</div><div class="criterion-name">Text Legibility</div></div>
+    <div class="criterion"><div class="criterion-icon">✧</div><div class="criterion-name">Fine Detail</div></div>
+    <div class="criterion"><div class="criterion-icon">◐</div><div class="criterion-name">Color Richness</div></div>
+    <div class="criterion"><div class="criterion-icon">▭</div><div class="criterion-name">Aspect Ratio</div></div>
+    <div class="criterion"><div class="criterion-icon">☆</div><div class="criterion-name">Print Ready</div></div>
   </div>
 
-  <div class="grid" style="margin-top: 40px;">
-    <div class="card">
+  <h2>MuleRouter</h2>
+  <div class="grid">
+    <div class="card" data-model="nano-banana-pro">
       <div class="card-header">
         <span class="model-name">Nano Banana Pro</span>
         <span class="model-vendor">Google</span>
       </div>
-      <div class="card-image" id="img-nano">
+      <div class="card-image" onclick="openLightbox(this)">
         <img src="assets/test-models/nano-banana-pro.png" alt="Nano Banana Pro"
              onerror="this.parentElement.classList.add('loading'); this.style.display='none';">
       </div>
       <div class="card-footer">
-        <div class="metric">
-          <span class="metric-label">Text</span>
-          <span class="metric-value" id="text-nano">-</span>
-        </div>
-        <div class="metric">
-          <span class="metric-label">Detail</span>
-          <span class="metric-value" id="detail-nano">-</span>
-        </div>
-        <div class="metric">
-          <span class="metric-label">Colors</span>
-          <span class="metric-value" id="color-nano">-</span>
-        </div>
         <div class="rating">
-          <button onclick="rate('nano', 1)">1</button>
-          <button onclick="rate('nano', 2)">2</button>
-          <button onclick="rate('nano', 3)">3</button>
-          <button onclick="rate('nano', 4)">4</button>
-          <button onclick="rate('nano', 5)">5</button>
+          <button onclick="rate(this, 1)">1</button>
+          <button onclick="rate(this, 2)">2</button>
+          <button onclick="rate(this, 3)">3</button>
+          <button onclick="rate(this, 4)">4</button>
+          <button onclick="rate(this, 5)">5</button>
         </div>
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" data-model="wan-2.5">
       <div class="card-header">
         <span class="model-name">Wan 2.5</span>
         <span class="model-vendor">Alibaba</span>
       </div>
-      <div class="card-image" id="img-wan">
+      <div class="card-image" onclick="openLightbox(this)">
         <img src="assets/test-models/wan-2.5.png" alt="Wan 2.5"
              onerror="this.parentElement.classList.add('loading'); this.style.display='none';">
       </div>
       <div class="card-footer">
-        <div class="metric">
-          <span class="metric-label">Text</span>
-          <span class="metric-value" id="text-wan">-</span>
-        </div>
-        <div class="metric">
-          <span class="metric-label">Detail</span>
-          <span class="metric-value" id="detail-wan">-</span>
-        </div>
-        <div class="metric">
-          <span class="metric-label">Colors</span>
-          <span class="metric-value" id="color-wan">-</span>
-        </div>
         <div class="rating">
-          <button onclick="rate('wan', 1)">1</button>
-          <button onclick="rate('wan', 2)">2</button>
-          <button onclick="rate('wan', 3)">3</button>
-          <button onclick="rate('wan', 4)">4</button>
-          <button onclick="rate('wan', 5)">5</button>
+          <button onclick="rate(this, 1)">1</button>
+          <button onclick="rate(this, 2)">2</button>
+          <button onclick="rate(this, 3)">3</button>
+          <button onclick="rate(this, 4)">4</button>
+          <button onclick="rate(this, 5)">5</button>
         </div>
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" data-model="midjourney">
       <div class="card-header">
         <span class="model-name">Midjourney</span>
         <span class="model-vendor">Midjourney</span>
       </div>
-      <div class="card-image" id="img-mj">
+      <div class="card-image" onclick="openLightbox(this)">
         <img src="assets/test-models/midjourney.png" alt="Midjourney"
              onerror="this.parentElement.classList.add('loading'); this.style.display='none';">
       </div>
       <div class="card-footer">
-        <div class="metric">
-          <span class="metric-label">Text</span>
-          <span class="metric-value" id="text-mj">-</span>
-        </div>
-        <div class="metric">
-          <span class="metric-label">Detail</span>
-          <span class="metric-value" id="detail-mj">-</span>
-        </div>
-        <div class="metric">
-          <span class="metric-label">Colors</span>
-          <span class="metric-value" id="color-mj">-</span>
-        </div>
         <div class="rating">
-          <button onclick="rate('mj', 1)">1</button>
-          <button onclick="rate('mj', 2)">2</button>
-          <button onclick="rate('mj', 3)">3</button>
-          <button onclick="rate('mj', 4)">4</button>
-          <button onclick="rate('mj', 5)">5</button>
+          <button onclick="rate(this, 1)">1</button>
+          <button onclick="rate(this, 2)">2</button>
+          <button onclick="rate(this, 3)">3</button>
+          <button onclick="rate(this, 4)">4</button>
+          <button onclick="rate(this, 5)">5</button>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="notes">
-    <h2>Notes</h2>
-    <textarea placeholder="Compare the outputs... Which model best handles text? Which has the richest colors for printing?"></textarea>
+  <h2>Replicate</h2>
+  <div class="grid">
+    <div class="card" data-model="ideogram-v3">
+      <div class="card-header">
+        <span class="model-name">Ideogram v3</span>
+        <span class="model-vendor">Ideogram</span>
+      </div>
+      <div class="card-image" onclick="openLightbox(this)">
+        <img src="assets/test-replicate/ideogram-v3.png" alt="Ideogram v3"
+             onerror="this.parentElement.classList.add('loading'); this.style.display='none';">
+      </div>
+      <div class="card-footer">
+        <div class="rating">
+          <button onclick="rate(this, 1)">1</button>
+          <button onclick="rate(this, 2)">2</button>
+          <button onclick="rate(this, 3)">3</button>
+          <button onclick="rate(this, 4)">4</button>
+          <button onclick="rate(this, 5)">5</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-model="flux-schnell">
+      <div class="card-header">
+        <span class="model-name">Flux Schnell</span>
+        <span class="model-vendor">Black Forest Labs</span>
+      </div>
+      <div class="card-image" onclick="openLightbox(this)">
+        <img src="assets/test-replicate/flux-schnell.png" alt="Flux Schnell"
+             onerror="this.parentElement.classList.add('loading'); this.style.display='none';">
+      </div>
+      <div class="card-footer">
+        <div class="rating">
+          <button onclick="rate(this, 1)">1</button>
+          <button onclick="rate(this, 2)">2</button>
+          <button onclick="rate(this, 3)">3</button>
+          <button onclick="rate(this, 4)">4</button>
+          <button onclick="rate(this, 5)">5</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-model="flux-1.1-pro">
+      <div class="card-header">
+        <span class="model-name">Flux 1.1 Pro</span>
+        <span class="model-vendor">Black Forest Labs</span>
+      </div>
+      <div class="card-image" onclick="openLightbox(this)">
+        <img src="assets/test-replicate/flux-1.1-pro.png" alt="Flux 1.1 Pro"
+             onerror="this.parentElement.classList.add('loading'); this.style.display='none';">
+      </div>
+      <div class="card-footer">
+        <div class="rating">
+          <button onclick="rate(this, 1)">1</button>
+          <button onclick="rate(this, 2)">2</button>
+          <button onclick="rate(this, 3)">3</button>
+          <button onclick="rate(this, 4)">4</button>
+          <button onclick="rate(this, 5)">5</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-model="recraft-v3">
+      <div class="card-header">
+        <span class="model-name">Recraft v3</span>
+        <span class="model-vendor">Recraft AI</span>
+      </div>
+      <div class="card-image" onclick="openLightbox(this)">
+        <img src="assets/test-replicate/recraft-v3.png" alt="Recraft v3"
+             onerror="this.parentElement.classList.add('loading'); this.style.display='none';">
+      </div>
+      <div class="card-footer">
+        <div class="rating">
+          <button onclick="rate(this, 1)">1</button>
+          <button onclick="rate(this, 2)">2</button>
+          <button onclick="rate(this, 3)">3</button>
+          <button onclick="rate(this, 4)">4</button>
+          <button onclick="rate(this, 5)">5</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-model="stable-diffusion-3.5">
+      <div class="card-header">
+        <span class="model-name">SD 3.5 Large</span>
+        <span class="model-vendor">Stability AI</span>
+      </div>
+      <div class="card-image" onclick="openLightbox(this)">
+        <img src="assets/test-replicate/stable-diffusion-3.5.png" alt="Stable Diffusion 3.5"
+             onerror="this.parentElement.classList.add('loading'); this.style.display='none';">
+      </div>
+      <div class="card-footer">
+        <div class="rating">
+          <button onclick="rate(this, 1)">1</button>
+          <button onclick="rate(this, 2)">2</button>
+          <button onclick="rate(this, 3)">3</button>
+          <button onclick="rate(this, 4)">4</button>
+          <button onclick="rate(this, 5)">5</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="summary">
+    <h2>Summary</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Model</th>
+          <th>Provider</th>
+          <th>API</th>
+          <th>Your Rating</th>
+        </tr>
+      </thead>
+      <tbody id="summaryTable">
+        <tr><td>Nano Banana Pro</td><td>Google</td><td>MuleRouter</td><td class="score" id="score-nano-banana-pro">-</td></tr>
+        <tr><td>Wan 2.5</td><td>Alibaba</td><td>MuleRouter</td><td class="score" id="score-wan-2.5">-</td></tr>
+        <tr><td>Midjourney</td><td>Midjourney</td><td>MuleRouter</td><td class="score" id="score-midjourney">-</td></tr>
+        <tr><td>Ideogram v3</td><td>Ideogram</td><td>Replicate</td><td class="score" id="score-ideogram-v3">-</td></tr>
+        <tr><td>Flux Schnell</td><td>Black Forest Labs</td><td>Replicate</td><td class="score" id="score-flux-schnell">-</td></tr>
+        <tr><td>Flux 1.1 Pro</td><td>Black Forest Labs</td><td>Replicate</td><td class="score" id="score-flux-1.1-pro">-</td></tr>
+        <tr><td>Recraft v3</td><td>Recraft AI</td><td>Replicate</td><td class="score" id="score-recraft-v3">-</td></tr>
+        <tr><td>SD 3.5 Large</td><td>Stability AI</td><td>Replicate</td><td class="score" id="score-stable-diffusion-3.5">-</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="">
+    <div class="lightbox-label" id="lightbox-label"></div>
   </div>
 
   <script>
     const ratings = {};
 
-    function rate(model, score) {
+    function rate(btn, score) {
+      const card = btn.closest('.card');
+      const model = card.dataset.model;
       ratings[model] = score;
-      document.querySelectorAll(`.card:has(#img-${model}) .rating button`).forEach((btn, i) => {
-        btn.classList.toggle('selected', i + 1 <= score);
+
+      card.querySelectorAll('.rating button').forEach((b, i) => {
+        b.classList.toggle('selected', i + 1 <= score);
       });
-      console.log('Ratings:', ratings);
+
+      const scoreEl = document.getElementById('score-' + model);
+      if (scoreEl) scoreEl.textContent = score + '/5';
+
+      localStorage.setItem('model-ratings', JSON.stringify(ratings));
     }
 
-    // Auto-refresh images every 10 seconds until loaded
-    function checkImages() {
+    function openLightbox(el) {
+      const img = el.querySelector('img');
+      const card = el.closest('.card');
+      if (img && img.src) {
+        document.getElementById('lightbox-img').src = img.src;
+        document.getElementById('lightbox-label').textContent = card.querySelector('.model-name').textContent;
+        document.getElementById('lightbox').classList.add('active');
+      }
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    // Load saved ratings
+    const saved = localStorage.getItem('model-ratings');
+    if (saved) {
+      const savedRatings = JSON.parse(saved);
+      Object.entries(savedRatings).forEach(([model, score]) => {
+        const card = document.querySelector(`[data-model="${model}"]`);
+        if (card) {
+          const btn = card.querySelectorAll('.rating button')[score - 1];
+          if (btn) rate(btn, score);
+        }
+      });
+    }
+
+    // Auto-refresh images
+    setInterval(() => {
       document.querySelectorAll('.card-image.loading img').forEach(img => {
         img.src = img.src.split('?')[0] + '?t=' + Date.now();
         img.style.display = '';
-        img.onerror = () => {
-          img.style.display = 'none';
-          img.parentElement.classList.add('loading');
-        };
-        img.onload = () => {
-          img.parentElement.classList.remove('loading');
-        };
       });
-    }
-
-    setInterval(checkImages, 10000);
+    }, 10000);
   </script>
 </body>
 </html>
