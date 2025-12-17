@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Future Vision - Print Sheet</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Source+Sans+Pro:wght@400;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: letter;
+      margin: 0.25in;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #444;
+      font-family: 'Source Sans Pro', sans-serif;
+    }
+
+    .info {
+      max-width: 8.5in;
+      margin: 20px auto;
+      padding: 16px 20px;
+      background: #222;
+      color: #fff;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .info h1 {
+      font-size: 18px;
+      color: #c9a227;
+    }
+
+    .info p {
+      font-size: 13px;
+      color: #888;
+      margin-top: 4px;
+    }
+
+    .info button {
+      background: #c9a227;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .info button:hover {
+      background: #d4b32a;
+    }
+
+    .page {
+      width: 8.5in;
+      min-height: 11in;
+      padding: 0.35in;
+      display: grid;
+      grid-template-columns: repeat(3, 2.5in);
+      grid-auto-rows: 3.5in;
+      gap: 0.1in;
+      justify-content: center;
+      align-content: start;
+      page-break-after: always;
+      background: white;
+      margin: 20px auto;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+
+    .page:last-child {
+      page-break-after: auto;
+    }
+
+    .card {
+      width: 2.5in;
+      height: 3.5in;
+      border-radius: 0.125in;
+      overflow: hidden;
+      background: #1a1a1a;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card .artwork {
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .card .artwork img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card .text-panel {
+      background: linear-gradient(to bottom, #1a1a1a, #0f0f0f);
+      padding: 8px 10px 10px;
+      border-top: 1px solid #333;
+    }
+
+    .card .category {
+      font-size: 8px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+
+    .card .title {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: #fff;
+    }
+
+    /* Card back */
+    .card-back {
+      width: 2.5in;
+      height: 3.5in;
+      border-radius: 0.125in;
+      overflow: hidden;
+      position: relative;
+      background: linear-gradient(135deg, #0d1117 0%, #080810 50%, #0d1117 100%);
+    }
+
+    .card-back .pattern {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image:
+        repeating-linear-gradient(45deg, transparent, transparent 12px, rgba(201, 162, 39, 0.06) 12px, rgba(201, 162, 39, 0.06) 13px),
+        repeating-linear-gradient(-45deg, transparent, transparent 12px, rgba(201, 162, 39, 0.06) 12px, rgba(201, 162, 39, 0.06) 13px);
+    }
+
+    .card-back .border-outer {
+      position: absolute;
+      top: 0.15in; left: 0.15in; right: 0.15in; bottom: 0.15in;
+      border: 2px solid #c9a227;
+      border-radius: 0.06in;
+    }
+
+    .card-back .border-inner {
+      position: absolute;
+      top: 0.22in; left: 0.22in; right: 0.22in; bottom: 0.22in;
+      border: 1px solid rgba(201, 162, 39, 0.4);
+      border-radius: 0.04in;
+    }
+
+    .card-back .center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .card-back .eye {
+      width: 0.6in;
+      height: 0.3in;
+      border: 2px solid #c9a227;
+      border-radius: 50%;
+      position: relative;
+      margin: 0 auto 0.15in;
+    }
+
+    .card-back .eye::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 0.15in;
+      height: 0.15in;
+      background: #c9a227;
+      border-radius: 50%;
+    }
+
+    .card-back .eye::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 0.06in;
+      height: 0.06in;
+      background: #080810;
+      border-radius: 50%;
+    }
+
+    .card-back .back-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      letter-spacing: 0.2em;
+      color: #c9a227;
+      margin-bottom: 4px;
+    }
+
+    .card-back .back-subtitle {
+      font-family: 'Playfair Display', serif;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: rgba(201, 162, 39, 0.6);
+      font-style: italic;
+    }
+
+    /* Print styles */
+    @media print {
+      body {
+        background: white;
+      }
+
+      .info {
+        display: none;
+      }
+
+      .page {
+        margin: 0;
+        box-shadow: none;
+      }
+
+      .card, .card-back {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+
+    /* Category colors */
+    .cat-wellbeing { color: #FFD93D; }
+    .cat-arc { color: #a855f7; }
+    .cat-terrain { color: #4ECDC4; }
+    .cat-object { color: #FF8C42; }
+    .cat-timeframe { color: #60a5fa; }
+    .cat-modifier { color: #f87171; }
+  </style>
+</head>
+<body>
+
+  <div class="info">
+    <div>
+      <h1>Future Vision - Printable Cards</h1>
+      <p>10 cards | Clean art deco style | Print double-sided, flip on long edge</p>
+    </div>
+    <button onclick="window.print()">Print All</button>
+  </div>
+
+  <!-- Page 1: Card Fronts (9 cards) -->
+  <div class="page">
+    <div class="card">
+      <div class="artwork"><img src="autonomy.png" alt="Autonomy"></div>
+      <div class="text-panel">
+        <div class="category cat-wellbeing">Wellbeing</div>
+        <div class="title">Autonomy</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="artwork"><img src="impact.png" alt="Impact"></div>
+      <div class="text-panel">
+        <div class="category cat-wellbeing">Wellbeing</div>
+        <div class="title">Impact</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="artwork"><img src="relatedness.png" alt="Relatedness"></div>
+      <div class="text-panel">
+        <div class="category cat-wellbeing">Wellbeing</div>
+        <div class="title">Relatedness</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="artwork"><img src="stimulation.png" alt="Stimulation"></div>
+      <div class="text-panel">
+        <div class="category cat-wellbeing">Wellbeing</div>
+        <div class="title">Stimulation</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="artwork"><img src="growth.png" alt="Growth"></div>
+      <div class="text-panel">
+        <div class="category cat-arc">Arc</div>
+        <div class="title">Growth</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="artwork"><img src="ocean.png" alt="The Ocean"></div>
+      <div class="text-panel">
+        <div class="category cat-terrain">Terrain</div>
+        <div class="title">The Ocean</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="artwork"><img src="ritual.png" alt="Ritual"></div>
+      <div class="text-panel">
+        <div class="category cat-object">Object</div>
+        <div class="title">Ritual</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="artwork"><img src="5years.png" alt="5 Years"></div>
+      <div class="text-panel">
+        <div class="category cat-timeframe">Timeframe</div>
+        <div class="title">5 Years</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="artwork"><img src="breakthrough.png" alt="Breakthrough"></div>
+      <div class="text-panel">
+        <div class="category cat-modifier">Modifier</div>
+        <div class="title">Breakthrough</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page 2: Card Backs -->
+  <div class="page">
+    <div class="card-back">
+      <div class="pattern"></div>
+      <div class="border-outer"></div>
+      <div class="border-inner"></div>
+      <div class="center">
+        <div class="eye"></div>
+        <div class="back-title">FUTURE VISION</div>
+        <div class="back-subtitle">Speculative Oracle</div>
+      </div>
+    </div>
+    <div class="card-back">
+      <div class="pattern"></div>
+      <div class="border-outer"></div>
+      <div class="border-inner"></div>
+      <div class="center">
+        <div class="eye"></div>
+        <div class="back-title">FUTURE VISION</div>
+        <div class="back-subtitle">Speculative Oracle</div>
+      </div>
+    </div>
+    <div class="card-back">
+      <div class="pattern"></div>
+      <div class="border-outer"></div>
+      <div class="border-inner"></div>
+      <div class="center">
+        <div class="eye"></div>
+        <div class="back-title">FUTURE VISION</div>
+        <div class="back-subtitle">Speculative Oracle</div>
+      </div>
+    </div>
+    <div class="card-back">
+      <div class="pattern"></div>
+      <div class="border-outer"></div>
+      <div class="border-inner"></div>
+      <div class="center">
+        <div class="eye"></div>
+        <div class="back-title">FUTURE VISION</div>
+        <div class="back-subtitle">Speculative Oracle</div>
+      </div>
+    </div>
+    <div class="card-back">
+      <div class="pattern"></div>
+      <div class="border-outer"></div>
+      <div class="border-inner"></div>
+      <div class="center">
+        <div class="eye"></div>
+        <div class="back-title">FUTURE VISION</div>
+        <div class="back-subtitle">Speculative Oracle</div>
+      </div>
+    </div>
+    <div class="card-back">
+      <div class="pattern"></div>
+      <div class="border-outer"></div>
+      <div class="border-inner"></div>
+      <div class="center">
+        <div class="eye"></div>
+        <div class="back-title">FUTURE VISION</div>
+        <div class="back-subtitle">Speculative Oracle</div>
+      </div>
+    </div>
+    <div class="card-back">
+      <div class="pattern"></div>
+      <div class="border-outer"></div>
+      <div class="border-inner"></div>
+      <div class="center">
+        <div class="eye"></div>
+        <div class="back-title">FUTURE VISION</div>
+        <div class="back-subtitle">Speculative Oracle</div>
+      </div>
+    </div>
+    <div class="card-back">
+      <div class="pattern"></div>
+      <div class="border-outer"></div>
+      <div class="border-inner"></div>
+      <div class="center">
+        <div class="eye"></div>
+        <div class="back-title">FUTURE VISION</div>
+        <div class="back-subtitle">Speculative Oracle</div>
+      </div>
+    </div>
+    <div class="card-back">
+      <div class="pattern"></div>
+      <div class="border-outer"></div>
+      <div class="border-inner"></div>
+      <div class="center">
+        <div class="eye"></div>
+        <div class="back-title">FUTURE VISION</div>
+        <div class="back-subtitle">Speculative Oracle</div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

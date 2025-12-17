@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Future Vision - Speculative Oracle</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Source+Sans+Pro:wght@300;400;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #c9a227;
+      --dark: #0a0a12;
+      --light: #f8f6f0;
+      --text: #333;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Source Sans Pro', sans-serif;
+      background: var(--light);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      background: var(--dark);
+      color: #fff;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(42px, 8vw, 64px);
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    header p {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-style: italic;
+      color: rgba(255,255,255,0.7);
+    }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 50px 20px;
+    }
+
+    .intro {
+      font-size: 18px;
+      color: #555;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 24px;
+      margin: 40px 0;
+    }
+
+    .card-preview {
+      text-align: center;
+    }
+
+    .card-preview img {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      transition: transform 0.2s;
+    }
+
+    .card-preview img:hover {
+      transform: scale(1.05);
+    }
+
+    .card-preview span {
+      display: block;
+      margin-top: 10px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .actions {
+      text-align: center;
+      margin: 50px 0;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 28px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      margin: 8px;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--dark);
+    }
+
+    .btn-primary:hover {
+      background: #d4b32a;
+    }
+
+    .btn-secondary {
+      background: var(--dark);
+      color: #fff;
+    }
+
+    .btn-secondary:hover {
+      background: #2a2a2a;
+    }
+
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.6);
+      padding: 30px 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    footer a {
+      color: var(--gold);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>FUTURE VISION</h1>
+    <p>Clean art deco style for speculative foresight</p>
+  </header>
+
+  <main>
+    <p class="intro">
+      A streamlined 10-card deck with bold art deco imagery.
+      Perfect for quick workshop exercises and focused scenario building.
+    </p>
+
+    <div class="card-grid">
+      <div class="card-preview">
+        <img src="autonomy.png" alt="Autonomy">
+        <span>Autonomy</span>
+      </div>
+      <div class="card-preview">
+        <img src="impact.png" alt="Impact">
+        <span>Impact</span>
+      </div>
+      <div class="card-preview">
+        <img src="relatedness.png" alt="Relatedness">
+        <span>Relatedness</span>
+      </div>
+      <div class="card-preview">
+        <img src="stimulation.png" alt="Stimulation">
+        <span>Stimulation</span>
+      </div>
+      <div class="card-preview">
+        <img src="growth.png" alt="Growth">
+        <span>Growth</span>
+      </div>
+      <div class="card-preview">
+        <img src="ocean.png" alt="The Ocean">
+        <span>The Ocean</span>
+      </div>
+      <div class="card-preview">
+        <img src="ritual.png" alt="Ritual">
+        <span>Ritual</span>
+      </div>
+      <div class="card-preview">
+        <img src="5years.png" alt="5 Years">
+        <span>5 Years</span>
+      </div>
+      <div class="card-preview">
+        <img src="breakthrough.png" alt="Breakthrough">
+        <span>Breakthrough</span>
+      </div>
+    </div>
+
+    <div class="actions">
+      <a href="print.html" class="btn btn-primary">Print Cards</a>
+      <a href="../index.html" class="btn btn-secondary">Back to Futures Deck</a>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      Part of the <a href="../index.html">Futures Deck</a> project.
+      <a href="https://github.com/JDerekLomas/futures-deck">View on GitHub</a>
+    </p>
+  </footer>
+
+</body>
+</html>
