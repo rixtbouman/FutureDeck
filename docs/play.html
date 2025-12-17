@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Futures Deck - Digital Oracle</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Source+Sans+Pro:wght@300;400;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #c9a227;
+      --dark: #0a0a12;
+      --light: #f8f6f0;
+      --wellbeing: #4a3d10;
+      --arc: #2d1f4d;
+      --terrain: #1a3d3a;
+      --outcome: #4d2a10;
+      --timeframe: #1a2a4d;
+      --modifier: #4d1a1a;
+      --technology: #1a3d4d;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Source Sans Pro', sans-serif;
+      background: var(--dark);
+      color: #fff;
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(to bottom, #0d0d15, var(--dark));
+      padding: 30px 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(201, 162, 39, 0.3);
+    }
+
+    header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 36px;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 30px 20px;
+    }
+
+    .spread-area {
+      min-height: 280px;
+      background: rgba(255,255,255,0.03);
+      border: 2px dashed rgba(201, 162, 39, 0.3);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 30px;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .spread-area.empty::before {
+      content: 'Draw cards from the deck below to build your spread';
+      color: rgba(255,255,255,0.3);
+      font-style: italic;
+    }
+
+    .spread-area .card {
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .spread-area .card:hover {
+      transform: scale(1.05);
+    }
+
+    .controls {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--dark);
+    }
+
+    .btn-primary:hover {
+      background: #d4b32a;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    .btn-danger {
+      background: rgba(248, 113, 113, 0.2);
+      color: #f87171;
+      border: 1px solid rgba(248, 113, 113, 0.3);
+    }
+
+    .btn-danger:hover {
+      background: rgba(248, 113, 113, 0.3);
+    }
+
+    .deck-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      margin-bottom: 15px;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .category-group {
+      margin-bottom: 25px;
+    }
+
+    .category-group h3 {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      padding-left: 5px;
+    }
+
+    .category-group.wellbeing h3 { color: #FFD93D; }
+    .category-group.arc h3 { color: #c084fc; }
+    .category-group.terrain h3 { color: #4ECDC4; }
+    .category-group.outcome h3 { color: #FF8C42; }
+    .category-group.timeframe h3 { color: #60a5fa; }
+    .category-group.modifier h3 { color: #f87171; }
+    .category-group.technology h3 { color: #22d3ee; }
+
+    .card-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      width: 120px;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #1a1a1a;
+      cursor: pointer;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .card.in-spread {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    .card .artwork {
+      height: 100px;
+      overflow: hidden;
+    }
+
+    .card .artwork img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card .info {
+      padding: 8px;
+    }
+
+    .card .info .category {
+      font-size: 8px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+
+    .card .info .title {
+      font-family: 'Playfair Display', serif;
+      font-size: 13px;
+      color: #fff;
+    }
+
+    .card.wellbeing .info { background: linear-gradient(to bottom, #4a3d10, #3d3008); }
+    .card.wellbeing .category { color: #FFD93D; }
+    .card.arc .info { background: linear-gradient(to bottom, #2d1f4d, #231839); }
+    .card.arc .category { color: #c084fc; }
+    .card.terrain .info { background: linear-gradient(to bottom, #1a3d3a, #132d2b); }
+    .card.terrain .category { color: #4ECDC4; }
+    .card.outcome .info { background: linear-gradient(to bottom, #4d2a10, #3d2008); }
+    .card.outcome .category { color: #FF8C42; }
+    .card.timeframe .info { background: linear-gradient(to bottom, #1a2a4d, #132039); }
+    .card.timeframe .category { color: #60a5fa; }
+    .card.modifier .info { background: linear-gradient(to bottom, #4d1a1a, #3d1313); }
+    .card.modifier .category { color: #f87171; }
+    .card.technology .info { background: linear-gradient(to bottom, #1a3d4d, #133039); }
+    .card.technology .category { color: #22d3ee; }
+
+    /* Spread card styling */
+    .spread-area .card {
+      width: 150px;
+    }
+
+    .spread-area .card .artwork {
+      height: 130px;
+    }
+
+    .spread-area .card .prompt {
+      padding: 6px 8px;
+      font-size: 8px;
+      line-height: 1.3;
+      color: rgba(255,255,255,0.85);
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.9);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: #1a1a1a;
+      border-radius: 12px;
+      max-width: 700px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      border: 1px solid rgba(201, 162, 39, 0.3);
+    }
+
+    .modal-header {
+      padding: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-header h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+      opacity: 0.6;
+    }
+
+    .modal-close:hover {
+      opacity: 1;
+    }
+
+    .modal-body {
+      padding: 20px;
+    }
+
+    .spread-summary {
+      background: rgba(0,0,0,0.3);
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 20px;
+      font-size: 13px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      font-family: monospace;
+    }
+
+    .modal-body textarea {
+      width: 100%;
+      min-height: 200px;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 8px;
+      padding: 15px;
+      color: #fff;
+      font-size: 14px;
+      line-height: 1.6;
+      resize: vertical;
+      margin-bottom: 15px;
+    }
+
+    .modal-body textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    .scenario-output {
+      background: rgba(201, 162, 39, 0.1);
+      border: 1px solid rgba(201, 162, 39, 0.3);
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 20px;
+      line-height: 1.7;
+    }
+
+    .scenario-output h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold);
+      margin-bottom: 15px;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .loading::after {
+      content: '';
+      animation: dots 1.5s infinite;
+    }
+
+    @keyframes dots {
+      0%, 20% { content: '.'; }
+      40% { content: '..'; }
+      60%, 100% { content: '...'; }
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      color: rgba(255,255,255,0.4);
+      font-size: 13px;
+    }
+
+    footer a {
+      color: var(--gold);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>FUTURES DECK</h1>
+    <p>Draw cards to explore possible futures</p>
+  </header>
+
+  <main>
+    <div class="spread-area empty" id="spreadArea">
+    </div>
+
+    <div class="controls">
+      <button class="btn btn-primary" onclick="drawRandom()">Draw Random Card</button>
+      <button class="btn btn-secondary" onclick="drawSpread()">Draw Full Spread (5)</button>
+      <button class="btn btn-secondary" onclick="interpretSpread()">Interpret Spread</button>
+      <button class="btn btn-danger" onclick="clearSpread()">Clear Spread</button>
+    </div>
+
+    <div class="deck-section">
+      <h2>Card Deck</h2>
+
+      <div class="category-group wellbeing">
+        <h3>Wellbeing</h3>
+        <div class="card-row" id="wellbeingCards"></div>
+      </div>
+
+      <div class="category-group arc">
+        <h3>Arc</h3>
+        <div class="card-row" id="arcCards"></div>
+      </div>
+
+      <div class="category-group terrain">
+        <h3>Terrain</h3>
+        <div class="card-row" id="terrainCards"></div>
+      </div>
+
+      <div class="category-group outcome">
+        <h3>Outcome</h3>
+        <div class="card-row" id="outcomeCards"></div>
+      </div>
+
+      <div class="category-group timeframe">
+        <h3>Timeframe</h3>
+        <div class="card-row" id="timeframeCards"></div>
+      </div>
+
+      <div class="category-group modifier">
+        <h3>Modifier</h3>
+        <div class="card-row" id="modifierCards"></div>
+      </div>
+
+      <div class="category-group technology">
+        <h3>Technology</h3>
+        <div class="card-row" id="technologyCards"></div>
+      </div>
+    </div>
+  </main>
+
+  <div class="modal" id="interpretModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>INTERPRET YOUR SPREAD</h2>
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="margin-bottom: 15px; color: rgba(255,255,255,0.7);">
+          Copy this spread description and paste it into ChatGPT, Claude, or your preferred AI to generate a scenario:
+        </p>
+        <div class="spread-summary" id="spreadSummary"></div>
+        <button class="btn btn-primary" onclick="copySpread()" style="width: 100%;">Copy to Clipboard</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>
+      <a href="index.html">About Futures Deck</a> &middot;
+      <a href="print.html">Print Cards</a> &middot;
+      <a href="https://github.com/JDerekLomas/futures-deck">GitHub</a>
+    </p>
+  </footer>
+
+  <script>
+    const CARDS = [
+      // Wellbeing
+      { id: 'well-01', category: 'wellbeing', title: 'Autonomy', image: 'cards/well-01.png', prompt: 'How much control do people have over their own lives? Can they opt out of systems they disagree with? Who decides what choices are available to them?' },
+      { id: 'well-02', category: 'wellbeing', title: 'Impact', image: 'cards/well-02.png', prompt: 'Can individuals make a meaningful difference? Are people\'s contributions visible and valued? Do actions have consequences that matter?' },
+      { id: 'well-03', category: 'wellbeing', title: 'Relatedness', image: 'cards/well-03.png', prompt: 'How do people connect with each other? Are communities stronger or more fragmented? Do people feel understood and part of something larger?' },
+      { id: 'well-04', category: 'wellbeing', title: 'Stimulation', image: 'cards/well-04.png', prompt: 'Is life engaging or monotonous? Do people have access to novelty, challenge, and variety? What keeps minds active and curious?' },
+      { id: 'well-05', category: 'wellbeing', title: 'Security', image: 'cards/well-05.png', prompt: 'Do people feel safe from threats? Are resources reliable and the future predictable? What risks do people live with daily?' },
+      { id: 'well-06', category: 'wellbeing', title: 'Purpose', image: 'cards/well-06.png', prompt: 'Do people have goals worth pursuing? Does life feel meaningful and coherent? What gives people a reason to get up in the morning?' },
+      { id: 'well-07', category: 'wellbeing', title: 'Competence', image: 'cards/well-07.png', prompt: 'Can people develop mastery and feel effective? Are skills still valuable, or has automation made humans feel obsolete?' },
+      { id: 'well-08', category: 'wellbeing', title: 'Comfort', image: 'cards/well-08.png', prompt: 'Are basic physical needs met? Do people live with chronic pain, hunger, or discomfort? What does daily bodily experience feel like?' },
+
+      // Arc
+      { id: 'arc-01', category: 'arc', title: 'Growth', image: 'cards/arc-01.png', prompt: 'The trajectory is expansion. Systems scale up, populations increase, capabilities multiply. More of everything—but is it sustainable?' },
+      { id: 'arc-02', category: 'arc', title: 'Collapse', image: 'cards/arc-02.png', prompt: 'The trajectory is decline. Systems fail, infrastructure crumbles, institutions weaken. What falls apart, and what rises from the rubble?' },
+      { id: 'arc-03', category: 'arc', title: 'Transformation', image: 'cards/arc-03.png', prompt: 'The trajectory is metamorphosis. Old forms dissolve, new patterns emerge. Not growth or decline—fundamental change in kind.' },
+      { id: 'arc-04', category: 'arc', title: 'Discipline', image: 'cards/arc-04.png', prompt: 'The trajectory is control. Order is imposed from above, regulation tightens, stability through enforcement. Who holds the reins?' },
+
+      // Terrain
+      { id: 'terrain-01', category: 'terrain', title: 'The Ocean', image: 'cards/terrain-01.png', prompt: 'Set this future at sea or on the coast. Consider shipping, fishing, underwater resources, rising waters, marine ecosystems.' },
+      { id: 'terrain-02', category: 'terrain', title: 'The City', image: 'cards/terrain-02.png', prompt: 'Set this future in urban space. Consider density, infrastructure, transit, housing, public life, the rhythm of streets.' },
+      { id: 'terrain-03', category: 'terrain', title: 'The Home', image: 'cards/terrain-03.png', prompt: 'Set this future in domestic space. Consider family dynamics, living arrangements, private life, the walls we live within.' },
+      { id: 'terrain-04', category: 'terrain', title: 'The Wilderness', image: 'cards/terrain-04.png', prompt: 'Set this future in nature untamed. Consider forests, mountains, rural life. What happens beyond the reach of civilization?' },
+      { id: 'terrain-05', category: 'terrain', title: 'The Workplace', image: 'cards/terrain-05.png', prompt: 'Set this future at work. Consider offices, factories, remote setups. How do people earn their living and spend their days?' },
+      { id: 'terrain-06', category: 'terrain', title: 'The School', image: 'cards/terrain-06.png', prompt: 'Set this future in education. Consider classrooms, universities, training. How do people learn and transmit knowledge?' },
+      { id: 'terrain-07', category: 'terrain', title: 'The Hospital', image: 'cards/terrain-07.png', prompt: 'Set this future in healthcare. Consider clinics, emergency rooms, care facilities. How do we heal and face mortality?' },
+
+      // Outcome
+      { id: 'object-01', category: 'outcome', title: 'Ritual', image: 'cards/object-01.png', prompt: 'A practice or tradition emerges. What do people do repeatedly, ceremonially? What new customs give life rhythm and meaning?' },
+      { id: 'object-02', category: 'outcome', title: 'Device', image: 'cards/object-02.png', prompt: 'A technology artifact is central. What object do people hold, wear, or interact with? How does it mediate their experience?' },
+      { id: 'object-03', category: 'outcome', title: 'Startup', image: 'cards/object-03.png', prompt: 'A new venture disrupts the status quo. What garage innovation upends established players? Who are the founders, and what drives them?' },
+      { id: 'object-04', category: 'outcome', title: 'Government Service', image: 'cards/object-04.png', prompt: 'A public program or agency takes center stage. What does the state provide? Who benefits, who\'s left out, what\'s the bureaucratic experience?' },
+
+      // Timeframe
+      { id: 'time-02', category: 'timeframe', title: 'Now', image: 'cards/time-02.png', prompt: 'Set this scenario in the present day. What\'s already happening that most people haven\'t noticed? What choices are being made right now?' },
+      { id: 'time-03', category: 'timeframe', title: '6 Months', image: 'cards/time-03.png', prompt: 'Set this scenario half a year out. What\'s about to launch or ship? What seeds planted today are just starting to sprout?' },
+      { id: 'time-04', category: 'timeframe', title: '1 Year', image: 'cards/time-04.png', prompt: 'Set this scenario one year out. What annual cycles have completed? What\'s different about next year\'s version of today?' },
+      { id: 'time-05', category: 'timeframe', title: '2 Years', image: 'cards/time-05.png', prompt: 'Set this scenario two years out. What relationships and investments have had time to mature? What\'s no longer new?' },
+      { id: 'time-01', category: 'timeframe', title: '5 Years', image: 'cards/time-01.png', prompt: 'Set this scenario five years out. What emerging technologies have gone mainstream? What debates have been settled?' },
+      { id: 'time-06', category: 'timeframe', title: '10 Years', image: 'cards/time-06.png', prompt: 'Set this scenario a decade out. What feels normal that would shock us today? What do children take for granted?' },
+
+      // Modifier
+      { id: 'mod-01', category: 'modifier', title: 'Breakthrough', image: 'cards/mod-01.png', prompt: 'Something unexpected succeeds. A barrier falls, a discovery accelerates the timeline. What seemed impossible becomes inevitable.' },
+      { id: 'mod-02', category: 'modifier', title: 'Setback', image: 'cards/mod-02.png', prompt: 'Something goes wrong. Plans are disrupted, progress reversed. What obstacle appears, and how do people adapt?' },
+
+      // Technology
+      { id: 'tech-01', category: 'technology', title: 'AI', image: 'cards/tech-01.png', prompt: 'Artificial intelligence drives this future. Consider automation, decision-making, creativity. What can machines do, and what remains human?' },
+      { id: 'tech-02', category: 'technology', title: 'Quantum', image: 'cards/tech-02.png', prompt: 'Quantum technology reshapes this future. Consider computing, cryptography, sensing. What problems become solvable? What secrets become exposed?' },
+      { id: 'tech-03', category: 'technology', title: 'Biotech', image: 'cards/tech-03.png', prompt: 'Biotechnology drives this future. Consider gene editing, synthetic biology, medicine. What can we redesign about life itself?' },
+      { id: 'tech-04', category: 'technology', title: 'Robotics', image: 'cards/tech-04.png', prompt: 'Robots and automation shape this future. Consider manufacturing, service, companionship. What physical tasks do machines now perform?' },
+    ];
+
+    let spread = [];
+
+    function init() {
+      // Render cards into category groups
+      const categories = ['wellbeing', 'arc', 'terrain', 'outcome', 'timeframe', 'modifier', 'technology'];
+      categories.forEach(cat => {
+        const container = document.getElementById(cat + 'Cards');
+        const cards = CARDS.filter(c => c.category === cat);
+        cards.forEach(card => {
+          container.appendChild(createCardElement(card, false));
+        });
+      });
+    }
+
+    function createCardElement(card, forSpread = false) {
+      const div = document.createElement('div');
+      div.className = `card ${card.category}`;
+      div.dataset.id = card.id;
+
+      if (spread.some(c => c.id === card.id)) {
+        div.classList.add('in-spread');
+      }
+
+      let html = `
+        <div class="artwork"><img src="${card.image}" alt="${card.title}"></div>
+        <div class="info">
+          <div class="category">${card.category}</div>
+          <div class="title">${card.title}</div>
+        </div>
+      `;
+
+      if (forSpread) {
+        html += `<div class="prompt">${card.prompt}</div>`;
+      }
+
+      div.innerHTML = html;
+
+      if (forSpread) {
+        div.onclick = () => removeFromSpread(card.id);
+      } else {
+        div.onclick = () => addToSpread(card.id);
+      }
+
+      return div;
+    }
+
+    function addToSpread(cardId) {
+      const card = CARDS.find(c => c.id === cardId);
+      if (!card || spread.some(c => c.id === cardId)) return;
+
+      spread.push(card);
+      renderSpread();
+      updateDeckCards();
+    }
+
+    function removeFromSpread(cardId) {
+      spread = spread.filter(c => c.id !== cardId);
+      renderSpread();
+      updateDeckCards();
+    }
+
+    function renderSpread() {
+      const area = document.getElementById('spreadArea');
+      area.innerHTML = '';
+      area.classList.toggle('empty', spread.length === 0);
+
+      spread.forEach(card => {
+        area.appendChild(createCardElement(card, true));
+      });
+    }
+
+    function updateDeckCards() {
+      document.querySelectorAll('.deck-section .card').forEach(el => {
+        const id = el.dataset.id;
+        el.classList.toggle('in-spread', spread.some(c => c.id === id));
+      });
+    }
+
+    function drawRandom() {
+      const available = CARDS.filter(c => !spread.some(s => s.id === c.id));
+      if (available.length === 0) return;
+
+      const randomCard = available[Math.floor(Math.random() * available.length)];
+      addToSpread(randomCard.id);
+    }
+
+    function drawSpread() {
+      clearSpread();
+
+      // Draw one from each major category for a balanced spread
+      const categories = ['wellbeing', 'arc', 'terrain', 'timeframe'];
+
+      categories.forEach(cat => {
+        const available = CARDS.filter(c => c.category === cat && !spread.some(s => s.id === c.id));
+        if (available.length > 0) {
+          const randomCard = available[Math.floor(Math.random() * available.length)];
+          spread.push(randomCard);
+        }
+      });
+
+      // Add one more from outcome, modifier, or technology
+      const extras = CARDS.filter(c =>
+        ['outcome', 'modifier', 'technology'].includes(c.category) &&
+        !spread.some(s => s.id === c.id)
+      );
+      if (extras.length > 0) {
+        const randomCard = extras[Math.floor(Math.random() * extras.length)];
+        spread.push(randomCard);
+      }
+
+      renderSpread();
+      updateDeckCards();
+    }
+
+    function clearSpread() {
+      spread = [];
+      renderSpread();
+      updateDeckCards();
+    }
+
+    function interpretSpread() {
+      if (spread.length === 0) {
+        alert('Draw some cards first!');
+        return;
+      }
+
+      const summary = generateSpreadText();
+      document.getElementById('spreadSummary').textContent = summary;
+      document.getElementById('interpretModal').classList.add('active');
+    }
+
+    function generateSpreadText() {
+      let text = `I've drawn the following cards from the Futures Deck. Please weave them into a vivid, concrete scenario:\n\n`;
+
+      spread.forEach((card, i) => {
+        text += `${i + 1}. ${card.title} (${card.category.toUpperCase()})\n`;
+        text += `   ${card.prompt}\n\n`;
+      });
+
+      text += `---\n\n`;
+      text += `Please create a specific, believable scenario based on these cards. Include:\n`;
+      text += `- A concrete description of daily life in this future\n`;
+      text += `- Specific details that make it feel real\n`;
+      text += `- Second-order implications and tensions\n`;
+      text += `- A brief narrative moment or scene\n\n`;
+      text += `Then generate an illustration depicting a key moment from this future.`;
+
+      return text;
+    }
+
+    function copySpread() {
+      const text = document.getElementById('spreadSummary').textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = event.target;
+        btn.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.textContent = 'Copy to Clipboard';
+        }, 2000);
+      });
+    }
+
+    function closeModal() {
+      document.getElementById('interpretModal').classList.remove('active');
+    }
+
+    // Close modal on outside click
+    document.getElementById('interpretModal').addEventListener('click', (e) => {
+      if (e.target.classList.contains('modal')) {
+        closeModal();
+      }
+    });
+
+    // Initialize
+    init();
+  </script>
+
+</body>
+</html>

@@ -103,9 +103,8 @@
     }
 
     .card .text-panel {
-      background: linear-gradient(to bottom, #1a1a1a, #0f0f0f);
-      padding: 8px 10px 10px;
-      border-top: 1px solid #333;
+      padding: 5px 10px 6px;
+      border-top: 1px solid rgba(255,255,255,0.1);
     }
 
     .card .category {
@@ -113,24 +112,67 @@
       font-weight: 600;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      margin-bottom: 2px;
+      margin-bottom: 1px;
     }
 
     .card .title {
       font-family: 'Playfair Display', serif;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 500;
       color: #fff;
     }
 
     .card .prompt-area {
-      background: #f8f6f0;
       padding: 6px 8px;
       font-size: 9px;
       line-height: 1.4;
-      color: #333;
-      border-top: 1px solid #e0e0e0;
+      color: rgba(255,255,255,0.9);
+      height: 0.55in;
+      overflow: hidden;
     }
+
+    /* Category-colored panels */
+    .card.wellbeing .text-panel,
+    .card.wellbeing .prompt-area {
+      background: linear-gradient(to bottom, #4a3d10, #3d3008);
+    }
+    .card.wellbeing .category { color: #FFD93D; }
+
+    .card.arc .text-panel,
+    .card.arc .prompt-area {
+      background: linear-gradient(to bottom, #2d1f4d, #231839);
+    }
+    .card.arc .category { color: #c084fc; }
+
+    .card.terrain .text-panel,
+    .card.terrain .prompt-area {
+      background: linear-gradient(to bottom, #1a3d3a, #132d2b);
+    }
+    .card.terrain .category { color: #4ECDC4; }
+
+    .card.outcome .text-panel,
+    .card.outcome .prompt-area {
+      background: linear-gradient(to bottom, #4d2a10, #3d2008);
+    }
+    .card.outcome .category { color: #FF8C42; }
+
+    .card.timeframe .text-panel,
+    .card.timeframe .prompt-area {
+      background: linear-gradient(to bottom, #1a2a4d, #132039);
+    }
+    .card.timeframe .category { color: #60a5fa; }
+
+    .card.modifier .text-panel,
+    .card.modifier .prompt-area {
+      background: linear-gradient(to bottom, #4d1a1a, #3d1313);
+    }
+    .card.modifier .category { color: #f87171; }
+
+    .card.technology .text-panel,
+    .card.technology .prompt-area {
+      background: linear-gradient(to bottom, #1a3d4d, #133039);
+    }
+    .card.technology .category { color: #22d3ee; }
 
     /* Card back */
     .card-back {
@@ -269,13 +311,6 @@
       }
     }
 
-    /* Category colors */
-    .cat-wellbeing { color: #FFD93D; }
-    .cat-arc { color: #a855f7; }
-    .cat-terrain { color: #4ECDC4; }
-    .cat-object { color: #FF8C42; }
-    .cat-timeframe { color: #60a5fa; }
-    .cat-modifier { color: #f87171; }
   </style>
 </head>
 <body>
@@ -283,7 +318,7 @@
   <div class="info">
     <div>
       <h1>Futures Deck - Printable Cards</h1>
-      <p>18 vision cards + 4 prompt cards | Print double-sided, flip on long edge</p>
+      <p>35 vision cards + 4 prompt cards | Print double-sided, flip on long edge</p>
     </div>
     <div class="buttons">
       <button onclick="window.print()">Print All</button>
@@ -292,178 +327,336 @@
 
   <!-- Page 1: Wellbeing Cards (8 cards) -->
   <div class="page">
-    <div class="card">
+    <div class="card wellbeing">
       <div class="artwork"><img src="cards/well-01.png" alt="Autonomy"></div>
       <div class="text-panel">
-        <div class="category cat-wellbeing">Wellbeing</div>
+        <div class="category">Wellbeing</div>
         <div class="title">Autonomy</div>
       </div>
-      <div class="prompt-area">Independence, self-direction, freedom to choose. Control over decisions, personal agency, opt-out power.</div>
+      <div class="prompt-area">How much control do people have over their own lives? Can they opt out of systems they disagree with? Who decides what choices are available to them?</div>
     </div>
 
-    <div class="card">
+    <div class="card wellbeing">
       <div class="artwork"><img src="cards/well-02.png" alt="Impact"></div>
       <div class="text-panel">
-        <div class="category cat-wellbeing">Wellbeing</div>
+        <div class="category">Wellbeing</div>
         <div class="title">Impact</div>
       </div>
-      <div class="prompt-area">Making a difference, meaningful contribution, leaving a mark. Influence on outcomes, visible effects of actions.</div>
+      <div class="prompt-area">Can individuals make a meaningful difference? Are people's contributions visible and valued? Do actions have consequences that matter?</div>
     </div>
 
-    <div class="card">
+    <div class="card wellbeing">
       <div class="artwork"><img src="cards/well-03.png" alt="Relatedness"></div>
       <div class="text-panel">
-        <div class="category cat-wellbeing">Wellbeing</div>
+        <div class="category">Wellbeing</div>
         <div class="title">Relatedness</div>
       </div>
-      <div class="prompt-area">Connection, belonging, social bonds. Relationships with others, community ties, feeling understood.</div>
+      <div class="prompt-area">How do people connect with each other? Are communities stronger or more fragmented? Do people feel understood and part of something larger?</div>
     </div>
 
-    <div class="card">
+    <div class="card wellbeing">
       <div class="artwork"><img src="cards/well-04.png" alt="Stimulation"></div>
       <div class="text-panel">
-        <div class="category cat-wellbeing">Wellbeing</div>
+        <div class="category">Wellbeing</div>
         <div class="title">Stimulation</div>
       </div>
-      <div class="prompt-area">Novelty, variety, excitement. New experiences, mental engagement, avoiding boredom and routine.</div>
+      <div class="prompt-area">Is life engaging or monotonous? Do people have access to novelty, challenge, and variety? What keeps minds active and curious?</div>
     </div>
 
-    <div class="card">
+    <div class="card wellbeing">
       <div class="artwork"><img src="cards/well-05.png" alt="Security"></div>
       <div class="text-panel">
-        <div class="category cat-wellbeing">Wellbeing</div>
+        <div class="category">Wellbeing</div>
         <div class="title">Security</div>
       </div>
-      <div class="prompt-area">Safety, stability, predictability. Protection from harm, reliable resources, manageable risk.</div>
+      <div class="prompt-area">Do people feel safe from threats? Are resources reliable and the future predictable? What risks do people live with daily?</div>
     </div>
 
-    <div class="card">
+    <div class="card wellbeing">
       <div class="artwork"><img src="cards/well-06.png" alt="Purpose"></div>
       <div class="text-panel">
-        <div class="category cat-wellbeing">Wellbeing</div>
+        <div class="category">Wellbeing</div>
         <div class="title">Purpose</div>
       </div>
-      <div class="prompt-area">Meaning, direction, significance. Goals worth pursuing, sense of mission, life coherence.</div>
+      <div class="prompt-area">Do people have goals worth pursuing? Does life feel meaningful and coherent? What gives people a reason to get up in the morning?</div>
     </div>
 
-    <div class="card">
+    <div class="card wellbeing">
       <div class="artwork"><img src="cards/well-07.png" alt="Competence"></div>
       <div class="text-panel">
-        <div class="category cat-wellbeing">Wellbeing</div>
+        <div class="category">Wellbeing</div>
         <div class="title">Competence</div>
       </div>
-      <div class="prompt-area">Mastery, skill, effectiveness. Ability to succeed, learning and growth, feeling capable.</div>
+      <div class="prompt-area">Can people develop mastery and feel effective? Are skills still valuable, or has automation made humans feel obsolete?</div>
     </div>
 
-    <div class="card">
+    <div class="card wellbeing">
       <div class="artwork"><img src="cards/well-08.png" alt="Comfort"></div>
       <div class="text-panel">
-        <div class="category cat-wellbeing">Wellbeing</div>
+        <div class="category">Wellbeing</div>
         <div class="title">Comfort</div>
       </div>
-      <div class="prompt-area">Ease, pleasure, physical wellbeing. Absence of pain, sensory satisfaction, bodily needs met.</div>
+      <div class="prompt-area">Are basic physical needs met? Do people live with chronic pain, hunger, or discomfort? What does daily bodily experience feel like?</div>
     </div>
 
     <!-- Empty slot -->
     <div style="width: 2.5in; height: 3.5in;"></div>
   </div>
 
-  <!-- Page 2: Arc + Terrain + Object + Time + Modifier Cards -->
+  <!-- Page 2: Arc + Terrain + Outcome Cards -->
   <div class="page">
-    <div class="card">
+    <div class="card arc">
       <div class="artwork"><img src="cards/arc-01.png" alt="Growth"></div>
       <div class="text-panel">
-        <div class="category cat-arc">Arc</div>
+        <div class="category">Arc</div>
         <div class="title">Growth</div>
       </div>
-      <div class="prompt-area">Expansion, increase, flourishing. Systems scaling up, populations growing, capabilities multiplying.</div>
+      <div class="prompt-area">The trajectory is expansion. Systems scale up, populations increase, capabilities multiply. More of everything—but is it sustainable?</div>
     </div>
 
-    <div class="card">
+    <div class="card arc">
       <div class="artwork"><img src="cards/arc-02.png" alt="Collapse"></div>
       <div class="text-panel">
-        <div class="category cat-arc">Arc</div>
+        <div class="category">Arc</div>
         <div class="title">Collapse</div>
       </div>
-      <div class="prompt-area">Decline, breakdown, failure. Systems under stress, infrastructure crumbling, institutions weakening.</div>
+      <div class="prompt-area">The trajectory is decline. Systems fail, infrastructure crumbles, institutions weaken. What falls apart, and what rises from the rubble?</div>
     </div>
 
-    <div class="card">
+    <div class="card arc">
       <div class="artwork"><img src="cards/arc-03.png" alt="Transformation"></div>
       <div class="text-panel">
-        <div class="category cat-arc">Arc</div>
+        <div class="category">Arc</div>
         <div class="title">Transformation</div>
       </div>
-      <div class="prompt-area">Fundamental change, metamorphosis, paradigm shift. Old forms dissolving, new patterns emerging.</div>
+      <div class="prompt-area">The trajectory is metamorphosis. Old forms dissolve, new patterns emerge. Not growth or decline—fundamental change in kind.</div>
     </div>
 
-    <div class="card">
+    <div class="card arc">
+      <div class="artwork"><img src="cards/arc-04.png" alt="Discipline"></div>
+      <div class="text-panel">
+        <div class="category">Arc</div>
+        <div class="title">Discipline</div>
+      </div>
+      <div class="prompt-area">The trajectory is control. Order is imposed from above, regulation tightens, stability through enforcement. Who holds the reins?</div>
+    </div>
+
+    <div class="card terrain">
       <div class="artwork"><img src="cards/terrain-01.png" alt="The Ocean"></div>
       <div class="text-panel">
-        <div class="category cat-terrain">Terrain</div>
+        <div class="category">Terrain</div>
         <div class="title">The Ocean</div>
       </div>
-      <div class="prompt-area">Marine systems, coastal life, deep sea. Shipping, fishing, underwater resources, rising seas, ocean health.</div>
+      <div class="prompt-area">Set this future at sea or on the coast. Consider shipping, fishing, underwater resources, rising waters, marine ecosystems.</div>
     </div>
 
-    <div class="card">
+    <div class="card terrain">
       <div class="artwork"><img src="cards/terrain-02.png" alt="The City"></div>
       <div class="text-panel">
-        <div class="category cat-terrain">Terrain</div>
+        <div class="category">Terrain</div>
         <div class="title">The City</div>
       </div>
-      <div class="prompt-area">Urban environment, dense population, built space. Infrastructure, transit, housing, public life, city services.</div>
+      <div class="prompt-area">Set this future in urban space. Consider density, infrastructure, transit, housing, public life, the rhythm of streets.</div>
     </div>
 
-    <div class="card">
+    <div class="card terrain">
       <div class="artwork"><img src="cards/terrain-03.png" alt="The Home"></div>
       <div class="text-panel">
-        <div class="category cat-terrain">Terrain</div>
+        <div class="category">Terrain</div>
         <div class="title">The Home</div>
       </div>
-      <div class="prompt-area">Domestic space, private life, household. Family dynamics, living arrangements, home technology, shelter.</div>
+      <div class="prompt-area">Set this future in domestic space. Consider family dynamics, living arrangements, private life, the walls we live within.</div>
     </div>
 
-    <div class="card">
+    <div class="card outcome">
       <div class="artwork"><img src="cards/object-01.png" alt="Ritual"></div>
       <div class="text-panel">
-        <div class="category cat-object">Object</div>
+        <div class="category">Outcome</div>
         <div class="title">Ritual</div>
       </div>
-      <div class="prompt-area">Repeated practice, ceremony, tradition. Daily routines, cultural customs, meaningful patterns of behavior.</div>
+      <div class="prompt-area">A practice or tradition emerges. What do people do repeatedly, ceremonially? What new customs give life rhythm and meaning?</div>
     </div>
 
-    <div class="card">
+    <div class="card outcome">
       <div class="artwork"><img src="cards/object-02.png" alt="Device"></div>
       <div class="text-panel">
-        <div class="category cat-object">Object</div>
+        <div class="category">Outcome</div>
         <div class="title">Device</div>
       </div>
-      <div class="prompt-area">Tool, gadget, technology artifact. Something held, worn, or used. Interface between human and system.</div>
-    </div>
-
-    <div class="card">
-      <div class="artwork"><img src="cards/time-01.png" alt="5 Years"></div>
-      <div class="text-panel">
-        <div class="category cat-timeframe">Timeframe</div>
-        <div class="title">5 Years</div>
-      </div>
-      <div class="prompt-area">Near future, emerging trends. Technologies in development, policies being debated, shifts underway.</div>
+      <div class="prompt-area">A technology artifact is central. What object do people hold, wear, or interact with? How does it mediate their experience?</div>
     </div>
   </div>
 
-  <!-- Page 3: Modifier + Prompt Cards -->
+  <!-- Page 3: Outcome + Timeframe + Modifier Cards -->
   <div class="page">
-    <div class="card">
-      <div class="artwork"><img src="cards/mod-01.png" alt="Breakthrough"></div>
+    <div class="card outcome">
+      <div class="artwork"><img src="cards/object-03.png" alt="Startup"></div>
       <div class="text-panel">
-        <div class="category cat-modifier">Modifier</div>
-        <div class="title">Breakthrough</div>
+        <div class="category">Outcome</div>
+        <div class="title">Startup</div>
       </div>
-      <div class="prompt-area">Sudden advance, unexpected success, barrier broken. Accelerates timeline, opens new possibilities.</div>
+      <div class="prompt-area">A new venture disrupts the status quo. What garage innovation upends established players? Who are the founders, and what drives them?</div>
     </div>
 
-    <!-- Prompt Cards -->
+    <div class="card timeframe">
+      <div class="artwork"><img src="cards/time-02.png" alt="Now"></div>
+      <div class="text-panel">
+        <div class="category">Timeframe</div>
+        <div class="title">Now</div>
+      </div>
+      <div class="prompt-area">Set this scenario in the present day. What's already happening that most people haven't noticed? What choices are being made right now?</div>
+    </div>
+
+    <div class="card timeframe">
+      <div class="artwork"><img src="cards/time-03.png" alt="6 Months"></div>
+      <div class="text-panel">
+        <div class="category">Timeframe</div>
+        <div class="title">6 Months</div>
+      </div>
+      <div class="prompt-area">Set this scenario half a year out. What's about to launch or ship? What seeds planted today are just starting to sprout?</div>
+    </div>
+
+    <div class="card timeframe">
+      <div class="artwork"><img src="cards/time-04.png" alt="1 Year"></div>
+      <div class="text-panel">
+        <div class="category">Timeframe</div>
+        <div class="title">1 Year</div>
+      </div>
+      <div class="prompt-area">Set this scenario one year out. What annual cycles have completed? What's different about next year's version of today?</div>
+    </div>
+
+    <div class="card timeframe">
+      <div class="artwork"><img src="cards/time-05.png" alt="2 Years"></div>
+      <div class="text-panel">
+        <div class="category">Timeframe</div>
+        <div class="title">2 Years</div>
+      </div>
+      <div class="prompt-area">Set this scenario two years out. What relationships and investments have had time to mature? What's no longer new?</div>
+    </div>
+
+    <div class="card timeframe">
+      <div class="artwork"><img src="cards/time-01.png" alt="5 Years"></div>
+      <div class="text-panel">
+        <div class="category">Timeframe</div>
+        <div class="title">5 Years</div>
+      </div>
+      <div class="prompt-area">Set this scenario five years out. What emerging technologies have gone mainstream? What debates have been settled?</div>
+    </div>
+
+    <div class="card timeframe">
+      <div class="artwork"><img src="cards/time-06.png" alt="10 Years"></div>
+      <div class="text-panel">
+        <div class="category">Timeframe</div>
+        <div class="title">10 Years</div>
+      </div>
+      <div class="prompt-area">Set this scenario a decade out. What feels normal that would shock us today? What do children take for granted?</div>
+    </div>
+
+    <div class="card modifier">
+      <div class="artwork"><img src="cards/mod-01.png" alt="Breakthrough"></div>
+      <div class="text-panel">
+        <div class="category">Modifier</div>
+        <div class="title">Breakthrough</div>
+      </div>
+      <div class="prompt-area">Something unexpected succeeds. A barrier falls, a discovery accelerates the timeline. What seemed impossible becomes inevitable.</div>
+    </div>
+
+    <div class="card modifier">
+      <div class="artwork"><img src="cards/mod-02.png" alt="Setback"></div>
+      <div class="text-panel">
+        <div class="category">Modifier</div>
+        <div class="title">Setback</div>
+      </div>
+      <div class="prompt-area">Something goes wrong. Plans are disrupted, progress reversed. What obstacle appears, and how do people adapt?</div>
+    </div>
+  </div>
+
+  <!-- Page 4: More Terrain + Outcome + Technology Cards -->
+  <div class="page">
+    <div class="card terrain">
+      <div class="artwork"><img src="cards/terrain-04.png" alt="The Wilderness"></div>
+      <div class="text-panel">
+        <div class="category">Terrain</div>
+        <div class="title">The Wilderness</div>
+      </div>
+      <div class="prompt-area">Set this future in nature untamed. Consider forests, mountains, rural life. What happens beyond the reach of civilization?</div>
+    </div>
+
+    <div class="card terrain">
+      <div class="artwork"><img src="cards/terrain-05.png" alt="The Workplace"></div>
+      <div class="text-panel">
+        <div class="category">Terrain</div>
+        <div class="title">The Workplace</div>
+      </div>
+      <div class="prompt-area">Set this future at work. Consider offices, factories, remote setups. How do people earn their living and spend their days?</div>
+    </div>
+
+    <div class="card terrain">
+      <div class="artwork"><img src="cards/terrain-06.png" alt="The School"></div>
+      <div class="text-panel">
+        <div class="category">Terrain</div>
+        <div class="title">The School</div>
+      </div>
+      <div class="prompt-area">Set this future in education. Consider classrooms, universities, training. How do people learn and transmit knowledge?</div>
+    </div>
+
+    <div class="card terrain">
+      <div class="artwork"><img src="cards/terrain-07.png" alt="The Hospital"></div>
+      <div class="text-panel">
+        <div class="category">Terrain</div>
+        <div class="title">The Hospital</div>
+      </div>
+      <div class="prompt-area">Set this future in healthcare. Consider clinics, emergency rooms, care facilities. How do we heal and face mortality?</div>
+    </div>
+
+    <div class="card outcome">
+      <div class="artwork"><img src="cards/object-04.png" alt="Government Service"></div>
+      <div class="text-panel">
+        <div class="category">Outcome</div>
+        <div class="title">Government Service</div>
+      </div>
+      <div class="prompt-area">A public program or agency takes center stage. What does the state provide? Who benefits, who's left out, what's the bureaucratic experience?</div>
+    </div>
+
+    <div class="card technology">
+      <div class="artwork"><img src="cards/tech-01.png" alt="AI"></div>
+      <div class="text-panel">
+        <div class="category">Technology</div>
+        <div class="title">AI</div>
+      </div>
+      <div class="prompt-area">Artificial intelligence drives this future. Consider automation, decision-making, creativity. What can machines do, and what remains human?</div>
+    </div>
+
+    <div class="card technology">
+      <div class="artwork"><img src="cards/tech-02.png" alt="Quantum"></div>
+      <div class="text-panel">
+        <div class="category">Technology</div>
+        <div class="title">Quantum</div>
+      </div>
+      <div class="prompt-area">Quantum technology reshapes this future. Consider computing, cryptography, sensing. What problems become solvable? What secrets become exposed?</div>
+    </div>
+
+    <div class="card technology">
+      <div class="artwork"><img src="cards/tech-03.png" alt="Biotech"></div>
+      <div class="text-panel">
+        <div class="category">Technology</div>
+        <div class="title">Biotech</div>
+      </div>
+      <div class="prompt-area">Biotechnology drives this future. Consider gene editing, synthetic biology, medicine. What can we redesign about life itself?</div>
+    </div>
+
+    <div class="card technology">
+      <div class="artwork"><img src="cards/tech-04.png" alt="Robotics"></div>
+      <div class="text-panel">
+        <div class="category">Technology</div>
+        <div class="title">Robotics</div>
+      </div>
+      <div class="prompt-area">Robots and automation shape this future. Consider manufacturing, service, companionship. What physical tasks do machines now perform?</div>
+    </div>
+  </div>
+
+  <!-- Page 5: Prompt Cards -->
+  <div class="page">
     <div class="prompt-card">
       <div class="prompt-title">DESCRIBE THIS FUTURE</div>
       <div class="prompt-text">
@@ -511,7 +704,7 @@
     <div style="width: 2.5in; height: 3.5in;"></div>
   </div>
 
-  <!-- Page 4: Card Backs (for double-sided printing) -->
+  <!-- Page 5: Card Backs (for double-sided printing) -->
   <div class="page">
     <div class="card-back">
       <div class="pattern"></div>
@@ -605,7 +798,7 @@
     </div>
   </div>
 
-  <!-- Page 5: More Card Backs -->
+  <!-- Page 6: More Card Backs -->
   <div class="page">
     <div class="card-back">
       <div class="pattern"></div>
@@ -699,8 +892,162 @@
     </div>
   </div>
 
-  <!-- Page 6: Remaining Card Backs -->
+  <!-- Page 7: Remaining Card Backs -->
   <div class="page">
+    <div class="card-back">
+      <div class="pattern"></div>
+      <div class="border-outer"></div>
+      <div class="border-inner"></div>
+      <div class="center">
+        <div class="eye"></div>
+        <div class="back-title">FUTURES DECK</div>
+        <div class="back-subtitle">Speculative Oracle</div>
+      </div>
+    </div>
+    <div class="card-back">
+      <div class="pattern"></div>
+      <div class="border-outer"></div>
+      <div class="border-inner"></div>
+      <div class="center">
+        <div class="eye"></div>
+        <div class="back-title">FUTURES DECK</div>
+        <div class="back-subtitle">Speculative Oracle</div>
+      </div>
+    </div>
+    <div class="card-back">
+      <div class="pattern"></div>
+      <div class="border-outer"></div>
+      <div class="border-inner"></div>
+      <div class="center">
+        <div class="eye"></div>
+        <div class="back-title">FUTURES DECK</div>
+        <div class="back-subtitle">Speculative Oracle</div>
+      </div>
+    </div>
+    <div class="card-back">
+      <div class="pattern"></div>
+      <div class="border-outer"></div>
+      <div class="border-inner"></div>
+      <div class="center">
+        <div class="eye"></div>
+        <div class="back-title">FUTURES DECK</div>
+        <div class="back-subtitle">Speculative Oracle</div>
+      </div>
+    </div>
+    <div class="card-back">
+      <div class="pattern"></div>
+      <div class="border-outer"></div>
+      <div class="border-inner"></div>
+      <div class="center">
+        <div class="eye"></div>
+        <div class="back-title">FUTURES DECK</div>
+        <div class="back-subtitle">Speculative Oracle</div>
+      </div>
+    </div>
+    <div class="card-back">
+      <div class="pattern"></div>
+      <div class="border-outer"></div>
+      <div class="border-inner"></div>
+      <div class="center">
+        <div class="eye"></div>
+        <div class="back-title">FUTURES DECK</div>
+        <div class="back-subtitle">Speculative Oracle</div>
+      </div>
+    </div>
+    <div class="card-back">
+      <div class="pattern"></div>
+      <div class="border-outer"></div>
+      <div class="border-inner"></div>
+      <div class="center">
+        <div class="eye"></div>
+        <div class="back-title">FUTURES DECK</div>
+        <div class="back-subtitle">Speculative Oracle</div>
+      </div>
+    </div>
+    <div class="card-back">
+      <div class="pattern"></div>
+      <div class="border-outer"></div>
+      <div class="border-inner"></div>
+      <div class="center">
+        <div class="eye"></div>
+        <div class="back-title">FUTURES DECK</div>
+        <div class="back-subtitle">Speculative Oracle</div>
+      </div>
+    </div>
+    <div class="card-back">
+      <div class="pattern"></div>
+      <div class="border-outer"></div>
+      <div class="border-inner"></div>
+      <div class="center">
+        <div class="eye"></div>
+        <div class="back-title">FUTURES DECK</div>
+        <div class="back-subtitle">Speculative Oracle</div>
+      </div>
+    </div>
+    <div class="card-back">
+      <div class="pattern"></div>
+      <div class="border-outer"></div>
+      <div class="border-inner"></div>
+      <div class="center">
+        <div class="eye"></div>
+        <div class="back-title">FUTURES DECK</div>
+        <div class="back-subtitle">Speculative Oracle</div>
+      </div>
+    </div>
+    <div class="card-back">
+      <div class="pattern"></div>
+      <div class="border-outer"></div>
+      <div class="border-inner"></div>
+      <div class="center">
+        <div class="eye"></div>
+        <div class="back-title">FUTURES DECK</div>
+        <div class="back-subtitle">Speculative Oracle</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page 9: More Card Backs -->
+  <div class="page">
+    <div class="card-back">
+      <div class="pattern"></div>
+      <div class="border-outer"></div>
+      <div class="border-inner"></div>
+      <div class="center">
+        <div class="eye"></div>
+        <div class="back-title">FUTURES DECK</div>
+        <div class="back-subtitle">Speculative Oracle</div>
+      </div>
+    </div>
+    <div class="card-back">
+      <div class="pattern"></div>
+      <div class="border-outer"></div>
+      <div class="border-inner"></div>
+      <div class="center">
+        <div class="eye"></div>
+        <div class="back-title">FUTURES DECK</div>
+        <div class="back-subtitle">Speculative Oracle</div>
+      </div>
+    </div>
+    <div class="card-back">
+      <div class="pattern"></div>
+      <div class="border-outer"></div>
+      <div class="border-inner"></div>
+      <div class="center">
+        <div class="eye"></div>
+        <div class="back-title">FUTURES DECK</div>
+        <div class="back-subtitle">Speculative Oracle</div>
+      </div>
+    </div>
+    <div class="card-back">
+      <div class="pattern"></div>
+      <div class="border-outer"></div>
+      <div class="border-inner"></div>
+      <div class="center">
+        <div class="eye"></div>
+        <div class="back-title">FUTURES DECK</div>
+        <div class="back-subtitle">Speculative Oracle</div>
+      </div>
+    </div>
     <div class="card-back">
       <div class="pattern"></div>
       <div class="border-outer"></div>
