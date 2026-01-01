@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Decks - Futures & Plant Intelligence</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Source Sans Pro', sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 56px;
+      font-weight: 400;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #c9a227 0%, #76c893 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-size: 18px;
+      color: #aaa;
+      font-weight: 300;
+    }
+
+    .decks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 40px;
+      margin-top: 60px;
+    }
+
+    .deck-card {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+      border-radius: 12px;
+      padding: 40px;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: 2px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .deck-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+
+    .deck-card.futures {
+      border-color: #c9a227;
+      background: linear-gradient(135deg, rgba(201, 162, 39, 0.05) 0%, rgba(201, 162, 39, 0.02) 100%);
+    }
+
+    .deck-card.futures:hover {
+      border-color: #d4ad2e;
+      box-shadow: 0 20px 40px rgba(201, 162, 39, 0.2);
+    }
+
+    .deck-card.plant {
+      border-color: #76c893;
+      background: linear-gradient(135deg, rgba(118, 200, 147, 0.05) 0%, rgba(118, 200, 147, 0.02) 100%);
+    }
+
+    .deck-card.plant:hover {
+      border-color: #52b788;
+      box-shadow: 0 20px 40px rgba(118, 200, 147, 0.2);
+    }
+
+    .deck-icon {
+      font-size: 64px;
+      margin-bottom: 20px;
+    }
+
+    .deck-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+
+    .deck-card.futures .deck-name {
+      color: #c9a227;
+    }
+
+    .deck-card.plant .deck-name {
+      color: #76c893;
+    }
+
+    .deck-description {
+      font-size: 14px;
+      color: #aaa;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+
+    .deck-stats {
+      display: flex;
+      justify-content: space-around;
+      margin: 30px 0;
+      padding: 20px 0;
+      border-top: 1px solid #333;
+      border-bottom: 1px solid #333;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .deck-card.futures .stat-number {
+      color: #c9a227;
+    }
+
+    .deck-card.plant .stat-number {
+      color: #76c893;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 12px 30px;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .btn-primary {
+      background: #c9a227;
+      color: #1a1a1a;
+    }
+
+    .deck-card.futures .btn-primary {
+      background: #c9a227;
+      color: #1a1a1a;
+    }
+
+    .deck-card.futures .btn-primary:hover {
+      background: #d4ad2e;
+    }
+
+    .deck-card.plant .btn-primary {
+      background: #76c893;
+      color: #1a3a2e;
+    }
+
+    .deck-card.plant .btn-primary:hover {
+      background: #52b788;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #aaa;
+      border: 1px solid #444;
+    }
+
+    .btn-secondary:hover {
+      border-color: #666;
+      color: #fff;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 80px;
+      padding-top: 40px;
+      border-top: 1px solid #333;
+      color: #666;
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 36px;
+      }
+
+      .decks-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .deck-card {
+        padding: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Deck Collections</h1>
+      <p class="subtitle">Choose a deck to explore and print</p>
+    </header>
+
+    <div class="decks-grid">
+      <!-- Futures Deck -->
+      <div class="deck-card futures">
+        <div class="deck-icon">🔮</div>
+        <div class="deck-name">Futures Deck</div>
+        <div class="deck-description">
+          A transformative card deck exploring wellbeing, growth arcs, terrains, objects, timeframes, and modifiers for futures thinking.
+        </div>
+        <div class="deck-stats">
+          <div class="stat">
+            <div class="stat-number">54</div>
+            <div class="stat-label">Cards</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">6</div>
+            <div class="stat-label">Categories</div>
+          </div>
+        </div>
+        <div class="button-group">
+          <a href="/index.html" class="btn btn-primary">View Deck</a>
+          <a href="/print-cards.html" class="btn btn-secondary">Print</a>
+        </div>
+      </div>
+
+      <!-- Plant Intelligence Deck -->
+      <div class="deck-card plant">
+        <div class="deck-icon">🌿</div>
+        <div class="deck-name">Plant Intelligence</div>
+        <div class="deck-description">
+          Explore biological intelligence through slime molds, plants, and fungal networks. Cards exploring organisms, behaviors, and distributed thinking.
+        </div>
+        <div class="deck-stats">
+          <div class="stat">
+            <div class="stat-number">18</div>
+            <div class="stat-label">Cards</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">5</div>
+            <div class="stat-label">Categories</div>
+          </div>
+        </div>
+        <div class="button-group">
+          <a href="/plant-intelligence.html" class="btn btn-primary">View Deck</a>
+          <a href="/plant-intelligence.html" class="btn btn-secondary">Print</a>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>Decks made for exploration, contemplation, and creative thinking.</p>
+    </footer>
+  </div>
+</body>
+</html>
