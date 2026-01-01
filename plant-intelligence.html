@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plant Intelligence Deck - Print Cards</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    @page {
+      size: letter;
+      margin: 0.5in;
+    }
+
+    body {
+      background: #fff;
+      font-family: 'Source Sans Pro', sans-serif;
+    }
+
+    .print-controls {
+      background: #1a3a2e;
+      padding: 20px;
+      text-align: center;
+      color: #fff;
+    }
+
+    .print-controls h1 {
+      font-family: 'Playfair Display', serif;
+      color: #76c893;
+      font-weight: 400;
+      margin-bottom: 10px;
+    }
+
+    .print-controls p {
+      color: #aaa;
+      margin-bottom: 15px;
+    }
+
+    .print-controls button {
+      background: #76c893;
+      color: #1a3a2e;
+      border: none;
+      padding: 12px 30px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .print-controls button:hover {
+      background: #52b788;
+    }
+
+    .print-page {
+      width: 8.5in;
+      height: 11in;
+      margin: 20px auto;
+      padding: 0.5in;
+      background: #fff;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap: 0.15in;
+      height: 100%;
+    }
+
+    .card {
+      background: linear-gradient(135deg, #1a3a2e 0%, #0f2818 100%);
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .card .artwork {
+      flex: 1;
+      overflow: hidden;
+      min-height: 0;
+      background: linear-gradient(135deg, #2d6a4f 0%, #1b4332 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      color: #52b788;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .card .text-panel {
+      background: linear-gradient(to bottom, #1a3a2e, #0d1f14);
+      padding: 8px 10px;
+      border-top: 1px solid #2d6a4f;
+      flex-shrink: 0;
+    }
+
+    .card .category {
+      font-size: 7px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #76c893;
+      margin-bottom: 2px;
+    }
+
+    .card .title {
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #fff;
+    }
+
+    /* Category colors */
+    .card[data-category="organism"] .category { color: #52b788; }
+    .card[data-category="intelligence"] .category { color: #74c69d; }
+    .card[data-category="behavior"] .category { color: #95d5b2; }
+    .card[data-category="network"] .category { color: #d6f5d6; }
+    .card[data-category="scale"] .category { color: #b7e4c7; }
+
+    /* Different emoji for each category */
+    .card[data-category="organism"] .artwork::before { content: '🍄'; }
+    .card[data-category="intelligence"] .artwork::before { content: '🧠'; }
+    .card[data-category="behavior"] .artwork::before { content: '⚡'; }
+    .card[data-category="network"] .artwork::before { content: '🌐'; }
+    .card[data-category="scale"] .artwork::before { content: '📊'; }
+
+    /* Print styles */
+    @media print {
+      .print-controls {
+        display: none;
+      }
+
+      body {
+        background: white;
+      }
+
+      .print-page {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+        page-break-after: always;
+      }
+
+      .card-grid {
+        padding: 0.25in;
+      }
+
+      .card {
+        box-shadow: none;
+        border: 0.5px solid #ddd;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="print-controls">
+    <h1>Plant Intelligence Deck</h1>
+    <p>Print at 100% scale on Letter size paper (8.5" x 11"). Cut along card edges.</p>
+    <button onclick="window.print()">Print Cards</button>
+  </div>
+
+  <div class="print-page">
+    <div class="card-grid">
+
+      <!-- Row 1: Organisms -->
+      <div class="card" data-category="organism">
+        <div class="artwork"></div>
+        <div class="text-panel">
+          <div class="category">Organism</div>
+          <div class="title">Physarum Polycephalum</div>
+        </div>
+      </div>
+
+      <div class="card" data-category="organism">
+        <div class="artwork"></div>
+        <div class="text-panel">
+          <div class="category">Organism</div>
+          <div class="title">Mycelial Network</div>
+        </div>
+      </div>
+
+      <div class="card" data-category="organism">
+        <div class="artwork"></div>
+        <div class="text-panel">
+          <div class="category">Organism</div>
+          <div class="title">Venus Flytrap</div>
+        </div>
+      </div>
+
+      <!-- Row 2: Intelligence Types -->
+      <div class="card" data-category="intelligence">
+        <div class="artwork"></div>
+        <div class="text-panel">
+          <div class="category">Intelligence</div>
+          <div class="title">Root Memory</div>
+        </div>
+      </div>
+
+      <div class="card" data-category="intelligence">
+        <div class="artwork"></div>
+        <div class="text-panel">
+          <div class="category">Intelligence</div>
+          <div class="title">Chemical Logic</div>
+        </div>
+      </div>
+
+      <div class="card" data-category="intelligence">
+        <div class="artwork"></div>
+        <div class="text-panel">
+          <div class="category">Intelligence</div>
+          <div class="title">Slime Computation</div>
+        </div>
+      </div>
+
+      <!-- Row 3: Behaviors & Networks -->
+      <div class="card" data-category="behavior">
+        <div class="artwork"></div>
+        <div class="text-panel">
+          <div class="category">Behavior</div>
+          <div class="title">Nutrient Seeking</div>
+        </div>
+      </div>
+
+      <div class="card" data-category="network">
+        <div class="artwork"></div>
+        <div class="text-panel">
+          <div class="category">Network</div>
+          <div class="title">Mycorrhizal Symbiosis</div>
+        </div>
+      </div>
+
+      <div class="card" data-category="scale">
+        <div class="artwork"></div>
+        <div class="text-panel">
+          <div class="category">Scale</div>
+          <div class="title">Forest Consciousness</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Additional pages with more cards -->
+
+  <div class="print-page">
+    <div class="card-grid">
+
+      <!-- Row 1: More Organisms -->
+      <div class="card" data-category="organism">
+        <div class="artwork"></div>
+        <div class="text-panel">
+          <div class="category">Organism</div>
+          <div class="title">Endophytic Fungi</div>
+        </div>
+      </div>
+
+      <div class="card" data-category="organism">
+        <div class="artwork"></div>
+        <div class="text-panel">
+          <div class="category">Organism</div>
+          <div class="title">Wood Wide Web</div>
+        </div>
+      </div>
+
+      <div class="card" data-category="organism">
+        <div class="artwork"></div>
+        <div class="text-panel">
+          <div class="category">Organism</div>
+          <div class="title">Sensitive Plant</div>
+        </div>
+      </div>
+
+      <!-- Row 2: Problem Solving -->
+      <div class="card" data-category="behavior">
+        <div class="artwork"></div>
+        <div class="text-panel">
+          <div class="category">Behavior</div>
+          <div class="title">Maze Navigation</div>
+        </div>
+      </div>
+
+      <div class="card" data-category="behavior">
+        <div class="artwork"></div>
+        <div class="text-panel">
+          <div class="category">Behavior</div>
+          <div class="title">Pathogen Defense</div>
+        </div>
+      </div>
+
+      <div class="card" data-category="behavior">
+        <div class="artwork"></div>
+        <div class="text-panel">
+          <div class="category">Behavior</div>
+          <div class="title">Light Adaptation</div>
+        </div>
+      </div>
+
+      <!-- Row 3: Communication & Signals -->
+      <div class="card" data-category="intelligence">
+        <div class="artwork"></div>
+        <div class="text-panel">
+          <div class="category">Intelligence</div>
+          <div class="title">Volatile Signaling</div>
+        </div>
+      </div>
+
+      <div class="card" data-category="network">
+        <div class="artwork"></div>
+        <div class="text-panel">
+          <div class="category">Network</div>
+          <div class="title">Root Exudates</div>
+        </div>
+      </div>
+
+      <div class="card" data-category="scale">
+        <div class="artwork"></div>
+        <div class="text-panel">
+          <div class="category">Scale</div>
+          <div class="title">Distributed Mind</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
