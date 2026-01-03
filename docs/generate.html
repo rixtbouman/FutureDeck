@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Futures Deck - Generate Scenarios</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Source+Sans+Pro:wght@300;400;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #c9a227;
+      --dark: #0a0a12;
+      --arc: #a855f7;
+      --terrain: #4ECDC4;
+      --object: #FF8C42;
+      --wellbeing: #FFD93D;
+      --timeframe: #60a5fa;
+      --modifier: #f87171;
+      --technology: #38bdf8;
+      --prompt: #e2e8f0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Source Sans Pro', sans-serif;
+      background: var(--dark);
+      color: #fff;
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(to bottom, #0d0d15, var(--dark));
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(201, 162, 39, 0.3);
+    }
+
+    header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      margin-bottom: 5px;
+    }
+
+    header p {
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    nav {
+      background: #111;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--gold); }
+    nav a.active { color: var(--gold); }
+
+    main {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 25px 20px;
+    }
+
+    .workflow {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+    }
+
+    @media (max-width: 1000px) {
+      .workflow { grid-template-columns: 1fr; }
+    }
+
+    .panel {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .panel-header {
+      background: rgba(0,0,0,0.3);
+      padding: 15px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .panel-header h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+    }
+
+    .panel-body {
+      padding: 20px;
+    }
+
+    /* Card Selection */
+    .spread-preview {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      min-height: 180px;
+      padding: 15px;
+      background: rgba(0,0,0,0.2);
+      border-radius: 8px;
+      margin-bottom: 15px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .spread-preview.empty::before {
+      content: 'Click cards below or use quick draw';
+      color: rgba(255,255,255,0.25);
+      font-style: italic;
+      font-size: 13px;
+    }
+
+    .spread-card {
+      width: 100px;
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+
+    .spread-card:hover { transform: scale(1.05); }
+    .spread-card img { width: 100%; display: block; }
+
+    .quick-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      padding: 10px 18px;
+      border: none;
+      border-radius: 5px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-gold { background: var(--gold); color: var(--dark); }
+    .btn-gold:hover { background: #d4b32a; }
+    .btn-outline {
+      background: transparent;
+      color: rgba(255,255,255,0.7);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.1); }
+    .btn-danger {
+      background: rgba(248,113,113,0.15);
+      color: #f87171;
+      border: 1px solid rgba(248,113,113,0.3);
+    }
+
+    /* Card picker */
+    .category-section {
+      margin-bottom: 15px;
+    }
+
+    .category-section h4 {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      padding-left: 2px;
+    }
+
+    .category-section.arc h4 { color: var(--arc); }
+    .category-section.terrain h4 { color: var(--terrain); }
+    .category-section.object h4 { color: var(--object); }
+    .category-section.wellbeing h4 { color: var(--wellbeing); }
+    .category-section.timeframe h4 { color: var(--timeframe); }
+    .category-section.modifier h4 { color: var(--modifier); }
+    .category-section.technology h4 { color: var(--technology); }
+    .category-section.prompt h4 { color: var(--prompt); }
+
+    .card-grid {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .mini-card {
+      width: 60px;
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.2s;
+      opacity: 1;
+    }
+
+    .mini-card:hover { transform: scale(1.1); box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
+    .mini-card.selected { opacity: 0.3; pointer-events: none; }
+    .mini-card img { width: 100%; display: block; }
+
+    /* Output panel */
+    .prompt-output {
+      background: rgba(0,0,0,0.3);
+      border-radius: 8px;
+      padding: 15px;
+      font-size: 12px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      font-family: 'Source Code Pro', monospace;
+      color: rgba(255,255,255,0.85);
+      max-height: 400px;
+      overflow-y: auto;
+      margin-bottom: 15px;
+    }
+
+    .prompt-output.empty {
+      color: rgba(255,255,255,0.3);
+      font-style: italic;
+    }
+
+    .output-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .output-actions .btn { flex: 1; }
+
+    /* Scenario input */
+    .scenario-input {
+      width: 100%;
+      min-height: 200px;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      padding: 15px;
+      color: #fff;
+      font-size: 13px;
+      line-height: 1.6;
+      resize: vertical;
+      margin-bottom: 15px;
+    }
+
+    .scenario-input:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    .scenario-input::placeholder {
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* Saved scenarios */
+    .saved-list {
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .saved-item {
+      background: rgba(0,0,0,0.2);
+      border-radius: 6px;
+      padding: 12px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .saved-item:hover { background: rgba(0,0,0,0.4); }
+
+    .saved-item h5 {
+      font-size: 13px;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+
+    .saved-item p {
+      font-size: 11px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .saved-item .cards {
+      display: flex;
+      gap: 4px;
+      margin-top: 8px;
+    }
+
+    .saved-item .cards img {
+      width: 30px;
+      border-radius: 2px;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 30px;
+      color: rgba(255,255,255,0.3);
+      font-style: italic;
+      font-size: 13px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: rgba(255,255,255,0.3);
+      font-size: 11px;
+    }
+
+    footer a { color: var(--gold); }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>SCENARIO GENERATOR</h1>
+    <p>Draw cards, generate prompts, save scenarios</p>
+  </header>
+
+  <nav>
+    <a href="index.html">About</a>
+    <a href="examples.html">Examples</a>
+    <a href="generate.html" class="active">Generate</a>
+    <a href="play-v2.html">Quick Draw</a>
+    <a href="quantum.html">Quantum</a>
+    <a href="../review.html">Review Cards</a>
+  </nav>
+
+  <main>
+    <div class="workflow">
+
+      <!-- Left: Card Selection -->
+      <div class="panel">
+        <div class="panel-header">
+          <h2>1. SELECT CARDS</h2>
+        </div>
+        <div class="panel-body">
+          <div class="spread-preview empty" id="spreadPreview"></div>
+
+          <div class="quick-actions">
+            <button class="btn btn-gold" onclick="drawBalanced()">Draw Balanced (5)</button>
+            <button class="btn btn-outline" onclick="drawRandom()">+ Random</button>
+            <button class="btn btn-danger" onclick="clearSpread()">Clear</button>
+          </div>
+
+          <div class="card-picker" id="cardPicker"></div>
+        </div>
+      </div>
+
+      <!-- Right: Output -->
+      <div class="panel">
+        <div class="panel-header">
+          <h2>2. GENERATE & SAVE</h2>
+        </div>
+        <div class="panel-body">
+          <div class="prompt-output empty" id="promptOutput">Select cards to generate a prompt...</div>
+
+          <div class="output-actions" style="margin-bottom: 20px;">
+            <button class="btn btn-gold" onclick="copyPrompt()">Copy Prompt</button>
+            <button class="btn btn-outline" onclick="regeneratePrompt()">Regenerate</button>
+          </div>
+
+          <textarea class="scenario-input" id="scenarioInput" placeholder="Paste your AI-generated scenario here, then save it..."></textarea>
+
+          <input type="text" id="scenarioTitle" placeholder="Scenario title..." style="width: 100%; padding: 10px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; color: #fff; margin-bottom: 10px; font-size: 13px;">
+
+          <div class="output-actions">
+            <button class="btn btn-gold" onclick="saveScenario()">Save Scenario</button>
+            <button class="btn btn-outline" onclick="exportAll()">Export All</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Saved Scenarios -->
+    <div class="panel" style="margin-top: 25px;">
+      <div class="panel-header">
+        <h2>SAVED SCENARIOS</h2>
+      </div>
+      <div class="panel-body">
+        <div class="saved-list" id="savedList">
+          <div class="empty-state">No scenarios saved yet. Generate and save your first one above.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <a href="examples.html">View Example Scenarios</a> &middot;
+    <a href="play-v2.html">Quick Draw Mode</a>
+  </footer>
+
+  <script>
+    const IMAGE_BASE = '../assets/cards-final/';
+
+    const CARDS = [
+      // Arc (4)
+      { id: 'arc-01', category: 'arc', name: 'Growth', description: 'Continuous expansion and progress' },
+      { id: 'arc-02', category: 'arc', name: 'Collapse', description: 'Systems failing and crumbling' },
+      { id: 'arc-03', category: 'arc', name: 'Discipline', description: 'Order imposed from above' },
+      { id: 'arc-04', category: 'arc', name: 'Transformation', description: 'Fundamental change in kind' },
+      // Terrain (16)
+      { id: 'terrain-01', category: 'terrain', name: 'Agriculture', description: 'Food production' },
+      { id: 'terrain-02', category: 'terrain', name: 'Warfare', description: 'Conflict and security' },
+      { id: 'terrain-03', category: 'terrain', name: 'Healthcare', description: 'Medicine and healing' },
+      { id: 'terrain-04', category: 'terrain', name: 'Education', description: 'Learning and knowledge' },
+      { id: 'terrain-05', category: 'terrain', name: 'The Ocean', description: 'Maritime life' },
+      { id: 'terrain-06', category: 'terrain', name: 'Governance', description: 'Politics and policy' },
+      { id: 'terrain-07', category: 'terrain', name: 'Entertainment', description: 'Leisure and art' },
+      { id: 'terrain-08', category: 'terrain', name: 'Transport', description: 'Movement and mobility' },
+      { id: 'terrain-09', category: 'terrain', name: 'Religion', description: 'Faith and spirituality' },
+      { id: 'terrain-10', category: 'terrain', name: 'Commerce', description: 'Trade and markets' },
+      { id: 'terrain-11', category: 'terrain', name: 'Startups', description: 'New ventures' },
+      { id: 'terrain-12', category: 'terrain', name: 'Arts & Culture', description: 'Creative expression' },
+      { id: 'terrain-13', category: 'terrain', name: 'Energy', description: 'Power generation' },
+      { id: 'terrain-14', category: 'terrain', name: 'Housing', description: 'Shelter and urban life' },
+      { id: 'terrain-15', category: 'terrain', name: 'Labor', description: 'Work and employment' },
+      { id: 'terrain-16', category: 'terrain', name: 'Climate', description: 'Environment' },
+      // Object (10)
+      { id: 'object-01', category: 'object', name: 'Device', description: 'Hardware artifact' },
+      { id: 'object-02', category: 'object', name: 'Law', description: 'Regulation' },
+      { id: 'object-03', category: 'object', name: 'Ritual', description: 'Ceremony' },
+      { id: 'object-04', category: 'object', name: 'Beverage', description: 'Drink' },
+      { id: 'object-05', category: 'object', name: 'Vehicle', description: 'Transport' },
+      { id: 'object-06', category: 'object', name: 'Building', description: 'Structure' },
+      { id: 'object-07', category: 'object', name: 'Garment', description: 'Clothing' },
+      { id: 'object-08', category: 'object', name: 'Game', description: 'Play' },
+      { id: 'object-09', category: 'object', name: 'Plant', description: 'Flora' },
+      { id: 'object-10', category: 'object', name: 'Advertisement', description: 'Messaging' },
+      // Wellbeing (13)
+      { id: 'well-01', category: 'wellbeing', name: 'Autonomy', description: 'Self-direction' },
+      { id: 'well-02', category: 'wellbeing', name: 'Beauty', description: 'Aesthetic pleasure' },
+      { id: 'well-03', category: 'wellbeing', name: 'Comfort', description: 'Physical ease' },
+      { id: 'well-04', category: 'wellbeing', name: 'Community', description: 'Group belonging' },
+      { id: 'well-05', category: 'wellbeing', name: 'Competence', description: 'Mastery' },
+      { id: 'well-06', category: 'wellbeing', name: 'Fitness', description: 'Physical health' },
+      { id: 'well-07', category: 'wellbeing', name: 'Impact', description: 'Influence' },
+      { id: 'well-08', category: 'wellbeing', name: 'Morality', description: 'Values' },
+      { id: 'well-09', category: 'wellbeing', name: 'Purpose', description: 'Meaning' },
+      { id: 'well-10', category: 'wellbeing', name: 'Recognition', description: 'Being seen' },
+      { id: 'well-11', category: 'wellbeing', name: 'Relatedness', description: 'Relationships' },
+      { id: 'well-12', category: 'wellbeing', name: 'Security', description: 'Safety' },
+      { id: 'well-13', category: 'wellbeing', name: 'Stimulation', description: 'Novelty' },
+      // Timeframe (7)
+      { id: 'time-01', category: 'timeframe', name: 'Now', description: 'Present' },
+      { id: 'time-02', category: 'timeframe', name: '6 Months', description: 'Near future' },
+      { id: 'time-03', category: 'timeframe', name: '1 Year', description: 'One year' },
+      { id: 'time-04', category: 'timeframe', name: '2 Years', description: 'Two years' },
+      { id: 'time-05', category: 'timeframe', name: '5 Years', description: 'Medium term' },
+      { id: 'time-06', category: 'timeframe', name: '10 Years', description: 'Decade' },
+      { id: 'time-07', category: 'timeframe', name: '20 Years', description: 'Generation' },
+      // Modifier (6)
+      { id: 'mod-01', category: 'modifier', name: 'Major Breakthrough', description: '-3 years' },
+      { id: 'mod-02', category: 'modifier', name: 'Accelerated Funding', description: '-2 years' },
+      { id: 'mod-03', category: 'modifier', name: 'Steady Progress', description: '-1 year' },
+      { id: 'mod-04', category: 'modifier', name: 'Technical Setback', description: '+1 year' },
+      { id: 'mod-05', category: 'modifier', name: 'Funding Collapse', description: '+2 years' },
+      { id: 'mod-06', category: 'modifier', name: 'Regulatory Delay', description: '+3 years' },
+      // Technology (10)
+      { id: 'tech-01', category: 'technology', name: 'Fault-Tolerant Quantum', description: 'Error-corrected QC' },
+      { id: 'tech-02', category: 'technology', name: 'Quantum Cryptography', description: 'Unbreakable encryption' },
+      { id: 'tech-03', category: 'technology', name: 'Quantum AI', description: 'Beyond classical' },
+      { id: 'tech-04', category: 'technology', name: 'Quantum Sensing', description: 'Ultra-precision' },
+      { id: 'tech-05', category: 'technology', name: 'Quantum Simulation', description: 'Molecular modeling' },
+      { id: 'tech-06', category: 'technology', name: 'AGI', description: 'General intelligence' },
+      { id: 'tech-07', category: 'technology', name: 'Brain-Computer Interface', description: 'Neural link' },
+      { id: 'tech-08', category: 'technology', name: 'Synthetic Biology', description: 'Engineered life' },
+      { id: 'tech-09', category: 'technology', name: 'Fusion Power', description: 'Clean energy' },
+      { id: 'tech-10', category: 'technology', name: 'Room-Temp Superconductors', description: 'Lossless power' },
+      // Prompt (6)
+      { id: 'prompt-01', category: 'prompt', name: 'The Innovator', description: 'Who creates?' },
+      { id: 'prompt-02', category: 'prompt', name: 'The Incumbent', description: 'Who resists?' },
+      { id: 'prompt-03', category: 'prompt', name: 'The Citizen', description: 'Daily life?' },
+      { id: 'prompt-04', category: 'prompt', name: 'The Edge Case', description: 'Who\'s left out?' },
+      { id: 'prompt-05', category: 'prompt', name: 'The Unintended', description: 'What goes wrong?' },
+      { id: 'prompt-06', category: 'prompt', name: 'The Threshold', description: 'Point of no return?' }
+    ];
+
+    let spread = [];
+    let savedScenarios = JSON.parse(localStorage.getItem('futuresDeckScenarios') || '[]');
+
+    function init() {
+      renderCardPicker();
+      renderSavedScenarios();
+    }
+
+    function renderCardPicker() {
+      const picker = document.getElementById('cardPicker');
+      const categories = ['arc', 'terrain', 'object', 'wellbeing', 'timeframe', 'modifier', 'technology', 'prompt'];
+
+      picker.innerHTML = categories.map(cat => {
+        const cards = CARDS.filter(c => c.category === cat);
+        return `
+          <div class="category-section ${cat}">
+            <h4>${cat} (${cards.length})</h4>
+            <div class="card-grid">
+              ${cards.map(card => `
+                <div class="mini-card ${spread.some(s => s.id === card.id) ? 'selected' : ''}"
+                     data-id="${card.id}"
+                     onclick="toggleCard('${card.id}')"
+                     title="${card.name}">
+                  <img src="${IMAGE_BASE}${card.id}.png" alt="${card.name}">
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function toggleCard(cardId) {
+      const card = CARDS.find(c => c.id === cardId);
+      if (!card) return;
+
+      const idx = spread.findIndex(c => c.id === cardId);
+      if (idx >= 0) {
+        spread.splice(idx, 1);
+      } else {
+        spread.push(card);
+      }
+
+      renderSpread();
+      renderCardPicker();
+      updatePrompt();
+    }
+
+    function renderSpread() {
+      const preview = document.getElementById('spreadPreview');
+      preview.classList.toggle('empty', spread.length === 0);
+
+      preview.innerHTML = spread.map(card => `
+        <div class="spread-card" onclick="toggleCard('${card.id}')" title="Click to remove">
+          <img src="${IMAGE_BASE}${card.id}.png" alt="${card.name}">
+        </div>
+      `).join('');
+    }
+
+    function drawRandom() {
+      const available = CARDS.filter(c => !spread.some(s => s.id === c.id));
+      if (available.length === 0) return;
+      const card = available[Math.floor(Math.random() * available.length)];
+      spread.push(card);
+      renderSpread();
+      renderCardPicker();
+      updatePrompt();
+    }
+
+    function drawBalanced() {
+      clearSpread();
+      const picks = [
+        ['arc'],
+        ['terrain'],
+        ['wellbeing', 'object'],
+        ['timeframe'],
+        ['technology', 'modifier', 'prompt']
+      ];
+
+      picks.forEach(cats => {
+        const available = CARDS.filter(c => cats.includes(c.category) && !spread.some(s => s.id === c.id));
+        if (available.length > 0) {
+          spread.push(available[Math.floor(Math.random() * available.length)]);
+        }
+      });
+
+      renderSpread();
+      renderCardPicker();
+      updatePrompt();
+    }
+
+    function clearSpread() {
+      spread = [];
+      renderSpread();
+      renderCardPicker();
+      updatePrompt();
+    }
+
+    function updatePrompt() {
+      const output = document.getElementById('promptOutput');
+      if (spread.length === 0) {
+        output.classList.add('empty');
+        output.textContent = 'Select cards to generate a prompt...';
+        return;
+      }
+
+      output.classList.remove('empty');
+      output.textContent = generatePromptText();
+    }
+
+    function generatePromptText() {
+      let text = `Create a vivid future scenario using these Futures Deck cards:\n\n`;
+
+      spread.forEach((card, i) => {
+        text += `${i + 1}. ${card.name} (${card.category.toUpperCase()})\n`;
+        text += `   ${card.description}\n\n`;
+      });
+
+      text += `---\n\n`;
+      text += `Write a 400-600 word scenario that:\n`;
+      text += `- Opens with a concrete scene showing daily life in this future\n`;
+      text += `- Names specific people, places, products, or institutions\n`;
+      text += `- Shows the second-order effects and unintended consequences\n`;
+      text += `- Includes a brief narrative moment from someone living through it\n`;
+      text += `- Ends with 3-4 bullet points of implications\n\n`;
+      text += `Write in present tense. Be specific and grounded, not abstract.`;
+
+      return text;
+    }
+
+    function regeneratePrompt() {
+      updatePrompt();
+    }
+
+    function copyPrompt() {
+      const text = document.getElementById('promptOutput').textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = event.target;
+        btn.textContent = 'Copied!';
+        setTimeout(() => { btn.textContent = 'Copy Prompt'; }, 1500);
+      });
+    }
+
+    function saveScenario() {
+      const title = document.getElementById('scenarioTitle').value.trim();
+      const content = document.getElementById('scenarioInput').value.trim();
+
+      if (!title || !content || spread.length === 0) {
+        alert('Please add a title, scenario text, and at least one card.');
+        return;
+      }
+
+      const scenario = {
+        id: Date.now(),
+        title,
+        content,
+        cards: spread.map(c => ({ id: c.id, name: c.name, category: c.category })),
+        created: new Date().toISOString()
+      };
+
+      savedScenarios.unshift(scenario);
+      localStorage.setItem('futuresDeckScenarios', JSON.stringify(savedScenarios));
+
+      document.getElementById('scenarioTitle').value = '';
+      document.getElementById('scenarioInput').value = '';
+
+      renderSavedScenarios();
+      alert('Scenario saved!');
+    }
+
+    function renderSavedScenarios() {
+      const list = document.getElementById('savedList');
+
+      if (savedScenarios.length === 0) {
+        list.innerHTML = '<div class="empty-state">No scenarios saved yet.</div>';
+        return;
+      }
+
+      list.innerHTML = savedScenarios.map(s => `
+        <div class="saved-item" onclick="loadScenario(${s.id})">
+          <h5>${s.title}</h5>
+          <p>${new Date(s.created).toLocaleDateString()} - ${s.cards.length} cards</p>
+          <div class="cards">
+            ${s.cards.map(c => `<img src="${IMAGE_BASE}${c.id}.png" alt="${c.name}" title="${c.name}">`).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function loadScenario(id) {
+      const scenario = savedScenarios.find(s => s.id === id);
+      if (!scenario) return;
+
+      spread = scenario.cards.map(c => CARDS.find(card => card.id === c.id)).filter(Boolean);
+      document.getElementById('scenarioTitle').value = scenario.title;
+      document.getElementById('scenarioInput').value = scenario.content;
+
+      renderSpread();
+      renderCardPicker();
+      updatePrompt();
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function exportAll() {
+      if (savedScenarios.length === 0) {
+        alert('No scenarios to export.');
+        return;
+      }
+
+      const data = JSON.stringify(savedScenarios, null, 2);
+      const blob = new Blob([data], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'futures-deck-scenarios.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    init();
+  </script>
+
+</body>
+</html>
