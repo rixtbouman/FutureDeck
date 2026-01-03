@@ -326,6 +326,90 @@ const CARDS = [
     id: 'mod-06',
     name: 'Regulatory Delay',
     prompt: `${BASE_STYLE} Official documents stamped with pending status, government office with towering stacks of paperwork, bureaucratic maze of long corridors, red ribbon tape wrapped around project files, institutional clock showing slow passage of time, amber and red warning tones.`
+  },
+
+  // TECHNOLOGY CARDS (10)
+  {
+    id: 'tech-01',
+    name: 'Fault-Tolerant Quantum',
+    prompt: `${BASE_STYLE} Massive quantum computer with glowing blue qubits suspended in crystalline array, error correction codes visualized as protective geometric shields, cryogenic cooling chambers with frost and mist, IBM or Google-style quantum processor close-up, the holy grail of computing achieved, electric blues and deep purples.`
+  },
+  {
+    id: 'tech-02',
+    name: 'Quantum Cryptography',
+    prompt: `${BASE_STYLE} Entangled photons traveling through fiber optic cables as paired light streams, quantum key distribution system with unhackable lock visualization, secure channel forming between distant towers, eavesdropper being detected and rejected, unbreakable encryption shield glowing, secure blues and violets.`
+  },
+  {
+    id: 'tech-03',
+    name: 'Quantum AI',
+    prompt: `${BASE_STYLE} Neural network made of entangled quantum particles thinking in superposition, AI oracle giving answers it cannot explain, quantum brain processing patterns beyond classical comprehension, machine learning at exponential scale, mysterious intelligence emerging, ethereal purples and thinking blues.`
+  },
+  {
+    id: 'tech-04',
+    name: 'Quantum Sensing',
+    prompt: `${BASE_STYLE} Atomic clock of extraordinary precision measuring time with cosmic accuracy, magnetic sensor detecting hidden objects through walls, medical scanner seeing disease at molecular level years before symptoms, quantum compass navigating without GPS, ultra-precise measurement instruments, sensing greens and detection blues.`
+  },
+  {
+    id: 'tech-05',
+    name: 'Quantum Simulation',
+    prompt: `${BASE_STYLE} Molecular simulation showing drug binding to protein in exquisite detail, new material being designed atom by atom, chemical reaction being modeled at quantum level, pharmaceutical lab with holographic molecule displays, designing drugs in days not decades, discovery greens and simulation blues.`
+  },
+  {
+    id: 'tech-06',
+    name: 'AGI',
+    prompt: `${BASE_STYLE} Artificial general intelligence awakening as vast interconnected mind visualization, AI reasoning about complex goals with human-level cognition, self-improving system reaching new levels of capability, threshold being crossed into machine consciousness, digital being emerging, transcendent golds and intelligence blues.`
+  },
+  {
+    id: 'tech-07',
+    name: 'Brain-Computer Interface',
+    prompt: `${BASE_STYLE} Neural implant connecting human brain directly to digital world, thoughts becoming actions on screen without touching anything, paralyzed person controlling robotic arm with pure intention, memory being recorded and replayed, telepathic communication between networked minds, neural reds and interface blues.`
+  },
+  {
+    id: 'tech-08',
+    name: 'Synthetic Biology',
+    prompt: `${BASE_STYLE} Designer organism being programmed with genetic code, biological factory producing fuel and medicine, CRISPR tools editing life like software code, living materials growing into structures, custom cells performing engineered functions, bio greens and genetic purples.`
+  },
+  {
+    id: 'tech-09',
+    name: 'Fusion Power',
+    prompt: `${BASE_STYLE} Tokamak fusion reactor with plasma contained by magnetic fields glowing like captured sun, net energy gain achieved as breakthrough moment, unlimited clean power flowing into grid, artificial star burning in controlled chamber, power of the sun on Earth, fusion oranges and plasma blues.`
+  },
+  {
+    id: 'tech-10',
+    name: 'Room-Temp Superconductors',
+    prompt: `${BASE_STYLE} Superconducting material levitating magnets at room temperature, power lines glowing with lossless electricity transmission, maglev train floating silently, quantum computer running without cryogenic cooling, zero resistance revolution changing everything, superconducting blues and transformation golds.`
+  },
+
+  // PROMPT CARDS (6)
+  {
+    id: 'prompt-01',
+    name: 'The Innovator',
+    prompt: `${BASE_STYLE} Visionary inventor at workbench surrounded by prototypes and dreams, entrepreneur pitching world-changing idea with passion, researcher having eureka moment in laboratory, garage startup founder defying the odds, dreamer building the future, warm inspiring golds and creative oranges.`
+  },
+  {
+    id: 'prompt-02',
+    name: 'The Incumbent',
+    prompt: `${BASE_STYLE} Corporate executive watching market disruption from corner office tower, established industry resisting change with institutional weight, old guard fighting to preserve power and position, lobbying forces blocking progress, adapting or dying in face of innovation, conservative blues and resistant grays.`
+  },
+  {
+    id: 'prompt-03',
+    name: 'The Citizen',
+    prompt: `${BASE_STYLE} Ordinary person navigating technological change in daily life, family adapting to new normal with mixed emotions, morning routine transformed by innovation, new habits forming and old ones dying, what is gained and lost in transition, everyday warm tones and life colors.`
+  },
+  {
+    id: 'prompt-04',
+    name: 'The Edge Case',
+    prompt: `${BASE_STYLE} Person falling through cracks of technological system, those left behind by progress watching from margins, communities forgotten by innovation wave, vulnerable populations facing new risks, who doesn't fit the default assumption, shadow tones and marginalized perspectives.`
+  },
+  {
+    id: 'prompt-05',
+    name: 'The Unintended',
+    prompt: `${BASE_STYLE} Butterfly effect cascading from good intentions to strange outcomes, unforeseen consequences rippling through systems, solution creating new problems in its wake, second-order effects nobody predicted, what could possibly go wrong visualization, chaotic patterns and warning ambers.`
+  },
+  {
+    id: 'prompt-06',
+    name: 'The Threshold',
+    prompt: `${BASE_STYLE} Point of no return visualized as doorway into changed world, tipping point moment when change becomes inevitable, line being crossed with no going back, decisive moment locking in future path, before and after separated by critical instant, threshold golds and transformation violets.`
   }
 ];
 

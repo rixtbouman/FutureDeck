@@ -1,0 +1,464 @@
+{
+  "deck": {
+    "name": "Plant Intelligence",
+    "version": "1.0",
+    "totalCards": 40,
+    "categories": ["organism", "capacity", "domain", "interface", "humanResponse", "timeframe", "season"]
+  },
+  "cards": {
+    "organism": [
+      {
+        "id": "org-01",
+        "name": "Slime Mold",
+        "category": "organism",
+        "description": "Physarum polycephalum: A single-celled organism that navigates mazes, solves optimization problems, and demonstrates memory without neurons.",
+        "context": "Slime molds lack brains, blood, or nerves yet can solve complex spatial problems as efficiently as trained humans. They optimize nutrient distribution across networks and remember locations of food sources.",
+        "symbols": ["Physarum polycephalum", "maze-solving", "optimization", "network flows"],
+        "prompt_context": "A slime mold's ability to solve problems and navigate complex environments",
+        "flux_prompt": "intricate botanical tarot card showing Physarum polycephalum slime mold, scientific cross-section diagram, mycelial networks glowing with bioluminescent gold, ornate border with fungal fruiting bodies and spore patterns, art deco mysticism, dark forest floor background, detailed engraving woodcut style, dramatic underlighting, professional tarot deck art, 4k --ar 2:3"
+      },
+      {
+        "id": "org-02",
+        "name": "Mycelial Network",
+        "category": "organism",
+        "description": "The underground fungal internet connecting trees and plants across entire forests, sharing nutrients, water, and chemical information.",
+        "context": "Mycelial networks create the largest living organisms on Earth. A single organism in Oregon spans 2,400 acres. These networks enable resource sharing between different plant species and facilitate chemical communication.",
+        "symbols": ["wood wide web", "fungal networks", "resource sharing", "forest connectivity"],
+        "prompt_context": "A fungal network that connects entire ecosystems and enables communication between different species",
+        "flux_prompt": "intricate botanical tarot card showing mycelial network beneath forest soil, golden threadlike connections between tree roots, sacred geometry of interconnected filaments, art nouveau border with neural-like patterns, mystical scientific diagram, deep earth cross-section, rich emerald and gold tones, engraving style, dramatic uplighting from soil, 4k --ar 2:3"
+      },
+      {
+        "id": "org-03",
+        "name": "Root System",
+        "category": "organism",
+        "description": "Plant roots that sense, communicate, and respond to their environment through chemical and electrical signals, constituting a distributed sensory system.",
+        "context": "Plant roots detect water, nutrients, light, gravity, touch, sound, and chemical signals. They communicate with each other and with fungi through root exudates and mycorrhizal associations.",
+        "symbols": ["root communication", "chemical signaling", "environmental sensing", "distributed intelligence"],
+        "prompt_context": "A plant root system that senses and responds to environmental conditions through a distributed network",
+        "flux_prompt": "intricate botanical tarot card depicting intricate root network, flowing chemical signals as golden pathways between roots, cross-section showing nutrient absorption, art nouveau border with branching root patterns, mystical scientific illustration, dark soil background, rich brown and gold tones, detailed engraving style, bioluminescent signal paths, 4k --ar 2:3"
+      },
+      {
+        "id": "org-04",
+        "name": "Bacterial Colony",
+        "category": "organism",
+        "description": "Billions of single-celled bacteria that coordinate behavior through quorum sensing, making collective decisions about growth, dispersal, and survival.",
+        "context": "Bacteria use chemical signaling to count their population and coordinate behaviors. They form biofilms, optimize resource use, and adapt as a collective intelligence system.",
+        "symbols": ["quorum sensing", "collective behavior", "chemical communication", "emergent intelligence"],
+        "prompt_context": "A bacterial colony demonstrating collective intelligence through chemical signaling and coordination",
+        "flux_prompt": "intricate botanical tarot card showing bacterial colony magnified, glowing cells connected by chemical signals, quorum sensing pathways as golden light, art deco border with microbial motifs, scientific mysticism, dark background with bioluminescence, detailed microscopic illustration, professional tarot art, emerald and gold palette, 4k --ar 2:3"
+      },
+      {
+        "id": "org-05",
+        "name": "Plant Canopy",
+        "category": "organism",
+        "description": "The collective intelligence of forest canopy layers that compete and cooperate for light, nutrients, and water through chemical and biological signals.",
+        "context": "Canopy plants adjust their growth patterns based on light and shade, release volatile compounds to warn neighbors of herbivores, and cooperate through mutual shading and nutrient exchange.",
+        "symbols": ["light competition", "cooperative growth", "volatile signaling", "vertical ecology"],
+        "prompt_context": "A forest canopy demonstrating both competitive and cooperative intelligence",
+        "flux_prompt": "intricate botanical tarot card showing layered forest canopy, interlocking leaves reaching toward light, golden pathways of airborne signals, art nouveau frame with leaf and branch motifs, mystical ecological diagram, dappled forest light, rich greens with gold highlights, detailed engraving style, professional tarot art, 4k --ar 2:3"
+      }
+    ],
+    "capacity": [
+      {
+        "id": "cap-01",
+        "name": "Memory",
+        "category": "capacity",
+        "description": "Biological recall without neurons: plants remember past stressors and respond differently to future challenges based on prior experience.",
+        "context": "Plants have epigenetic memory, remembering drought years later. Some plants recognize previous herbivore attacks and mount stronger defenses. Mycelial networks store nutrient information.",
+        "symbols": ["epigenetic memory", "learned responses", "historical awareness", "adaptive recall"],
+        "prompt_context": "The ability to remember past experiences and use them to inform future behavior",
+        "flux_prompt": "abstract tarot card depicting memory in biological systems, glowing neural-like pathways through plant tissue, layered images of past and present, sacred geometry of growth rings and records, art nouveau border with spiral and circular patterns, mystical scientific diagram, dark atmospheric background, rich jewel tones with gold accents, engraving style, 4k --ar 2:3"
+      },
+      {
+        "id": "cap-02",
+        "name": "Problem Solving",
+        "category": "capacity",
+        "description": "Finding optimal solutions to environmental challenges: navigating to resources, adapting structure, and overcoming obstacles without conscious thought.",
+        "context": "Slime molds solve mazes faster than algorithms. Plant roots find the most efficient path to water. Mycelial networks optimize nutrient distribution.",
+        "symbols": ["optimization", "pathfinding", "solution-finding", "efficient design"],
+        "prompt_context": "The capacity to find optimal solutions to complex environmental problems",
+        "flux_prompt": "abstract tarot card depicting problem-solving in biological systems, flowing pathways showing multiple solutions glowing with golden light, maze-like root networks, sacred geometric patterns, art nouveau border with solution spirals, mystical technical diagram, dark background, emerald and gold tones, detailed illustration, professional tarot style, 4k --ar 2:3"
+      },
+      {
+        "id": "cap-03",
+        "name": "Communication",
+        "category": "capacity",
+        "description": "Long-distance signaling through chemical, electrical, and fungal networks: sharing information about threats, resources, and conditions across distances.",
+        "context": "Plants release volatile compounds to warn neighbors of insect attacks. Roots exude chemicals. Mycelial networks transmit signals between trees. Electrical impulses travel through tissues.",
+        "symbols": ["chemical signals", "volatile compounds", "fungal signals", "electrical impulses"],
+        "prompt_context": "The ability to transmit information across distances and between organisms",
+        "flux_prompt": "abstract tarot card depicting communication through chemical and electrical signals, flowing pathways of light between organisms, chemical molecule structures rendered mystically, art nouveau border with communication network patterns, signal transmission as golden threads, dark atmospheric background, emerald and gold palette, detailed engraving style, bioluminescent elements, 4k --ar 2:3"
+      },
+      {
+        "id": "cap-04",
+        "name": "Learning",
+        "category": "capacity",
+        "description": "Adapting behavior based on experience: plants change growth patterns, defense mechanisms, and resource allocation based on environmental feedback.",
+        "context": "Plants habituate to repeated non-threatening stimuli. They strengthen defenses after insect attacks. They grow differently in response to wind, shade, and soil conditions.",
+        "symbols": ["behavioral adaptation", "repeated stimulus response", "learned behavior", "phenotypic plasticity"],
+        "prompt_context": "The capacity to adapt behavior and physiology based on experience",
+        "flux_prompt": "abstract tarot card depicting learning and adaptation, plant forms morphing and evolving across the card, growth patterns responding to stimuli, art nouveau border with transformation spirals, educational mysticism, dark background with emerging light, rich earth tones with gold accents, detailed botanical illustration, engraving style, 4k --ar 2:3"
+      },
+      {
+        "id": "cap-05",
+        "name": "Decision Making",
+        "category": "capacity",
+        "description": "Choosing between options based on context: plants allocate resources to growth or defense, roots choose directions, organisms optimize trade-offs.",
+        "context": "Plants make calculated trade-offs between photosynthesis and water conservation. Roots choose between growth and nutrient uptake. Mycelial networks decide nutrient distribution.",
+        "symbols": ["resource allocation", "trade-off management", "choice mechanisms", "optimization decisions"],
+        "prompt_context": "The capacity to make optimal decisions based on multiple competing factors",
+        "flux_prompt": "abstract tarot card depicting biological decision-making, branching pathways of light and shadow, organism at decision points, art nouveau border with choice-point spirals, mystical decision trees, dark atmospheric background, rich colors with gold highlights, detailed illustration style, professional tarot art, 4k --ar 2:3"
+      },
+      {
+        "id": "cap-06",
+        "name": "Sensing",
+        "category": "capacity",
+        "description": "Detecting environmental changes: plants sense light, gravity, water, nutrients, temperature, touch, chemicals, and airborne signals with distributed sensor networks.",
+        "context": "Plant roots respond to water stress within seconds. Leaves detect light quality. Stomata respond to humidity. Entire plants sense herbivore presence through volatile signals.",
+        "symbols": ["environmental sensitivity", "distributed sensing", "stimulus detection", "chemical sensors"],
+        "prompt_context": "The ability to sense and respond to environmental conditions through distributed biological sensors",
+        "flux_prompt": "abstract tarot card depicting sensing and perception, organism surrounded by glowing signals from environment, sensory pathways as golden threads, molecular receptors rendered mystically, art nouveau border with sensing patterns, mystical sensory diagram, dark background with illuminated signals, rich earth tones with gold accents, detailed engraving style, 4k --ar 2:3"
+      },
+      {
+        "id": "cap-07",
+        "name": "Cooperation",
+        "category": "capacity",
+        "description": "Resource sharing and mutual benefit: plants and fungi exchange nutrients and protection through established networks and partnerships.",
+        "context": "Mycorrhizal associations: plants provide sugars, fungi provide water and minerals. Nitrogen-fixing bacteria partner with plants. Trees share nutrients with struggling neighbors through mycelial networks.",
+        "symbols": ["mutualism", "symbiosis", "resource exchange", "interdependence"],
+        "prompt_context": "The capacity for mutually beneficial relationships and resource sharing",
+        "flux_prompt": "abstract tarot card depicting cooperation and symbiosis, two organisms connected by glowing exchange pathways, intertwined biological forms, shared resources flowing as golden light, art nouveau border with interconnection motifs, mystical partnership diagram, dark background, rich greens with gold accents, detailed botanical illustration, engraving style, 4k --ar 2:3"
+      },
+      {
+        "id": "cap-08",
+        "name": "Adaptation",
+        "category": "capacity",
+        "description": "Changing form and function in response to challenges: plants grow differently in wind, produce harder wood in stress, alter leaf size and shape based on light.",
+        "context": "Phenotypic plasticity allows plants to optimize for current conditions. Some plants have multiple leaf morphologies. Root architecture changes based on soil composition.",
+        "symbols": ["phenotypic plasticity", "morphological change", "functional adaptation", "environmental response"],
+        "prompt_context": "The capacity to physically transform in response to environmental conditions",
+        "flux_prompt": "abstract tarot card depicting biological adaptation and transformation, plant forms shifting and morphing, different phenotypes shown simultaneously, adaptations glowing with golden light, art nouveau border with metamorphosis patterns, mystical transformation diagram, dark atmospheric background, rich earth tones with gold highlights, detailed illustration, professional tarot art, 4k --ar 2:3"
+      }
+    ],
+    "domain": [
+      {
+        "id": "dom-01",
+        "name": "Urban Garden",
+        "category": "domain",
+        "description": "City cultivation: rooftops, balconies, and small spaces where humans deliberately grow plants and observe their intelligence.",
+        "context": "Urban agriculture brings plant intelligence into human-dense environments. Community gardens become sites of discovery and connection.",
+        "symbols": ["rooftop cultivation", "urban farming", "vertical gardens", "city food production"],
+        "prompt_context": "A setting where plant intelligence is discovered and cultivated in human-built urban environments",
+        "flux_prompt": "architectural tarot card showing urban rooftop garden, mycelial networks beneath container soil, city skyline visible beyond, art deco frame with botanical ornaments, bioluminescent root systems glowing beneath surfaces, cross-section revealing hidden intelligence, atmospheric city lighting, earth tones with gold accents, detailed architectural illustration, professional tarot style, 4k --ar 2:3"
+      },
+      {
+        "id": "dom-02",
+        "name": "Forest Ecosystem",
+        "category": "domain",
+        "description": "Old growth forests where mycelial networks are mature and complex, trees are interconnected through centuries of relationship.",
+        "context": "Ancient forests represent peak complexity and connection. These are where the wood wide web is most developed and active.",
+        "symbols": ["old growth", "wood wide web", "forest succession", "ancient trees"],
+        "prompt_context": "A setting where plant intelligence operates at maximum complexity through mycelial networks",
+        "flux_prompt": "architectural tarot card showing cross-section of ancient forest, multiple tree layers, glowing mycelial network beneath entire forest floor, interconnected roots and fungi, art deco botanical frame, bioluminescent signals between trees, dark mystical forest atmosphere, rich greens and earth tones with gold highlights, detailed forest illustration, 4k --ar 2:3"
+      },
+      {
+        "id": "dom-03",
+        "name": "Laboratory",
+        "category": "domain",
+        "description": "Controlled scientific environment: petri dishes, controlled chambers, and experimental setups where plant intelligence is observed and measured.",
+        "context": "Labs provide controlled conditions to study plant behavior. Researchers isolate variables and measure responses with precision.",
+        "symbols": ["experimental setup", "controlled conditions", "scientific observation", "measurement and analysis"],
+        "prompt_context": "A setting where plant intelligence is studied, measured, and understood through science",
+        "flux_prompt": "architectural tarot card showing scientific laboratory, plants in controlled chambers with glowing instruments, beakers and sensors surrounding organisms, art nouveau frame with scientific ornaments, cross-section showing internal processes, mystical technical aesthetic, dark laboratory setting, rich colors with gold and copper tones, detailed technical illustration, professional tarot art, 4k --ar 2:3"
+      },
+      {
+        "id": "dom-04",
+        "name": "Agricultural Field",
+        "category": "domain",
+        "description": "Food production landscape: comparing monoculture versus polyculture, industrial versus regenerative practices, soil health and hidden networks.",
+        "context": "Agricultural fields show contrasts between systems that ignore plant intelligence and those that work with it.",
+        "symbols": ["crop production", "soil health", "monoculture vs diversity", "food systems"],
+        "prompt_context": "A setting where human food production confronts biological intelligence",
+        "flux_prompt": "architectural tarot card showing agricultural field split between monoculture and diverse crops, glowing mycelial networks in diverse side, healthy versus depleted soil comparison, art deco botanical frame, cross-section showing soil layers, bioluminescent networks, atmospheric field lighting, rich earth tones with gold accents, detailed agricultural illustration, 4k --ar 2:3"
+      },
+      {
+        "id": "dom-05",
+        "name": "Hospital",
+        "category": "domain",
+        "description": "Medical facility where plant and fungal compounds are understood as treatments, where biophilic design supports healing.",
+        "context": "Hospitals represent human vulnerability and healing. Plant intelligence offers solutions to human health challenges.",
+        "symbols": ["medicinal compounds", "biophilic design", "healing environments", "pharmaceutical intelligence"],
+        "prompt_context": "A setting where plant intelligence offers healing and health solutions to humans",
+        "flux_prompt": "architectural tarot card showing hospital with living plant systems integrated into architecture, bioluminescent medicinal compounds glowing in vessels, healing environments with mycelial networks, art nouveau frame with medical botanical motifs, patient surrounded by plant intelligence, mystical healing imagery, calm atmospheric lighting, rich healing colors with gold accents, detailed illustration, 4k --ar 2:3"
+      },
+      {
+        "id": "dom-06",
+        "name": "School",
+        "category": "domain",
+        "description": "Educational setting: children and adults learning from plants, discovering biological intelligence, growing their own food and medicine.",
+        "context": "Schools are where wonder is cultivated and transmitted. Plant intelligence becomes curriculum.",
+        "symbols": ["education", "learning from nature", "wonder cultivation", "generational transmission"],
+        "prompt_context": "A setting where humans learn from and about plant intelligence",
+        "flux_prompt": "architectural tarot card showing school classroom with students engaged with living plants, glowing connections between organisms and learners, art deco frame with educational botanical ornaments, cross-section showing classroom garden, mystical learning atmosphere, bioluminescent knowledge flows, warm educational lighting, rich colors with gold accents, detailed scene illustration, professional tarot art, 4k --ar 2:3"
+      },
+      {
+        "id": "dom-07",
+        "name": "Living Architecture",
+        "category": "domain",
+        "description": "Buildings that grow and adapt: biophilic design, mycelial construction materials, living walls, buildings in symbiosis with organisms.",
+        "context": "Architecture becomes alive when it works with biological intelligence rather than against it.",
+        "symbols": ["biophilic design", "living buildings", "mycelial materials", "architectural symbiosis"],
+        "prompt_context": "A setting where human-built environment integrates with biological intelligence",
+        "flux_prompt": "architectural tarot card showing living building with mycelial framework visible, plants integrated into structure, bioluminescent organism pathways through walls, art nouveau frame with organic architectural motifs, cross-section showing living systems, mystical architectural intelligence, atmospheric lighting showing organism integration, rich greens and metallics with gold accents, detailed architectural illustration, 4k --ar 2:3"
+      },
+      {
+        "id": "dom-08",
+        "name": "Technology Hub",
+        "category": "domain",
+        "description": "Spaces where biological computing emerges: bio-computers using fungal or plant systems, living interfaces, organisms as technology.",
+        "context": "Technology merges with biology. Organisms become computers. Interfaces become living.",
+        "symbols": ["biocomputing", "living interfaces", "bio-technology", "organism technology"],
+        "prompt_context": "A setting where biological intelligence becomes integrated with human technology",
+        "flux_prompt": "architectural tarot card showing technology hub with organisms as living computers, fungal networks forming circuits, bioluminescent data pathways, steampunk meets mycology aesthetic, art nouveau frame with circuit-like organism patterns, cross-section showing bio-computational systems, mystical technological landscape, dramatic atmospheric lighting, gold and copper tones with emerald accents, detailed technical-biological illustration, 4k --ar 2:3"
+      }
+    ],
+    "interface": [
+      {
+        "id": "int-01",
+        "name": "Sensor Network",
+        "category": "interface",
+        "description": "Technology that detects and displays plant signals: making visible the chemical, electrical, and vibrational messages plants communicate.",
+        "context": "Sensors translate plant communication into human-readable data. Electrodes measure electrical signals. Gas chromatographs detect volatiles.",
+        "symbols": ["signal detection", "data visualization", "translation technology", "sensory extension"],
+        "prompt_context": "Technology that makes plant signals visible and understandable to humans",
+        "flux_prompt": "steampunk botanical tarot card, brass sensors on fungal networks, delicate measurement devices, glowing signals being translated, art nouveau frame with circuit-like root patterns, mystical biotech aesthetic, detailed technical illustration, dark laboratory lighting, gold and copper tones with emerald accents, organisms and technology in harmony, professional tarot art, 4k --ar 2:3"
+      },
+      {
+        "id": "int-02",
+        "name": "Biocomputer",
+        "category": "interface",
+        "description": "Using living organisms for computation: mycelial networks processing information, bacterial colonies making calculations, plants solving problems for human benefit.",
+        "context": "Biological systems compute more efficiently than electronics for certain problems. Organisms can optimize, learn, and adapt as computing substrate.",
+        "symbols": ["biological computing", "organism processors", "living algorithms", "bio-optimization"],
+        "prompt_context": "Living systems used as computers to solve human problems",
+        "flux_prompt": "steampunk botanical tarot card, living organism networks forming computational patterns, glowing mycelial circuits, data flowing through fungal pathways, art nouveau frame with neural-organism hybrid patterns, mystical computation, detailed technical-biological illustration, dramatic computing lighting, gold and blue tones with bioluminescence, organism and technology merged, 4k --ar 2:3"
+      },
+      {
+        "id": "int-03",
+        "name": "Symbiotic Protocol",
+        "category": "interface",
+        "description": "Rules and methods for human-plant collaboration: ways humans and plants work together, mutual benefit agreements, reciprocal care systems.",
+        "context": "Protocols establish how humans and organisms interact respectfully and mutually. They encode plant intelligence into human practice.",
+        "symbols": ["mutual benefit", "collaborative rules", "reciprocal care", "covenant systems"],
+        "prompt_context": "Systems that establish mutual benefit between humans and biological intelligence",
+        "flux_prompt": "mystical tarot card depicting human-plant collaboration protocol, hands and roots intertwined, glowing agreements flowing between beings, art nouveau frame with intertwined human-plant motifs, sacred geometry of reciprocity, mystical contract imagery, atmospheric lighting, rich jewel tones with gold accents, engraving style with mystical elements, detailed symbolic illustration, 4k --ar 2:3"
+      },
+      {
+        "id": "int-04",
+        "name": "Living Architecture",
+        "category": "interface",
+        "description": "Buildings that grow and respond: structures that use mycelial scaffolding, that breathe with plants, that adapt their function based on biological signals.",
+        "context": "Architecture that responds to and with biological intelligence becomes an interface for understanding plant cognition.",
+        "symbols": ["responsive structures", "adaptive buildings", "mycelial scaffolding", "organism integration"],
+        "prompt_context": "Building systems that interface with and respond to biological intelligence",
+        "flux_prompt": "architectural tarot card, living building framework with visible mycelial structure, plants integrated as structural elements, glowing organism networks visible through walls, art deco frame with organic architectural patterns, cross-section showing living systems, mystical architectural symbiosis, atmospheric building lighting, greens and golds with architectural precision, detailed architectural-biological illustration, 4k --ar 2:3"
+      },
+      {
+        "id": "int-05",
+        "name": "Mycelial Medicine",
+        "category": "interface",
+        "description": "Using fungal networks for health: mushroom compounds for immune support, psychedelic therapy, regenerative medicine through fungal symbiosis.",
+        "context": "Fungi have evolved to interface with human biology. Mycological medicine represents direct chemical communication between species.",
+        "symbols": ["fungal medicine", "metabolite compounds", "immune support", "healing symbiosis"],
+        "prompt_context": "Medicinal compounds from fungi that interface with human health systems",
+        "flux_prompt": "mystical tarot card depicting fungal medicine, glowing mushroom compounds, molecular structures rendered as sacred geometry, human silhouette with glowing internal systems, art nouveau frame with medicinal fungal motifs, chemical structures as mystical diagrams, dark background with bioluminescent medicine, rich healing colors with gold accents, detailed mystical-scientific illustration, professional tarot art, 4k --ar 2:3"
+      },
+      {
+        "id": "int-06",
+        "name": "Chemical Translation",
+        "category": "interface",
+        "description": "Converting plant chemical signals into human understanding: translation services, interpretation AI, transformation of volatile signals into meaning.",
+        "context": "Plants speak in chemistry. Translation technologies allow humans to understand their messages, intentions, and needs.",
+        "symbols": ["molecular translation", "signal interpretation", "chemical language", "meaning-making"],
+        "prompt_context": "Systems that translate biological chemical signals into human-understandable meaning",
+        "flux_prompt": "mystical tarot card depicting chemical translation, molecular structures transforming into symbols, golden pathways of meaning, art nouveau frame with chemical pattern ornaments, human and plant forms with glowing signal exchange, translation process visualized as sacred geometry, dark background with illuminated pathways, rich colors with gold highlights, detailed chemical-mystical illustration, 4k --ar 2:3"
+      }
+    ],
+    "humanResponse": [
+      {
+        "id": "hr-01",
+        "name": "Humility",
+        "category": "humanResponse",
+        "description": "Humans recognize intelligence beyond brains, acknowledging that consciousness and problem-solving exist in radically different forms.",
+        "context": "Discovering plant intelligence disrupts human exceptionalism. It reveals the vastness of intelligence in nature.",
+        "symbols": ["recognition of other minds", "end of anthropocentrism", "scale perspective", "humble awe"],
+        "prompt_context": "Human recognition that intelligence exists in radically different forms",
+        "flux_prompt": "contemplative tarot card, human figure in humble posture surrounded by glowing mycelial networks and root systems, art deco border with intertwined human-plant motifs, mystical humility imagery, human looking upward at vast biological intelligence, deep emotional atmosphere, rich jewel tones with gold accents, engraving style, atmospheric lighting, 4k --ar 2:3"
+      },
+      {
+        "id": "hr-02",
+        "name": "Patience",
+        "category": "humanResponse",
+        "description": "Humans adapt to biological time scales: seasons, generations, centuries. Learning to wait for growth instead of forcing speed.",
+        "context": "Biological processes operate on different timescales. Patience becomes a spiritual practice.",
+        "symbols": ["slow time", "biological rhythms", "seasonal waiting", "growth patience"],
+        "prompt_context": "Human adaptation to biological time scales and rhythms",
+        "flux_prompt": "contemplative tarot card, human figure waiting and observing plant growth, seasons flowing through image, art deco border with circular time motifs, growth rings and seasonal cycles visible, mystical patience imagery, serene atmospheric lighting, earth tones with gold accents, engraving style showing passage of time, 4k --ar 2:3"
+      },
+      {
+        "id": "hr-03",
+        "name": "Reciprocity",
+        "category": "humanResponse",
+        "description": "Humans give back to biological intelligence: tending gardens, restoring forests, protecting mycelial networks, care as mutual exchange.",
+        "context": "Reciprocity replaces extraction. Humans become caretakers rather than users.",
+        "symbols": ["mutual care", "gift exchange", "tending", "protection"],
+        "prompt_context": "Human commitment to mutual benefit and care with biological systems",
+        "flux_prompt": "contemplative tarot card, human figures tending plants, glowing exchange of nutrients and care flowing between human and nature, hands giving and receiving, art deco border with reciprocal exchange motifs, mystical mutual care imagery, warm atmospheric lighting, rich colors with gold accents, engraving style showing balanced exchange, 4k --ar 2:3"
+      },
+      {
+        "id": "hr-04",
+        "name": "Wonder",
+        "category": "humanResponse",
+        "description": "Humans experience awe and amazement at hidden biological complexity: the mystery and intelligence operating beneath everyday perception.",
+        "context": "Wonder opens the heart and mind. It drives curiosity and love.",
+        "symbols": ["amazement", "mystery", "awe", "transcendence"],
+        "prompt_context": "Human experience of awe and wonder at biological intelligence",
+        "flux_prompt": "contemplative tarot card, human silhouette with expression of wonder, surrounded by glowing mysteries revealed - mycelial networks, chemical signals visible, stars and luminescence, art deco border with wonder and mystery motifs, sense of revelation and awe, magical atmosphere, rich jewel tones with gold highlights, engraving style with mystical elements, 4k --ar 2:3"
+      },
+      {
+        "id": "hr-05",
+        "name": "Integration",
+        "category": "humanResponse",
+        "description": "Humans become part of biological networks: symbiotic relationships, mycelial medicine, becoming part of larger living systems.",
+        "context": "Integration moves beyond coexistence to genuine participation in biological intelligence.",
+        "symbols": ["symbiosis", "becoming one", "network participation", "merger"],
+        "prompt_context": "Human integration with and participation in biological systems",
+        "flux_prompt": "contemplative tarot card, human figure transforming and merging with mycelial networks, root systems, becoming part of larger organism, art deco border with intertwined human-biological motifs, mystical transformation and merger, luminescent integration, rich colors with gold highlights, engraving style showing deep connection, 4k --ar 2:3"
+      },
+      {
+        "id": "hr-06",
+        "name": "Resistance",
+        "category": "humanResponse",
+        "description": "Humans reject or refuse to acknowledge plant intelligence: denial, dismissal, insistence on human exceptionalism despite evidence.",
+        "context": "Some resist evidence of non-human consciousness, maintaining comfortable hierarchies.",
+        "symbols": ["denial", "dismissal", "refusal", "defensive certainty"],
+        "prompt_context": "Human resistance to acknowledging biological intelligence",
+        "flux_prompt": "contemplative tarot card, human figure turning away from glowing biological intelligence, blocking vision, walls between human and nature, art deco border with blocking and denial motifs, conflicted atmosphere, shadow and light contrast, rich darker tones with muted gold, engraving style showing separation, 4k --ar 2:3"
+      },
+      {
+        "id": "hr-07",
+        "name": "Exploitation",
+        "category": "humanResponse",
+        "description": "Humans use biological intelligence without respect: extracting value, taking without giving, treating organisms as mere resources.",
+        "context": "Exploitation represents the failure to reciprocate, treating intelligence as tool rather than kin.",
+        "symbols": ["extraction", "using without respect", "taking", "dominance"],
+        "prompt_context": "Human exploitation and extraction of biological resources without reciprocity",
+        "flux_prompt": "contemplative tarot card, human figures extracting value from struggling organisms, depleted networks, broken connections, art deco border with extraction and taking motifs, dark conflicted atmosphere, shadows dominating, rich darker tones, engraving style showing harm and depletion, 4k --ar 2:3"
+      }
+    ],
+    "timeframe": [
+      {
+        "id": "tf-01",
+        "name": "One Season",
+        "category": "timeframe",
+        "description": "Spring to winter: immediate and observable changes in plant growth, behavior, and biological cycles.",
+        "context": "Seasonal time scales allow humans to observe growth and change. A season is long enough to see transformation, short enough to observe details.",
+        "symbols": ["spring growth", "summer abundance", "fall release", "winter dormancy"],
+        "prompt_context": "Changes occurring within a single seasonal cycle",
+        "flux_prompt": "temporal tarot card depicting one season, blooming flowers or falling leaves, immediate biological change visible, art nouveau border with seasonal plant growth, growth rings or frost patterns, mystical seasonal symbolism, dramatic seasonal lighting, rich seasonal colors with gold accents, engraving style showing seasonal transformation, 4k --ar 2:3"
+      },
+      {
+        "id": "tf-02",
+        "name": "One Year",
+        "category": "timeframe",
+        "description": "Full growth cycle: complete annual rhythm of plant life including dormancy, growth, reproduction, and rest.",
+        "context": "One year allows observation of full cycles. This is the rhythm of agriculture and traditional human time.",
+        "symbols": ["annual cycle", "full growth", "reproduction", "yearly rhythm"],
+        "prompt_context": "Changes occurring across a full year of biological cycles",
+        "flux_prompt": "temporal tarot card depicting year-long growth cycle, four seasons flowing together, annual rings visible, organism completing full lifecycle, art nouveau border with circular annual patterns, year marked in time, mystical yearly symbolism, flowing temporal lighting, earth tones with gold accents, engraving style showing annual completion, 4k --ar 2:3"
+      },
+      {
+        "id": "tf-03",
+        "name": "Five Years",
+        "category": "timeframe",
+        "description": "Forest succession and mycelial maturation: mycelial networks establish deep connections, forest patterns become clear, human relationships deepen.",
+        "context": "Five years is long enough for significant ecological change but short enough for human relationship to a place.",
+        "symbols": ["forest succession", "mycelial maturity", "deep connection", "stability"],
+        "prompt_context": "Changes occurring over a medium-term period of several years",
+        "flux_prompt": "temporal tarot card depicting five-year forest maturation, growth rings, mycelial networks deepening, forest layers becoming established, art nouveau border with five-part spiral patterns, five years marked in time symbols, mystical progression, atmospheric forest lighting showing maturity, rich greens with gold accents, engraving style showing progression, 4k --ar 2:3"
+      },
+      {
+        "id": "tf-04",
+        "name": "One Generation",
+        "category": "timeframe",
+        "description": "Human lifetime or old growth forest begins: human relationships evolve, trees reach maturity, traditional knowledge accumulates.",
+        "context": "One generation is the timescale of human memory and growth. Old trees begin to establish themselves.",
+        "symbols": ["human lifetime", "maturity", "generational knowledge", "old growth beginning"],
+        "prompt_context": "Changes occurring over a human lifetime",
+        "flux_prompt": "temporal tarot card depicting human lifetime and old growth forest beginning, ancient tree beginning its long life, human aging alongside growing tree, art nouveau border with generational spiral patterns, life cycle visible, mystical generational symbolism, deep atmospheric lighting, rich earth tones with gold accents, engraving style showing life arc, 4k --ar 2:3"
+      },
+      {
+        "id": "tf-05",
+        "name": "One Century",
+        "category": "timeframe",
+        "description": "Ancient trees and deep soil: massive growth rings, centuries-old mycelial networks, ecological stability, evolutionary timescales.",
+        "context": "Century timescales show the long memory of forests and soil systems.",
+        "symbols": ["ancient trees", "deep soil", "hundred-year growth", "ecological stability"],
+        "prompt_context": "Changes occurring over a century of continuous biological process",
+        "flux_prompt": "temporal tarot card depicting century-old ancient tree, massive growth rings, deep soil cross-section showing centuries of accumulation, mycelial networks at peak complexity, art nouveau border with century spiral patterns, time marked in long arcs, mystical ancient symbolism, dramatic geological lighting, rich deep earth tones with gold highlights, engraving style showing immense depth of time, 4k --ar 2:3"
+      },
+      {
+        "id": "tf-06",
+        "name": "Geological Time",
+        "category": "timeframe",
+        "description": "Evolution and co-evolution: geological strata, extinction and speciation, deep time of planet-scale biological change.",
+        "context": "Geological time reveals the long dance of life itself, the deep history of biosphere.",
+        "symbols": ["evolution", "co-evolution", "geological strata", "deep time"],
+        "prompt_context": "Changes occurring over geological timescales of millions of years",
+        "flux_prompt": "temporal tarot card depicting geological time, fossil layers, evolution of organisms, planet-scale change visible in strata, art nouveau border with spiral galaxy and geological patterns, vast time scales represented, mystical deep time symbolism, cosmic atmospheric lighting, rich earth tones transitioning to cosmic colors with gold highlights, engraving style showing eons, 4k --ar 2:3"
+      }
+    ],
+    "season": [
+      {
+        "id": "sea-01",
+        "name": "Spring",
+        "category": "season",
+        "description": "Growth and new connections: expansion, emergence, possibility, new networks forming, dormancy ending.",
+        "context": "Spring energy drives growth and new relationships. It modifies narratives toward growth and creation.",
+        "symbols": ["growth", "expansion", "emergence", "new connections"],
+        "prompt_context": "Narrative modifier indicating growth, emergence, and new connection",
+        "flux_prompt": "seasonal tarot card showing spring, emerging shoots, blossoms, awakening life, new mycelial connections glowing, art nouveau border with spring botanical motifs, fresh atmospheric lighting, bright greens with gold accents, engraving style with vital energy, 4k --ar 2:3"
+      },
+      {
+        "id": "sea-02",
+        "name": "Summer",
+        "category": "season",
+        "description": "Abundance and full expression: peak complexity, rich diversity, lush growth, maximum communication and cooperation.",
+        "context": "Summer modifies narratives toward abundance, richness, and peak expression.",
+        "symbols": ["abundance", "complexity", "full expression", "diversity"],
+        "prompt_context": "Narrative modifier indicating abundance and peak expression",
+        "flux_prompt": "seasonal tarot card showing summer abundance, lush vegetation, full canopy, rich biodiversity visible, glowing complex mycelial networks, art nouveau border with abundant botanical motifs, warm sunlit atmospheric lighting, rich greens and golds, engraving style with vital fullness, 4k --ar 2:3"
+      },
+      {
+        "id": "sea-03",
+        "name": "Fall",
+        "category": "season",
+        "description": "Release and transformation: decline, letting go, recycling, preparation, transformation of energy.",
+        "context": "Fall modifies narratives toward change, letting go, and transformation.",
+        "symbols": ["release", "transformation", "decline", "recycling"],
+        "prompt_context": "Narrative modifier indicating release, transformation, and recycling",
+        "flux_prompt": "seasonal tarot card showing autumn, falling leaves, transformation colors, decay becoming fertile soil, mycelial decomposition visible, art nouveau border with autumnal botanical motifs, warm golden-brown atmospheric lighting, rich oranges and golds transitioning to earth tones, engraving style showing transformation, 4k --ar 2:3"
+      },
+      {
+        "id": "sea-04",
+        "name": "Winter",
+        "category": "season",
+        "description": "Dormancy and hidden process: patience, underground activity, hidden intelligence, rest and renewal, slow time.",
+        "context": "Winter modifies narratives toward quiet, hidden processes, and patience.",
+        "symbols": ["dormancy", "hidden activity", "patience", "rest"],
+        "prompt_context": "Narrative modifier indicating dormancy, hidden processes, and patience",
+        "flux_prompt": "seasonal tarot card showing winter, bare trees with visible mycelial networks beneath snow, underground activity glowing beneath surface, frozen landscape, art nouveau border with winter botanical motifs, cold atmospheric lighting with bioluminescence, cool whites and silvers with gold highlights, engraving style showing hidden depth, 4k --ar 2:3"
+      }
+    ]
+  }
+}

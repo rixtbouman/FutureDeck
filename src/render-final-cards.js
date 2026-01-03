@@ -27,12 +27,14 @@ const CARD_HEIGHT = 1500;
 
 // Category color styles
 const categoryStyles = {
-  arc:       { bg: 'linear-gradient(to bottom, #1f1a2e, #0f0a1a)', color: '#a855f7', name: 'Arc' },
-  terrain:   { bg: 'linear-gradient(to bottom, #1a2a2a, #0a1a1a)', color: '#4ECDC4', name: 'Terrain' },
-  object:    { bg: 'linear-gradient(to bottom, #2a1f1a, #1a0f0a)', color: '#FF8C42', name: 'Object' },
-  wellbeing: { bg: 'linear-gradient(to bottom, #2a2a1a, #1a1a0a)', color: '#FFD93D', name: 'Wellbeing' },
-  timeframe: { bg: 'linear-gradient(to bottom, #1a1f2a, #0a0f1a)', color: '#60a5fa', name: 'Timeframe' },
-  modifiers: { bg: 'linear-gradient(to bottom, #2a1a1a, #1a0a0a)', color: '#f87171', name: 'Modifier' }
+  arc:        { bg: 'linear-gradient(to bottom, #1f1a2e, #0f0a1a)', color: '#a855f7', name: 'Arc' },
+  terrain:    { bg: 'linear-gradient(to bottom, #1a2a2a, #0a1a1a)', color: '#4ECDC4', name: 'Terrain' },
+  object:     { bg: 'linear-gradient(to bottom, #2a1f1a, #1a0f0a)', color: '#FF8C42', name: 'Object' },
+  wellbeing:  { bg: 'linear-gradient(to bottom, #2a2a1a, #1a1a0a)', color: '#FFD93D', name: 'Wellbeing' },
+  timeframe:  { bg: 'linear-gradient(to bottom, #1a1f2a, #0a0f1a)', color: '#60a5fa', name: 'Timeframe' },
+  modifiers:  { bg: 'linear-gradient(to bottom, #2a1a1a, #1a0a0a)', color: '#f87171', name: 'Modifier' },
+  technology: { bg: 'linear-gradient(to bottom, #1a2a3a, #0a1520)', color: '#38bdf8', name: 'Technology' },
+  prompt:     { bg: 'linear-gradient(to bottom, #2a2a2a, #151515)', color: '#e2e8f0', name: 'Prompt' }
 };
 
 // Build card list from JSON
@@ -55,7 +57,13 @@ function buildCardList() {
     cards.push({ id: card.id, category: 'timeframe', name: card.name, description: card.description, context: card.context });
   }
   for (const card of CARDS_DATA.modifiers) {
-    cards.push({ id: card.id, category: 'modifiers', name: card.label, description: card.context, value: card.value });
+    cards.push({ id: card.id, category: 'modifiers', name: card.label, description: card.context, context: card.context, value: card.value });
+  }
+  for (const card of CARDS_DATA.technology) {
+    cards.push({ id: card.id, category: 'technology', name: card.name, description: card.description, context: card.context });
+  }
+  for (const card of CARDS_DATA.prompt) {
+    cards.push({ id: card.id, category: 'prompt', name: card.name, description: card.description, context: card.context });
   }
 
   return cards;
@@ -255,22 +263,22 @@ function generateCardBackHTML() {
       text-align: center;
     }
     .logo-symbol {
-      font-size: 140px;
+      font-size: 200px;
       color: #a855f7;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
     }
     .logo-text {
-      font-size: 56px;
+      font-size: 80px;
       font-weight: 500;
       color: #a855f7;
       letter-spacing: 0.25em;
       text-transform: uppercase;
     }
     .logo-subtitle {
-      font-size: 24px;
-      color: #666;
+      font-size: 36px;
+      color: #888;
       letter-spacing: 0.15em;
-      margin-top: 16px;
+      margin-top: 24px;
       font-style: italic;
     }
   </style>

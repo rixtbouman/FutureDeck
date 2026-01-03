@@ -697,5 +697,117 @@
       "symbols": ["Compliance review notices", "Safety audit requirements", "Ethics committee deliberations"],
       "context": "Regulatory bodies slow deployment."
     }
+  ],
+
+  "technology": [
+    {
+      "id": "tech-01",
+      "name": "Fault-Tolerant Quantum",
+      "description": "Error-corrected quantum computing",
+      "symbols": ["Logical qubits", "Error correction codes", "Quantum processors"],
+      "context": "Quantum computers that can run indefinitely without accumulating errors. The holy grail that makes all other quantum applications possible."
+    },
+    {
+      "id": "tech-02",
+      "name": "Quantum Cryptography",
+      "description": "Unbreakable encryption",
+      "symbols": ["Quantum key distribution", "Entangled photons", "Secure channels"],
+      "context": "Communication that's provably secure—any eavesdropping attempt instantly detectable through the laws of physics."
+    },
+    {
+      "id": "tech-03",
+      "name": "Quantum AI",
+      "description": "Machine learning beyond classical limits",
+      "symbols": ["Quantum neural networks", "Superposition states", "Exponential speedup"],
+      "context": "AI systems that think in ways classical computers cannot simulate. Oracles that give correct answers but cannot explain their reasoning."
+    },
+    {
+      "id": "tech-04",
+      "name": "Quantum Sensing",
+      "description": "Measuring the unmeasurable",
+      "symbols": ["Atomic clocks", "Magnetic sensors", "Gravity detectors"],
+      "context": "Sensors of extraordinary precision—detecting diseases before symptoms, navigating without GPS, seeing through walls."
+    },
+    {
+      "id": "tech-05",
+      "name": "Quantum Simulation",
+      "description": "Modeling molecules and materials",
+      "symbols": ["Drug discovery", "Material design", "Chemical reactions"],
+      "context": "Simulating nature at the quantum level—designing drugs in days, discovering superconductors, understanding protein folding."
+    },
+    {
+      "id": "tech-06",
+      "name": "AGI",
+      "description": "Artificial General Intelligence",
+      "symbols": ["Reasoning systems", "Goal-directed agents", "Human-level cognition"],
+      "context": "AI that can perform any intellectual task a human can. The threshold beyond which machine intelligence becomes self-improving."
+    },
+    {
+      "id": "tech-07",
+      "name": "Brain-Computer Interface",
+      "description": "Direct neural connection",
+      "symbols": ["Neural implants", "Thought control", "Memory augmentation"],
+      "context": "Technology that reads and writes to the brain directly—restoring senses, enhancing memory, enabling telepathy."
+    },
+    {
+      "id": "tech-08",
+      "name": "Synthetic Biology",
+      "description": "Engineering living systems",
+      "symbols": ["Gene editing", "Designed organisms", "Biological factories"],
+      "context": "Programming life itself—custom organisms that produce fuel, food, medicine, or materials on demand."
+    },
+    {
+      "id": "tech-09",
+      "name": "Fusion Power",
+      "description": "Unlimited clean energy",
+      "symbols": ["Tokamaks", "Plasma containment", "Net energy gain"],
+      "context": "The power of the sun, contained on Earth. Abundant, clean energy that could reshape civilization."
+    },
+    {
+      "id": "tech-10",
+      "name": "Room-Temp Superconductors",
+      "description": "Lossless electricity",
+      "symbols": ["Perfect conductors", "Maglev transport", "Quantum computers"],
+      "context": "Materials with zero electrical resistance at room temperature—transforming power grids, transportation, and computing."
+    }
+  ],
+
+  "prompt": [
+    {
+      "id": "prompt-01",
+      "name": "The Innovator",
+      "description": "Who creates this future?",
+      "context": "Consider the inventors, entrepreneurs, researchers, and dreamers who build new technologies. What motivates them? What obstacles do they face?"
+    },
+    {
+      "id": "prompt-02",
+      "name": "The Incumbent",
+      "description": "Who resists this change?",
+      "context": "Consider those whose power, wealth, or identity is threatened by this future. How do they adapt, obstruct, or co-opt the change?"
+    },
+    {
+      "id": "prompt-03",
+      "name": "The Citizen",
+      "description": "How does daily life change?",
+      "context": "Consider ordinary people living through this transition. What new rituals, habits, and anxieties emerge? What is gained and lost?"
+    },
+    {
+      "id": "prompt-04",
+      "name": "The Edge Case",
+      "description": "Who falls through the cracks?",
+      "context": "Consider those who don't fit the default assumptions. Who is left behind, exploited, or forgotten in this future?"
+    },
+    {
+      "id": "prompt-05",
+      "name": "The Unintended",
+      "description": "What goes wrong?",
+      "context": "Consider second and third-order effects. What unforeseen consequences emerge? What problems does this solution create?"
+    },
+    {
+      "id": "prompt-06",
+      "name": "The Threshold",
+      "description": "What is the point of no return?",
+      "context": "Consider the moment when this future becomes inevitable. What event, decision, or breakthrough locks in this path?"
+    }
   ]
 }

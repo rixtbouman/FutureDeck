@@ -1,0 +1,288 @@
+{
+  "meta": {
+    "style": "Cinematic digital art, dramatic lighting, contemporary symbols, evocative atmosphere, rich saturated colors, mysterious mood, oracle card aesthetic, no text or letters",
+    "negativePrompt": "text, words, letters, numbers, watermark, signature, blurry, low quality, cartoon, anime, clipart"
+  },
+  "cards": [
+    {
+      "id": "arc-01",
+      "name": "Growth",
+      "prompt": "Towering glass skyscrapers reaching into golden clouds, exponential growth curves made of light beams ascending into the sky, cryptocurrency charts floating in the air, lush vertical gardens on building facades, drones delivering packages, abundance and expansion, cinematic lighting, no text"
+    },
+    {
+      "id": "arc-02",
+      "name": "Collapse",
+      "prompt": "Abandoned shopping mall overgrown with vines and moss, cracked highway overpass with wildflowers growing through concrete, rusted shipping containers, empty office buildings with broken windows, nature reclaiming urban space, melancholic beauty, twilight atmosphere, no text"
+    },
+    {
+      "id": "arc-03",
+      "name": "Discipline",
+      "prompt": "Surveillance cameras on geometric poles watching over orderly crowds, facial recognition grids overlaid on faces, QR codes and access badges, uniform architecture in perfect rows, algorithmic patterns in the sky, cold blue lighting, controlled precision, no text"
+    },
+    {
+      "id": "arc-04",
+      "name": "Transformation",
+      "prompt": "Human silhouette merging with digital particles and organic matter, DNA helix transforming into fiber optic cables, butterfly emerging from a smartphone cocoon, old and new worlds colliding in a surreal landscape, metamorphosis and evolution, vibrant ethereal colors, no text"
+    },
+    {
+      "id": "terrain-01",
+      "name": "Agriculture",
+      "prompt": "Vertical hydroponic farm towers glowing with purple LED grow lights, robotic arms harvesting vegetables, lab-grown meat in glass petri dishes, ancient wheat fields meeting modern greenhouses, seed vault doors in arctic ice, food of the future, no text"
+    },
+    {
+      "id": "terrain-02",
+      "name": "Warfare",
+      "prompt": "Swarm of autonomous drones casting shadows over a landscape, cyber command center with holographic maps, soldier in exoskeleton armor, missile defense dome shimmering in the sky, digital battlefield with data streams, military technology, no text"
+    },
+    {
+      "id": "terrain-03",
+      "name": "Healthcare",
+      "prompt": "Robotic surgeon arms in sterile operating room, DNA double helix being edited with CRISPR scissors, pill bottles and syringes arranged artistically, AI diagnostic screen showing body scan, hospital bed surrounded by monitoring devices, medical future, no text"
+    },
+    {
+      "id": "terrain-04",
+      "name": "Education",
+      "prompt": "Virtual reality headset showing holographic classroom, AI tutor robot teaching children, digital badges and certificates floating, ancient library merging with digital screens, brain-computer interface for learning, knowledge transfer, no text"
+    },
+    {
+      "id": "terrain-05",
+      "name": "The Ocean",
+      "prompt": "Floating city platform on calm ocean waters, underwater kelp farm with diving suits, cargo ships in shipping lanes viewed from above, offshore wind turbines at sunset, whale swimming past submarine cables, maritime future, deep blue atmosphere, no text"
+    },
+    {
+      "id": "terrain-06",
+      "name": "Governance",
+      "prompt": "Digital voting booth with blockchain verification, parliament chamber with AI advisors, protest signs mixed with social media icons, algorithmic decision trees projected on government building, citizens connected by network lines, democracy and power, no text"
+    },
+    {
+      "id": "terrain-07",
+      "name": "Entertainment",
+      "prompt": "VR headset user in immersive gaming world, streaming platform interface with infinite content, concert venue with drone light show, influencer ring light and camera setup, social media notification bubbles, attention and pleasure, vibrant neon colors, no text"
+    },
+    {
+      "id": "terrain-08",
+      "name": "Transport",
+      "prompt": "Hyperloop tube cutting through landscape, autonomous electric vehicle on smart road, cargo drone swarm in formation, airport terminal with departure boards, bike-sharing station in urban plaza, movement and mobility, dynamic composition, no text"
+    },
+    {
+      "id": "terrain-09",
+      "name": "Religion",
+      "prompt": "Ancient cathedral with holographic stained glass, meditation app on smartphone in temple setting, pilgrims walking with GPS devices, sacred symbols from multiple faiths arranged in mandala, candles and prayer beads, spirituality meeting technology, no text"
+    },
+    {
+      "id": "terrain-10",
+      "name": "Commerce",
+      "prompt": "Cryptocurrency coins orbiting a shopping cart, stock exchange trading floor with digital displays, contactless payment wave emanating from smartphone, supply chain network visualized as glowing threads, retail store with augmented reality mirrors, money and trade, no text"
+    },
+    {
+      "id": "terrain-11",
+      "name": "Startups",
+      "prompt": "Pitch deck presentation on large screen in modern office, coworking space with exposed brick and neon signs, term sheet document with signatures, MVP prototype on laptop, accelerator demo day stage, entrepreneurship energy, warm creative lighting, no text"
+    },
+    {
+      "id": "terrain-12",
+      "name": "Arts & Culture",
+      "prompt": "NFT gallery with floating digital artworks, film festival red carpet, publishing house printing press meeting e-reader, street art mural being created by artist, museum exhibition with visitors, creative expression, rich artistic colors, no text"
+    },
+    {
+      "id": "terrain-13",
+      "name": "Energy",
+      "prompt": "Solar panel array stretching to horizon, battery storage facility glowing with charge, oil refinery at golden hour, power grid transmission lines, smart meter dashboard display, electricity and power, industrial beauty, no text"
+    },
+    {
+      "id": "terrain-14",
+      "name": "Housing",
+      "prompt": "3D-printed house under construction, smart home interface controlling lights and temperature, apartment blueprint with AR overlay, construction crane lifting modular unit, cozy living room with smart speakers, shelter and home, warm domestic lighting, no text"
+    },
+    {
+      "id": "terrain-15",
+      "name": "Labor",
+      "prompt": "Gig worker on electric scooter with delivery bag, robotic arm on factory floor, union hall meeting room, remote work home office setup, automation timeline chart as physical sculpture, work and employment, blue collar dignity, no text"
+    },
+    {
+      "id": "terrain-16",
+      "name": "Climate",
+      "prompt": "Carbon capture facility with pipes reaching skyward, weather satellite orbiting Earth, rewilding zone with returning wildlife, emissions trading screen with rising numbers, climate adaptation infrastructure, environmental urgency, dramatic storm clouds, no text"
+    },
+    {
+      "id": "object-01",
+      "name": "Device",
+      "prompt": "Smartphone floating and emanating holographic displays, smartwatch monitoring vital signs, wireless earbuds connected to brain waves, medical implant under skin glowing softly, smart home devices arranged ceremonially, technological artifacts, clean product design, no text"
+    },
+    {
+      "id": "object-02",
+      "name": "Law",
+      "prompt": "Gavel striking on digital screen, legal documents with blockchain seal, court ruling carved in stone meeting digital display, treaty scroll unfurling with binary code, regulatory compliance checklist floating, rules and governance, formal authority, no text"
+    },
+    {
+      "id": "object-03",
+      "name": "Ritual",
+      "prompt": "Wedding rings on smartphone altar, graduation cap throwing ceremony, corporate team-building circle, morning coffee routine as sacred act, memorial candles lit by smart lighter, meaningful repetition, ceremonial atmosphere, no text"
+    },
+    {
+      "id": "object-04",
+      "name": "Beverage",
+      "prompt": "Nootropic smart drink in sleek bottle, coffee cup with latte art next to laptop, energy drink cans in neon colors, herbal adaptogen tea ceremony, protein shake in gym setting, liquids that change us, refreshing aesthetic, no text"
+    },
+    {
+      "id": "object-05",
+      "name": "Vehicle",
+      "prompt": "Tesla-like electric car charging at sleek station, personal flying pod concept, cargo ship viewed from dramatic angle, emergency helicopter in flight, recreational sailboat on open water, machines of movement, transportation beauty, no text"
+    },
+    {
+      "id": "object-06",
+      "name": "Building",
+      "prompt": "Parametric architecture with flowing organic forms, public library with glass walls, shopping mall atrium with skylights, factory floor with robotic assembly, sacred temple with modern materials, structures that contain us, architectural drama, no text"
+    },
+    {
+      "id": "object-07",
+      "name": "Garment",
+      "prompt": "Smart fabric clothing with embedded sensors, high-visibility work vest with tech patches, luxury fashion runway piece, protective hazmat suit, athletic wear with biometric tracking, what we wear, fashion forward, no text"
+    },
+    {
+      "id": "object-08",
+      "name": "Game",
+      "prompt": "Esports arena with massive screens, board game pieces on strategic map, VR gaming headset in action, poker chips and cards on felt table, mobile game on subway commute, structured play, competitive energy, no text"
+    },
+    {
+      "id": "object-09",
+      "name": "Plant",
+      "prompt": "CRISPR-edited glowing plant in laboratory, vertical farm lettuce heads in rows, medicinal cannabis under grow lights, invasive species overtaking native habitat, ornamental bonsai on minimalist shelf, living organisms, botanical beauty, no text"
+    },
+    {
+      "id": "object-10",
+      "name": "Advertisement",
+      "prompt": "Targeted ad popup on smartphone screen, Times Square digital billboards at night, influencer creating sponsored content, product placement in living room scene, retargeting pixels visualized as following eyes, commercial persuasion, advertising aesthetic, no text"
+    },
+    {
+      "id": "well-01",
+      "name": "Autonomy",
+      "prompt": "Person breaking free from puppet strings made of social media icons, self-driving car with passenger relaxing, solo traveler at crossroads with multiple paths, resignation letter floating away dramatically, personal choice dashboard, freedom and independence, liberating energy, no text"
+    },
+    {
+      "id": "well-02",
+      "name": "Beauty",
+      "prompt": "Sunset over pristine landscape reflected in smartphone screen, art gallery visitor having emotional experience, concert crowd in rapture, interior design magazine spread, botanical garden in full bloom, aesthetic pleasure, gorgeous visuals, no text"
+    },
+    {
+      "id": "well-03",
+      "name": "Comfort",
+      "prompt": "Ergonomic chair in perfect home office, climate control smart thermostat interface, luxury mattress in serene bedroom, noise-canceling headphones creating bubble of peace, spa treatment room, physical ease, cozy warmth, no text"
+    },
+    {
+      "id": "well-04",
+      "name": "Community",
+      "prompt": "Neighborhood block party with diverse faces, team wearing matching uniforms celebrating, church congregation in fellowship, union members linking arms, alumni reunion gathering, group belonging, warm connection, no text"
+    },
+    {
+      "id": "well-05",
+      "name": "Competence",
+      "prompt": "Craftsperson's hands working with precision tools, professional certification badge glowing, athlete in perfect form, skill assessment results showing mastery, workshop filled with specialized equipment, capability and mastery, confident energy, no text"
+    },
+    {
+      "id": "well-06",
+      "name": "Fitness",
+      "prompt": "Runner at sunrise on scenic trail, gym equipment arranged like sculpture, health screening holographic body scan, sleep quality data visualization, nutrition tracking app with meal, physical vitality, energetic health, no text"
+    },
+    {
+      "id": "well-07",
+      "name": "Impact",
+      "prompt": "Ripples spreading from dropped stone in water, petition with thousands of signatures, volunteer group making visible difference, performance review showing contributions, project completion celebration, making a difference, influential energy, no text"
+    },
+    {
+      "id": "well-08",
+      "name": "Morality",
+      "prompt": "Ethical sourcing certification label close-up, voting booth with civic duty, charity donation receipt glowing, conscience as angel and devil figures, fair trade coffee beans being weighed, living values, righteous clarity, no text"
+    },
+    {
+      "id": "well-09",
+      "name": "Purpose",
+      "prompt": "Compass pointing toward meaningful horizon, mission statement on wall of inspiring workspace, vision board with life goals, career roadmap stretching into future, mountain peak representing achievement, direction and meaning, purposeful energy, no text"
+    },
+    {
+      "id": "well-10",
+      "name": "Recognition",
+      "prompt": "Trophy and award ceremony spotlights, social media likes and hearts floating, thank you card handwritten, promotion announcement on office screen, standing ovation from audience, being seen and valued, recognition glow, no text"
+    },
+    {
+      "id": "well-11",
+      "name": "Relatedness",
+      "prompt": "Family photo album pages turning, anniversary celebration dinner table, contacts list on phone showing close connections, gift exchange moment between friends, shared calendar with quality time blocked, caring relationships, intimate warmth, no text"
+    },
+    {
+      "id": "well-12",
+      "name": "Security",
+      "prompt": "Insurance policy document with protective shield, emergency fund bank statement showing savings, home security system keypad, employment contract signed and sealed, safe deposit box opening, safety and stability, protected feeling, no text"
+    },
+    {
+      "id": "well-13",
+      "name": "Stimulation",
+      "prompt": "Travel destinations collage with exotic locations, event tickets fanned out excitingly, new release notification alert exciting, adventure gear ready for expedition, learning platform with endless courses, novelty and excitement, stimulating energy, no text"
+    },
+    {
+      "id": "time-01",
+      "name": "Now",
+      "prompt": "Present moment captured as frozen time bubble, today's date on calendar glowing, breaking news ticker live broadcast, current status indicator pulsing, now playing music visualizer, the present instant, immediate urgency, no text"
+    },
+    {
+      "id": "time-02",
+      "name": "6 Months",
+      "prompt": "Half-year calendar page turning, next quarter planning meeting, seasonal change montage from current to coming, near-term forecast chart, upcoming events countdown, imminent future, anticipation energy, no text"
+    },
+    {
+      "id": "time-03",
+      "name": "1 Year",
+      "prompt": "Full orbit of Earth around Sun visualized, annual review document, next year calendar fresh and blank, twelve month projection chart, birthday candles for new year, one complete cycle, cyclical time, no text"
+    },
+    {
+      "id": "time-04",
+      "name": "2 Years",
+      "prompt": "Product roadmap stretching two years ahead, election cycle timeline, apartment lease agreement term, technology evolution over 24 months, near future city concept, coming soon, developing momentum, no text"
+    },
+    {
+      "id": "time-05",
+      "name": "5 Years",
+      "prompt": "Strategic five-year plan on executive desk, child growing from kid to teen montage, technology generations evolving, mortgage milestone marker, career trajectory arc, medium-term future, substantial change, no text"
+    },
+    {
+      "id": "time-06",
+      "name": "10 Years",
+      "prompt": "Decade timeline with major milestones marked, infrastructure project completion vision, long-term investment growth chart, generational shift represented, your future self in mirror, full decade ahead, transformative time, no text"
+    },
+    {
+      "id": "time-07",
+      "name": "20 Years",
+      "prompt": "Generation gap visualized as bridge between eras, climate projection maps of 2040s, children becoming parents themselves, retirement horizon visible, unrecognizable future cityscape, long-term future, profound change, no text"
+    },
+    {
+      "id": "mod-01",
+      "name": "Major Breakthrough",
+      "prompt": "Eureka moment lightning bolt in laboratory, scientific discovery celebration, patent filing documents glowing with innovation, press conference announcing breakthrough, exponential curve shooting upward, acceleration and leap, breakthrough energy in green, no text"
+    },
+    {
+      "id": "mod-02",
+      "name": "Accelerated Funding",
+      "prompt": "Venture capital term sheet being signed, government budget allocation pie chart expanding, defense contract award ceremony, money flowing like river into project, investment surge visualization, resource mobilization, green abundance, no text"
+    },
+    {
+      "id": "mod-03",
+      "name": "Steady Progress",
+      "prompt": "Quarterly progress report with checkmarks, milestone completion notice board, team expansion welcome banner, steady upward graph line, on-track project timeline, reliable advancement, calm green progress, no text"
+    },
+    {
+      "id": "mod-04",
+      "name": "Technical Setback",
+      "prompt": "Bug tracking system with red errors, failed test report document, engineering post-mortem meeting room, code debugging screen, obstacle in the path, unexpected challenge, amber warning light, no text"
+    },
+    {
+      "id": "mod-05",
+      "name": "Funding Collapse",
+      "prompt": "Layoff announcement email on screen, project cancellation notice torn, budget cut memo with red ink, empty office after downsizing, money drying up visualization, resource withdrawal, red financial stress, no text"
+    },
+    {
+      "id": "mod-06",
+      "name": "Regulatory Delay",
+      "prompt": "Compliance review notice stamp pending, safety audit paperwork pile, ethics committee deliberation room, red tape wrapped around project, bureaucratic maze visualization, institutional slowdown, red delay warning, no text"
+    }
+  ]
+}

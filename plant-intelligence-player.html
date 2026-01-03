@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plant Intelligence Deck - Interactive Player</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Source Sans Pro', sans-serif;
+      background: linear-gradient(135deg, #0a1a0f 0%, #1a2a1f 100%);
+      color: #fff;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      font-weight: 400;
+      color: #76c893;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #aaa;
+      font-size: 16px;
+      font-weight: 300;
+    }
+
+    .game-board {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .deck-section {
+      background: rgba(26, 58, 46, 0.5);
+      border: 1px solid #2d6a4f;
+      border-radius: 12px;
+      padding: 30px;
+    }
+
+    .deck-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      color: #76c893;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 500;
+    }
+
+    .deck-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .deck-card {
+      background: linear-gradient(135deg, #1a3a2e 0%, #0f2818 100%);
+      border: 2px solid #2d6a4f;
+      border-radius: 8px;
+      padding: 12px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 12px;
+      color: #ccc;
+    }
+
+    .deck-card:hover {
+      border-color: #76c893;
+      background: linear-gradient(135deg, #2d5a4f 0%, #1f3a28 100%);
+      color: #76c893;
+    }
+
+    .deck-card.drawn {
+      background: #76c893;
+      color: #0a1a0f;
+      border-color: #76c893;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    .spread {
+      background: rgba(26, 58, 46, 0.3);
+      border: 2px dashed #2d6a4f;
+      border-radius: 12px;
+      padding: 30px;
+      min-height: 400px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .spread-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .spread-item {
+      background: rgba(45, 106, 79, 0.3);
+      border: 1px solid #2d6a4f;
+      border-radius: 8px;
+      padding: 15px;
+      text-align: center;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .spread-item.empty {
+      opacity: 0.5;
+    }
+
+    .spread-label {
+      font-size: 12px;
+      color: #76c893;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .spread-value {
+      font-size: 18px;
+      font-family: 'Playfair Display', serif;
+      color: #fff;
+    }
+
+    .spread-value img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+
+    .controls {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background: #76c893;
+      color: #0a1a0f;
+      flex: 1;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: #52b788;
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #76c893;
+      border: 1px solid #76c893;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(118, 200, 147, 0.1);
+    }
+
+    .narrative-section {
+      grid-column: 1 / -1;
+      background: rgba(26, 58, 46, 0.5);
+      border: 1px solid #2d6a4f;
+      border-radius: 12px;
+      padding: 30px;
+    }
+
+    .narrative-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      color: #76c893;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .narrative {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #ccc;
+      margin-bottom: 20px;
+      background: rgba(15, 40, 24, 0.5);
+      padding: 20px;
+      border-radius: 8px;
+      border-left: 3px solid #76c893;
+      min-height: 80px;
+    }
+
+    .narrative.empty {
+      color: #666;
+      font-style: italic;
+    }
+
+    .copy-btn {
+      background: transparent;
+      color: #76c893;
+      border: 1px solid #76c893;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    .copy-btn:hover {
+      background: rgba(118, 200, 147, 0.1);
+    }
+
+    .instructions {
+      background: rgba(45, 106, 79, 0.2);
+      border: 1px solid #2d6a4f;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 30px;
+      font-size: 13px;
+      color: #aaa;
+      line-height: 1.6;
+    }
+
+    .draw-sequence {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .sequence-step {
+      background: rgba(118, 200, 147, 0.1);
+      color: #76c893;
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border: 1px solid #76c893;
+    }
+
+    .sequence-step.active {
+      background: #76c893;
+      color: #0a1a0f;
+    }
+
+    @media (max-width: 1024px) {
+      .game-board {
+        grid-template-columns: 1fr;
+      }
+
+      .spread-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      h1 {
+        font-size: 36px;
+      }
+    }
+
+    .status {
+      text-align: center;
+      color: #76c893;
+      font-size: 12px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🌿 Plant Intelligence Deck</h1>
+      <p class="subtitle">Draw cards to explore biological consciousness and human-plant entanglement</p>
+    </header>
+
+    <div class="instructions">
+      <strong>How to Play:</strong> Click the "Draw Next Card" button to draw from each category in sequence. Cards will appear in the spread below.
+      Once you've completed a full reading (all 6 categories + seasonal modifier), the AI narrative prompt will generate automatically.
+      You can then copy the prompt to send to Claude or ChatGPT to generate a full story.
+    </div>
+
+    <div class="draw-sequence" id="sequenceIndicator"></div>
+
+    <div class="game-board">
+      <!-- Deck Selection -->
+      <div class="deck-section">
+        <div class="deck-title">📚 Organism (5)</div>
+        <div class="deck-list" id="organismDeck"></div>
+
+        <div class="deck-title">🧠 Capacity (8)</div>
+        <div class="deck-list" id="capacityDeck"></div>
+
+        <div class="deck-title">🌍 Domain (8)</div>
+        <div class="deck-list" id="domainDeck"></div>
+
+        <div class="deck-title">⚙️ Interface (6)</div>
+        <div class="deck-list" id="interfaceDeck"></div>
+
+        <div class="deck-title">👥 Human Response (7)</div>
+        <div class="deck-list" id="humanResponseDeck"></div>
+
+        <div class="deck-title">⏳ Timeframe (6)</div>
+        <div class="deck-list" id="timeframeDeck"></div>
+
+        <div class="deck-title">🌱 Seasonal (4)</div>
+        <div class="deck-list" id="seasonDeck"></div>
+      </div>
+
+      <!-- Spread Display -->
+      <div class="spread">
+        <div class="controls">
+          <button class="btn btn-primary" id="drawBtn">Draw Next Card</button>
+          <button class="btn btn-secondary" id="resetBtn">New Reading</button>
+        </div>
+
+        <div class="spread-grid">
+          <div class="spread-item empty" id="spreadOrganism">
+            <div class="spread-label">Organism</div>
+            <div class="spread-value">—</div>
+          </div>
+          <div class="spread-item empty" id="spreadCapacity">
+            <div class="spread-label">Capacity</div>
+            <div class="spread-value">—</div>
+          </div>
+          <div class="spread-item empty" id="spreadDomain">
+            <div class="spread-label">Domain</div>
+            <div class="spread-value">—</div>
+          </div>
+          <div class="spread-item empty" id="spreadInterface">
+            <div class="spread-label">Interface</div>
+            <div class="spread-value">—</div>
+          </div>
+          <div class="spread-item empty" id="spreadHumanResponse">
+            <div class="spread-label">Human Response</div>
+            <div class="spread-value">—</div>
+          </div>
+          <div class="spread-item empty" id="spreadTimeframe">
+            <div class="spread-label">Timeframe</div>
+            <div class="spread-value">—</div>
+          </div>
+        </div>
+
+        <div class="spread-item" id="spreadSeason" style="grid-column: 1 / -1;">
+          <div class="spread-label">Seasonal Modifier</div>
+          <div class="spread-value">—</div>
+        </div>
+
+        <div class="status" id="status"></div>
+      </div>
+    </div>
+
+    <!-- Narrative Section -->
+    <div class="narrative-section">
+      <div class="narrative-title">📖 AI Narrative Prompt</div>
+      <div class="narrative empty" id="narrativeText">
+        Complete a full reading to generate your narrative prompt...
+      </div>
+      <button class="copy-btn" id="copyBtn" style="display:none;">Copy Prompt</button>
+    </div>
+  </div>
+
+  <script>
+    // Load cards data
+    let cardsData = null;
+    let currentDraw = {};
+    let drawnCards = {
+      organism: null,
+      capacity: null,
+      domain: null,
+      interface: null,
+      humanResponse: null,
+      timeframe: null,
+      season: null
+    };
+
+    const categories = ['organism', 'capacity', 'domain', 'interface', 'humanResponse', 'timeframe', 'season'];
+    let currentCategory = 0;
+
+    async function init() {
+      try {
+        const response = await fetch('./plant-intelligence-cards.json');
+        cardsData = await response.json();
+        renderDecks();
+        updateSequenceIndicator();
+      } catch (error) {
+        console.error('Error loading cards:', error);
+        document.getElementById('status').textContent = 'Error loading cards';
+      }
+    }
+
+    function renderDecks() {
+      const decks = {
+        organism: document.getElementById('organismDeck'),
+        capacity: document.getElementById('capacityDeck'),
+        domain: document.getElementById('domainDeck'),
+        interface: document.getElementById('interfaceDeck'),
+        humanResponse: document.getElementById('humanResponseDeck'),
+        timeframe: document.getElementById('timeframeDeck'),
+        season: document.getElementById('seasonDeck')
+      };
+
+      Object.entries(decks).forEach(([category, element]) => {
+        const cards = cardsData.cards[category] || [];
+        element.innerHTML = cards.map(card => `
+          <div class="deck-card" data-id="${card.id}" title="${card.name}: ${card.description}">
+            ${card.name}
+          </div>
+        `).join('');
+      });
+    }
+
+    function updateSequenceIndicator() {
+      const indicator = document.getElementById('sequenceIndicator');
+      indicator.innerHTML = categories.map((cat, idx) => `
+        <div class="sequence-step ${idx === currentCategory ? 'active' : ''}">
+          ${idx + 1}. ${cat.replace(/([A-Z])/g, ' $1').toUpperCase()}
+        </div>
+      `).join('');
+    }
+
+    function drawCard() {
+      if (currentCategory >= categories.length) return;
+
+      const category = categories[currentCategory];
+      const cards = cardsData.cards[category] || [];
+
+      // Filter out already drawn cards
+      const available = cards.filter(card =>
+        !drawnCards[category] || card.id !== drawnCards[category].id
+      );
+
+      if (available.length === 0) {
+        document.getElementById('status').textContent = 'No more cards in this category';
+        return;
+      }
+
+      const randomCard = available[Math.floor(Math.random() * available.length)];
+      drawnCards[category] = randomCard;
+
+      updateSpread();
+      markCardAsDrawn(randomCard.id);
+
+      currentCategory++;
+      updateSequenceIndicator();
+
+      if (currentCategory >= categories.length) {
+        generateNarrative();
+        document.getElementById('status').textContent = 'Reading complete! Check the narrative below.';
+      } else {
+        document.getElementById('status').textContent = `Drew ${randomCard.name}. Next...`;
+      }
+    }
+
+    function updateSpread() {
+      Object.entries(drawnCards).forEach(([category, card]) => {
+        if (card) {
+          const element = document.getElementById(`spread${capitalizeFirst(category)}`);
+          if (element) {
+            element.classList.remove('empty');
+            element.querySelector('.spread-value').innerHTML = `
+              ${card.name}
+              <br><small style="font-size: 11px; color: #888; margin-top: 8px; display: block;">${card.description.substring(0, 100)}...</small>
+            `;
+          }
+        }
+      });
+    }
+
+    function markCardAsDrawn(cardId) {
+      document.querySelectorAll(`[data-id="${cardId}"]`).forEach(el => {
+        el.classList.add('drawn');
+      });
+    }
+
+    function generateNarrative() {
+      const parts = [];
+
+      const organism = drawnCards.organism;
+      const capacity = drawnCards.capacity;
+      const domain = drawnCards.domain;
+      const interface_ = drawnCards.interface;
+      const humanResponse = drawnCards.humanResponse;
+      const timeframe = drawnCards.timeframe;
+      const season = drawnCards.season;
+
+      let narrative = `How ${organism?.name} demonstrates ${capacity?.name?.toLowerCase()} in ${domain?.name?.toLowerCase()}, `;
+      narrative += `through ${interface_?.name?.toLowerCase()}, `;
+      narrative += `leading humans to experience ${humanResponse?.name?.toLowerCase()} `;
+      narrative += `over ${timeframe?.name?.toLowerCase()}.`;
+
+      if (season) {
+        narrative += ` ${season.description}`;
+      }
+
+      const narrativeEl = document.getElementById('narrativeText');
+      narrativeEl.classList.remove('empty');
+      narrativeEl.textContent = narrative;
+
+      document.getElementById('copyBtn').style.display = 'inline-block';
+    }
+
+    function resetReading() {
+      drawnCards = {
+        organism: null,
+        capacity: null,
+        domain: null,
+        interface: null,
+        humanResponse: null,
+        timeframe: null,
+        season: null
+      };
+      currentCategory = 0;
+
+      document.querySelectorAll('.spread-item').forEach(el => {
+        el.classList.add('empty');
+        el.querySelector('.spread-value').textContent = '—';
+      });
+
+      document.querySelectorAll('.deck-card').forEach(el => {
+        el.classList.remove('drawn');
+      });
+
+      document.getElementById('narrativeText').classList.add('empty');
+      document.getElementById('narrativeText').textContent = 'Complete a full reading to generate your narrative prompt...';
+      document.getElementById('copyBtn').style.display = 'none';
+      document.getElementById('status').textContent = '';
+
+      updateSequenceIndicator();
+    }
+
+    function copyNarrative() {
+      const text = document.getElementById('narrativeText').textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('copyBtn');
+        const original = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(() => { btn.textContent = original; }, 2000);
+      });
+    }
+
+    function capitalizeFirst(str) {
+      return str.charAt(0).toUpperCase() + str.slice(1).replace(/([A-Z])/g, '$1');
+    }
+
+    // Event listeners
+    document.getElementById('drawBtn').addEventListener('click', drawCard);
+    document.getElementById('resetBtn').addEventListener('click', resetReading);
+    document.getElementById('copyBtn').addEventListener('click', copyNarrative);
+
+    // Initialize on load
+    init();
+  </script>
+</body>
+</html>

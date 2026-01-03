@@ -1,0 +1,187 @@
+Total cards to generate: 44
+Generating: Slime Mold (org-01)...
+Error for Slime Mold: {
+  title: 'Unauthenticated',
+  detail: 'You did not pass a valid authentication token',
+  status: 401
+}
+Generating: Mycelial Network (org-02)...
+Error for Mycelial Network: {
+  title: 'Unauthenticated',
+  detail: 'You did not pass a valid authentication token',
+  status: 401
+}
+Generating: Root System (org-03)...
+Error for Root System: {
+  title: 'Unauthenticated',
+  detail: 'You did not pass a valid authentication token',
+  status: 401
+}
+Generating: Bacterial Colony (org-04)...
+Error for Bacterial Colony: {
+  title: 'Unauthenticated',
+  detail: 'You did not pass a valid authentication token',
+  status: 401
+}
+Generating: Plant Canopy (org-05)...
+Error for Plant Canopy: {
+  title: 'Unauthenticated',
+  detail: 'You did not pass a valid authentication token',
+  status: 401
+}
+Generating: Memory (cap-01)...
+Error for Memory: {
+  title: 'Unauthenticated',
+  detail: 'You did not pass a valid authentication token',
+  status: 401
+}
+Generating: Problem Solving (cap-02)...
+Error for Problem Solving: {
+  title: 'Unauthenticated',
+  detail: 'You did not pass a valid authentication token',
+  status: 401
+}
+Generating: Communication (cap-03)...
+Error for Communication: {
+  title: 'Unauthenticated',
+  detail: 'You did not pass a valid authentication token',
+  status: 401
+}
+Generating: Learning (cap-04)...
+Error for Learning: {
+  title: 'Unauthenticated',
+  detail: 'You did not pass a valid authentication token',
+  status: 401
+}
+Generating: Decision Making (cap-05)...
+Error for Decision Making: {
+  title: 'Unauthenticated',
+  detail: 'You did not pass a valid authentication token',
+  status: 401
+}
+Generating: Sensing (cap-06)...
+Error for Sensing: {
+  title: 'Unauthenticated',
+  detail: 'You did not pass a valid authentication token',
+  status: 401
+}
+Generating: Cooperation (cap-07)...
+Error for Cooperation: {
+  title: 'Unauthenticated',
+  detail: 'You did not pass a valid authentication token',
+  status: 401
+}
+Generating: Adaptation (cap-08)...
+Error for Adaptation: {
+  title: 'Unauthenticated',
+  detail: 'You did not pass a valid authentication token',
+  status: 401
+}
+Generating: Urban Garden (dom-01)...
+Error for Urban Garden: {
+  title: 'Unauthenticated',
+  detail: 'You did not pass a valid authentication token',
+  status: 401
+}
+Generating: Forest Ecosystem (dom-02)...
+Error for Forest Ecosystem: {
+  title: 'Unauthenticated',
+  detail: 'You did not pass a valid authentication token',
+  status: 401
+}
+Generating: Laboratory (dom-03)...
+Error for Laboratory: {
+  title: 'Unauthenticated',
+  detail: 'You did not pass a valid authentication token',
+  status: 401
+}
+Generating: Agricultural Field (dom-04)...
+Error for Agricultural Field: {
+  title: 'Unauthenticated',
+  detail: 'You did not pass a valid authentication token',
+  status: 401
+}
+Generating: Hospital (dom-05)...
+Error for Hospital: {
+  title: 'Unauthenticated',
+  detail: 'You did not pass a valid authentication token',
+  status: 401
+}
+Generating: School (dom-06)...
+Error for School: {
+  title: 'Unauthenticated',
+  detail: 'You did not pass a valid authentication token',
+  status: 401
+}
+Generating: Living Architecture (dom-07)...
+Error for Living Architecture: {
+  title: 'Unauthenticated',
+  detail: 'You did not pass a valid authentication token',
+  status: 401
+}
+Generating: Technology Hub (dom-08)...
+Error for Technology Hub: {
+  title: 'Unauthenticated',
+  detail: 'You did not pass a valid authentication token',
+  status: 401
+}
+Generating: Sensor Network (int-01)...
+Error for Sensor Network: {
+  title: 'Unauthenticated',
+  detail: 'You did not pass a valid authentication token',
+  status: 401
+}
+Generating: Biocomputer (int-02)...
+Error for Biocomputer: {
+  title: 'Unauthenticated',
+  detail: 'You did not pass a valid authentication token',
+  status: 401
+}
+Generating: Symbiotic Protocol (int-03)...
+Error for Symbiotic Protocol: {
+  title: 'Unauthenticated',
+  detail: 'You did not pass a valid authentication token',
+  status: 401
+}
+Generating: Living Architecture (int-04)...
+Error for Living Architecture: {
+  title: 'Unauthenticated',
+  detail: 'You did not pass a valid authentication token',
+  status: 401
+}
+Generating: Mycelial Medicine (int-05)...
+Error for Mycelial Medicine: {
+  title: 'Unauthenticated',
+  detail: 'You did not pass a valid authentication token',
+  status: 401
+}
+Generating: Chemical Translation (int-06)...
+Error for Chemical Translation: {
+  title: 'Unauthenticated',
+  detail: 'You did not pass a valid authentication token',
+  status: 401
+}
+Generating: Humility (hr-01)...
+Error for Humility: {
+  title: 'Unauthenticated',
+  detail: 'You did not pass a valid authentication token',
+  status: 401
+}
+Generating: Patience (hr-02)...
+Error for Patience: {
+  title: 'Unauthenticated',
+  detail: 'You did not pass a valid authentication token',
+  status: 401
+}
+Generating: Reciprocity (hr-03)...
+Error for Reciprocity: {
+  title: 'Unauthenticated',
+  detail: 'You did not pass a valid authentication token',
+  status: 401
+}
+Generating: Wonder (hr-04)...
+Error for Wonder: {
+  title: 'Unauthenticated',
+  detail: 'You did not pass a valid authentication token',
+  status: 401
+}
