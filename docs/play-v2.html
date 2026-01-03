@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Futures Deck - Scenario Generator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Source+Sans+Pro:wght@300;400;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #c9a227;
+      --dark: #0a0a12;
+      --arc: #a855f7;
+      --terrain: #4ECDC4;
+      --object: #FF8C42;
+      --wellbeing: #FFD93D;
+      --timeframe: #60a5fa;
+      --modifier: #f87171;
+      --technology: #38bdf8;
+      --prompt: #e2e8f0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Source Sans Pro', sans-serif;
+      background: var(--dark);
+      color: #fff;
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(to bottom, #0d0d15, var(--dark));
+      padding: 25px 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(201, 162, 39, 0.3);
+    }
+
+    header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+
+    header p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+    }
+
+    main {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 25px 20px;
+    }
+
+    .spread-area {
+      min-height: 320px;
+      background: rgba(255,255,255,0.02);
+      border: 2px dashed rgba(201, 162, 39, 0.25);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 25px;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .spread-area.empty::before {
+      content: 'Click cards below to build your spread';
+      color: rgba(255,255,255,0.25);
+      font-style: italic;
+      font-size: 14px;
+    }
+
+    .spread-card {
+      width: 180px;
+      cursor: pointer;
+      transition: transform 0.2s;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    }
+
+    .spread-card:hover {
+      transform: scale(1.03);
+    }
+
+    .spread-card img {
+      width: 100%;
+      display: block;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 11px 22px;
+      border: none;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--dark);
+    }
+
+    .btn-primary:hover {
+      background: #d4b32a;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.15);
+    }
+
+    .btn-danger {
+      background: rgba(248, 113, 113, 0.15);
+      color: #f87171;
+      border: 1px solid rgba(248, 113, 113, 0.25);
+    }
+
+    .btn-danger:hover {
+      background: rgba(248, 113, 113, 0.25);
+    }
+
+    .deck-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      margin-bottom: 15px;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .category-group {
+      margin-bottom: 20px;
+    }
+
+    .category-group h3 {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      padding-left: 3px;
+    }
+
+    .category-group.arc h3 { color: var(--arc); }
+    .category-group.terrain h3 { color: var(--terrain); }
+    .category-group.object h3 { color: var(--object); }
+    .category-group.wellbeing h3 { color: var(--wellbeing); }
+    .category-group.timeframe h3 { color: var(--timeframe); }
+    .category-group.modifier h3 { color: var(--modifier); }
+    .category-group.technology h3 { color: var(--technology); }
+    .category-group.prompt h3 { color: var(--prompt); }
+
+    .card-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .deck-card {
+      width: 100px;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.2s;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .deck-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    }
+
+    .deck-card.in-spread {
+      opacity: 0.25;
+      pointer-events: none;
+    }
+
+    .deck-card img {
+      width: 100%;
+      display: block;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: #1a1a1a;
+      border-radius: 12px;
+      max-width: 750px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      border: 1px solid rgba(201, 162, 39, 0.25);
+    }
+
+    .modal-header {
+      padding: 18px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-header h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+      opacity: 0.5;
+    }
+
+    .modal-close:hover {
+      opacity: 1;
+    }
+
+    .modal-body {
+      padding: 20px;
+    }
+
+    .spread-summary {
+      background: rgba(0,0,0,0.4);
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+      font-size: 12px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      font-family: 'Source Code Pro', monospace;
+      color: rgba(255,255,255,0.85);
+      max-height: 350px;
+      overflow-y: auto;
+    }
+
+    .modal-body p {
+      color: rgba(255,255,255,0.6);
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px 20px;
+      color: rgba(255,255,255,0.35);
+      font-size: 12px;
+    }
+
+    footer a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .spread-card { width: 140px; }
+      .deck-card { width: 80px; }
+      header h1 { font-size: 26px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>FUTURES DECK</h1>
+    <p>Draw cards to generate speculative scenarios</p>
+  </header>
+
+  <main>
+    <div class="spread-area empty" id="spreadArea"></div>
+
+    <div class="controls">
+      <button class="btn btn-primary" onclick="drawRandom()">Draw Random</button>
+      <button class="btn btn-secondary" onclick="drawSpread()">Draw Spread (5)</button>
+      <button class="btn btn-secondary" onclick="interpretSpread()">Generate Prompt</button>
+      <button class="btn btn-danger" onclick="clearSpread()">Clear</button>
+    </div>
+
+    <div class="deck-section">
+      <h2>Select Cards</h2>
+
+      <div class="category-group arc">
+        <h3>Arc (4)</h3>
+        <div class="card-row" id="arcCards"></div>
+      </div>
+
+      <div class="category-group terrain">
+        <h3>Terrain (16)</h3>
+        <div class="card-row" id="terrainCards"></div>
+      </div>
+
+      <div class="category-group object">
+        <h3>Object (10)</h3>
+        <div class="card-row" id="objectCards"></div>
+      </div>
+
+      <div class="category-group wellbeing">
+        <h3>Wellbeing (13)</h3>
+        <div class="card-row" id="wellbeingCards"></div>
+      </div>
+
+      <div class="category-group timeframe">
+        <h3>Timeframe (7)</h3>
+        <div class="card-row" id="timeframeCards"></div>
+      </div>
+
+      <div class="category-group modifier">
+        <h3>Modifier (6)</h3>
+        <div class="card-row" id="modifierCards"></div>
+      </div>
+
+      <div class="category-group technology">
+        <h3>Technology (10)</h3>
+        <div class="card-row" id="technologyCards"></div>
+      </div>
+
+      <div class="category-group prompt">
+        <h3>Prompt (6)</h3>
+        <div class="card-row" id="promptCards"></div>
+      </div>
+    </div>
+  </main>
+
+  <div class="modal" id="interpretModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>SCENARIO PROMPT</h2>
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Copy this prompt and paste into ChatGPT, Claude, or your preferred AI:</p>
+        <div class="spread-summary" id="spreadSummary"></div>
+        <button class="btn btn-primary" onclick="copySpread()" style="width: 100%;">Copy to Clipboard</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <a href="index.html">About</a> &middot;
+    <a href="examples.html">Examples</a> &middot;
+    <a href="quantum.html">Quantum Futures</a> &middot;
+    <a href="rate.html">Rate</a> &middot;
+    <a href="../review.html">Review Cards</a>
+  </footer>
+
+  <script>
+    // All 72 cards with metadata
+    const CARDS = [
+      // Arc (4)
+      { id: 'arc-01', category: 'arc', name: 'Growth', description: 'A future where progress has continued', context: 'A world of continuous expansion, technological advancement, and economic growth.' },
+      { id: 'arc-02', category: 'arc', name: 'Collapse', description: 'A future where society has crumbled', context: 'A world where the systems that held society together have failed.' },
+      { id: 'arc-03', category: 'arc', name: 'Discipline', description: 'A future of strict control and order', context: 'A world of strict control, whether by governments, corporations, or algorithms.' },
+      { id: 'arc-04', category: 'arc', name: 'Transformation', description: 'A future fundamentally different from today', context: 'A world so fundamentally changed that people from today would barely recognize it.' },
+
+      // Terrain (16)
+      { id: 'terrain-01', category: 'terrain', name: 'Agriculture', description: 'Food production and farming', context: 'How we grow, process, and distribute food.' },
+      { id: 'terrain-02', category: 'terrain', name: 'Warfare', description: 'Conflict and security', context: 'How violence is organized, threatened, and defended against.' },
+      { id: 'terrain-03', category: 'terrain', name: 'Healthcare', description: 'Medicine, body, and mind', context: 'How we maintain, repair, and enhance human bodies and minds.' },
+      { id: 'terrain-04', category: 'terrain', name: 'Education', description: 'Learning and knowledge transfer', context: 'How knowledge and skills are transmitted across generations.' },
+      { id: 'terrain-05', category: 'terrain', name: 'The Ocean', description: 'Life on, in, or near the sea', context: 'The vast blue frontier covering most of Earth\'s surface.' },
+      { id: 'terrain-06', category: 'terrain', name: 'Governance', description: 'Politics and decision making', context: 'How collective decisions are made and enforced.' },
+      { id: 'terrain-07', category: 'terrain', name: 'Entertainment', description: 'Leisure, art, and distraction', context: 'How we spend our free time and express creativity.' },
+      { id: 'terrain-08', category: 'terrain', name: 'Transport', description: 'Movement of people and goods', context: 'How people and goods move through space.' },
+      { id: 'terrain-09', category: 'terrain', name: 'Religion', description: 'Faith, cults, and spirituality', context: 'How humans seek meaning and transcendence through belief.' },
+      { id: 'terrain-10', category: 'terrain', name: 'Commerce', description: 'Money, trade, and value', context: 'How value is created, exchanged, and accumulated.' },
+      { id: 'terrain-11', category: 'terrain', name: 'Startups', description: 'Entrepreneurship and innovation', context: 'How new ventures emerge, grow, and disrupt.' },
+      { id: 'terrain-12', category: 'terrain', name: 'Arts & Culture', description: 'Creative expression and heritage', context: 'How societies express and transmit meaning through creative works.' },
+      { id: 'terrain-13', category: 'terrain', name: 'Energy', description: 'Power generation and distribution', context: 'How we generate, store, and distribute power.' },
+      { id: 'terrain-14', category: 'terrain', name: 'Housing', description: 'Shelter and urban life', context: 'Where and how people live.' },
+      { id: 'terrain-15', category: 'terrain', name: 'Labor', description: 'Work and employment', context: 'How work is organized, compensated, and experienced.' },
+      { id: 'terrain-16', category: 'terrain', name: 'Climate', description: 'Environment and sustainability', context: 'Earth\'s changing climate and our response to it.' },
+
+      // Object (10)
+      { id: 'object-01', category: 'object', name: 'Device', description: 'A piece of hardware', context: 'A tangible technological artifact mediating our interactions.' },
+      { id: 'object-02', category: 'object', name: 'Law', description: 'A regulation or decree', context: 'A formal rule governing behavior.' },
+      { id: 'object-03', category: 'object', name: 'Ritual', description: 'A ceremonial action', context: 'A repeated meaningful action marking transitions.' },
+      { id: 'object-04', category: 'object', name: 'Beverage', description: 'Something to drink', context: 'A liquid consumed for sustenance, pleasure, or effect.' },
+      { id: 'object-05', category: 'object', name: 'Vehicle', description: 'A mode of transport', context: 'A machine for moving through space.' },
+      { id: 'object-06', category: 'object', name: 'Building', description: 'A structure', context: 'An architectural creation enclosing space for human activity.' },
+      { id: 'object-07', category: 'object', name: 'Garment', description: 'Clothing or wearable', context: 'Something worn on the body that protects and expresses identity.' },
+      { id: 'object-08', category: 'object', name: 'Game', description: 'A form of play', context: 'A structured form of play with rules and goals.' },
+      { id: 'object-09', category: 'object', name: 'Plant', description: 'Organic flora', context: 'A living organism that feeds, heals, or transforms.' },
+      { id: 'object-10', category: 'object', name: 'Advertisement', description: 'Commercial messaging', context: 'A message designed to influence behavior.' },
+
+      // Wellbeing (13)
+      { id: 'well-01', category: 'wellbeing', name: 'Autonomy', description: 'Independence and self-direction', context: 'The freedom to act according to your own will.' },
+      { id: 'well-02', category: 'wellbeing', name: 'Beauty', description: 'Aesthetic pleasure and harmony', context: 'The experience of aesthetic pleasure from nature, art, music.' },
+      { id: 'well-03', category: 'wellbeing', name: 'Comfort', description: 'Physical ease and relaxation', context: 'Physical ease and freedom from discomfort.' },
+      { id: 'well-04', category: 'wellbeing', name: 'Community', description: 'Group belonging and identity', context: 'Being part of a group with shared identity and purpose.' },
+      { id: 'well-05', category: 'wellbeing', name: 'Competence', description: 'Mastery and effectiveness', context: 'Being capable and effective at what you do.' },
+      { id: 'well-06', category: 'wellbeing', name: 'Fitness', description: 'Physical health and vitality', context: 'Physical health, energy, and bodily capability.' },
+      { id: 'well-07', category: 'wellbeing', name: 'Impact', description: 'Influence and making a difference', context: 'Having influence on your environment and people around you.' },
+      { id: 'well-08', category: 'wellbeing', name: 'Morality', description: 'Living by your values', context: 'Acting in accordance with your moral values.' },
+      { id: 'well-09', category: 'wellbeing', name: 'Purpose', description: 'Direction and meaning in life', context: 'Having direction and goals that feel meaningful.' },
+      { id: 'well-10', category: 'wellbeing', name: 'Recognition', description: 'Being seen and respected', context: 'Being acknowledged, appreciated, and respected by others.' },
+      { id: 'well-11', category: 'wellbeing', name: 'Relatedness', description: 'Close caring relationships', context: 'Having close, warm relationships with people who care about you.' },
+      { id: 'well-12', category: 'wellbeing', name: 'Security', description: 'Safety and predictability', context: 'Feeling safe and having a predictable, stable environment.' },
+      { id: 'well-13', category: 'wellbeing', name: 'Stimulation', description: 'Novelty and excitement', context: 'Mental and physical stimulation through novelty and challenge.' },
+
+      // Timeframe (7)
+      { id: 'time-01', category: 'timeframe', name: 'Now', description: 'The present moment', context: 'This is happening right now. The future is already here.' },
+      { id: 'time-02', category: 'timeframe', name: '6 Months', description: 'Half a year ahead', context: 'Just around the corner. Close enough to feel real.' },
+      { id: 'time-03', category: 'timeframe', name: '1 Year', description: 'One year from now', context: 'A single orbit around the sun.' },
+      { id: 'time-04', category: 'timeframe', name: '2 Years', description: 'Two years ahead', context: 'The near future. Plans made today will have played out.' },
+      { id: 'time-05', category: 'timeframe', name: '5 Years', description: 'Five years from now', context: 'The medium term. Recognizable but different.' },
+      { id: 'time-06', category: 'timeframe', name: '10 Years', description: 'A decade ahead', context: 'A full decade. Enough time for fundamental transformation.' },
+      { id: 'time-07', category: 'timeframe', name: '20 Years', description: 'Two decades into the future', context: 'A generation away. A genuinely different world.' },
+
+      // Modifier (6)
+      { id: 'mod-01', category: 'modifier', name: 'Major Breakthrough', description: '-3 years', context: 'An unexpected scientific leap accelerates everything.' },
+      { id: 'mod-02', category: 'modifier', name: 'Accelerated Funding', description: '-2 years', context: 'Massive investment surge—wartime-level mobilization.' },
+      { id: 'mod-03', category: 'modifier', name: 'Steady Progress', description: '-1 year', context: 'Everything goes according to plan.' },
+      { id: 'mod-04', category: 'modifier', name: 'Technical Setback', description: '+1 year', context: 'Unexpected engineering challenges.' },
+      { id: 'mod-05', category: 'modifier', name: 'Funding Collapse', description: '+2 years', context: 'The money dries up.' },
+      { id: 'mod-06', category: 'modifier', name: 'Regulatory Delay', description: '+3 years', context: 'Regulatory bodies slow deployment.' },
+
+      // Technology (10)
+      { id: 'tech-01', category: 'technology', name: 'Fault-Tolerant Quantum', description: 'Error-corrected quantum computing', context: 'Quantum computers that can run indefinitely without accumulating errors.' },
+      { id: 'tech-02', category: 'technology', name: 'Quantum Cryptography', description: 'Unbreakable encryption', context: 'Communication that\'s provably secure through the laws of physics.' },
+      { id: 'tech-03', category: 'technology', name: 'Quantum AI', description: 'Machine learning beyond classical limits', context: 'AI systems that think in ways classical computers cannot simulate.' },
+      { id: 'tech-04', category: 'technology', name: 'Quantum Sensing', description: 'Measuring the unmeasurable', context: 'Sensors of extraordinary precision—detecting diseases, navigating without GPS.' },
+      { id: 'tech-05', category: 'technology', name: 'Quantum Simulation', description: 'Modeling molecules and materials', context: 'Simulating nature at the quantum level—designing drugs in days.' },
+      { id: 'tech-06', category: 'technology', name: 'AGI', description: 'Artificial General Intelligence', context: 'AI that can perform any intellectual task a human can.' },
+      { id: 'tech-07', category: 'technology', name: 'Brain-Computer Interface', description: 'Direct neural connection', context: 'Technology that reads and writes to the brain directly.' },
+      { id: 'tech-08', category: 'technology', name: 'Synthetic Biology', description: 'Engineering living systems', context: 'Programming life itself—custom organisms on demand.' },
+      { id: 'tech-09', category: 'technology', name: 'Fusion Power', description: 'Unlimited clean energy', context: 'The power of the sun, contained on Earth.' },
+      { id: 'tech-10', category: 'technology', name: 'Room-Temp Superconductors', description: 'Lossless electricity', context: 'Materials with zero electrical resistance at room temperature.' },
+
+      // Prompt (6)
+      { id: 'prompt-01', category: 'prompt', name: 'The Innovator', description: 'Who creates this future?', context: 'Consider the inventors, entrepreneurs, and dreamers who build new technologies.' },
+      { id: 'prompt-02', category: 'prompt', name: 'The Incumbent', description: 'Who resists this change?', context: 'Consider those whose power or identity is threatened by this future.' },
+      { id: 'prompt-03', category: 'prompt', name: 'The Citizen', description: 'How does daily life change?', context: 'Consider ordinary people living through this transition.' },
+      { id: 'prompt-04', category: 'prompt', name: 'The Edge Case', description: 'Who falls through the cracks?', context: 'Consider those who don\'t fit the default assumptions.' },
+      { id: 'prompt-05', category: 'prompt', name: 'The Unintended', description: 'What goes wrong?', context: 'Consider second and third-order effects nobody predicted.' },
+      { id: 'prompt-06', category: 'prompt', name: 'The Threshold', description: 'What is the point of no return?', context: 'Consider the moment when this future becomes inevitable.' }
+    ];
+
+    let spread = [];
+    const IMAGE_BASE = '../assets/cards-final/';
+
+    function init() {
+      const categories = ['arc', 'terrain', 'object', 'wellbeing', 'timeframe', 'modifier', 'technology', 'prompt'];
+      categories.forEach(cat => {
+        const container = document.getElementById(cat + 'Cards');
+        const cards = CARDS.filter(c => c.category === cat);
+        cards.forEach(card => {
+          container.appendChild(createDeckCard(card));
+        });
+      });
+    }
+
+    function createDeckCard(card) {
+      const div = document.createElement('div');
+      div.className = 'deck-card';
+      div.dataset.id = card.id;
+      if (spread.some(c => c.id === card.id)) {
+        div.classList.add('in-spread');
+      }
+      div.innerHTML = `<img src="${IMAGE_BASE}${card.id}.png" alt="${card.name}" title="${card.name}">`;
+      div.onclick = () => addToSpread(card.id);
+      return div;
+    }
+
+    function createSpreadCard(card) {
+      const div = document.createElement('div');
+      div.className = 'spread-card';
+      div.dataset.id = card.id;
+      div.innerHTML = `<img src="${IMAGE_BASE}${card.id}.png" alt="${card.name}" title="Click to remove">`;
+      div.onclick = () => removeFromSpread(card.id);
+      return div;
+    }
+
+    function addToSpread(cardId) {
+      const card = CARDS.find(c => c.id === cardId);
+      if (!card || spread.some(c => c.id === cardId)) return;
+      spread.push(card);
+      renderSpread();
+      updateDeckCards();
+    }
+
+    function removeFromSpread(cardId) {
+      spread = spread.filter(c => c.id !== cardId);
+      renderSpread();
+      updateDeckCards();
+    }
+
+    function renderSpread() {
+      const area = document.getElementById('spreadArea');
+      area.innerHTML = '';
+      area.classList.toggle('empty', spread.length === 0);
+      spread.forEach(card => {
+        area.appendChild(createSpreadCard(card));
+      });
+    }
+
+    function updateDeckCards() {
+      document.querySelectorAll('.deck-card').forEach(el => {
+        const id = el.dataset.id;
+        el.classList.toggle('in-spread', spread.some(c => c.id === id));
+      });
+    }
+
+    function drawRandom() {
+      const available = CARDS.filter(c => !spread.some(s => s.id === c.id));
+      if (available.length === 0) return;
+      const randomCard = available[Math.floor(Math.random() * available.length)];
+      addToSpread(randomCard.id);
+    }
+
+    function drawSpread() {
+      clearSpread();
+      // Draw one from key categories for a balanced spread
+      const picks = [
+        ['arc'],
+        ['terrain'],
+        ['wellbeing', 'object'],
+        ['timeframe'],
+        ['technology', 'modifier', 'prompt']
+      ];
+
+      picks.forEach(cats => {
+        const available = CARDS.filter(c => cats.includes(c.category) && !spread.some(s => s.id === c.id));
+        if (available.length > 0) {
+          const randomCard = available[Math.floor(Math.random() * available.length)];
+          spread.push(randomCard);
+        }
+      });
+
+      renderSpread();
+      updateDeckCards();
+    }
+
+    function clearSpread() {
+      spread = [];
+      renderSpread();
+      updateDeckCards();
+    }
+
+    function interpretSpread() {
+      if (spread.length === 0) {
+        alert('Draw some cards first!');
+        return;
+      }
+      const summary = generateSpreadText();
+      document.getElementById('spreadSummary').textContent = summary;
+      document.getElementById('interpretModal').classList.add('active');
+    }
+
+    function generateSpreadText() {
+      let text = `I've drawn the following cards from the Futures Deck. Please weave them into a vivid, concrete scenario:\n\n`;
+
+      spread.forEach((card, i) => {
+        text += `${i + 1}. ${card.name} (${card.category.toUpperCase()})\n`;
+        text += `   "${card.description}"\n`;
+        text += `   ${card.context}\n\n`;
+      });
+
+      text += `---\n\n`;
+      text += `Please create a specific, believable scenario based on these cards. Include:\n`;
+      text += `- A concrete description of daily life in this future\n`;
+      text += `- Specific details that make it feel real (names, places, products)\n`;
+      text += `- Second-order implications and tensions\n`;
+      text += `- A brief narrative scene showing someone living through this moment\n`;
+      text += `- Who wins and who loses in this future?\n\n`;
+      text += `Write in present tense as if describing a world that already exists.`;
+
+      return text;
+    }
+
+    function copySpread() {
+      const text = document.getElementById('spreadSummary').textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = event.target;
+        btn.textContent = 'Copied!';
+        setTimeout(() => { btn.textContent = 'Copy to Clipboard'; }, 2000);
+      });
+    }
+
+    function closeModal() {
+      document.getElementById('interpretModal').classList.remove('active');
+    }
+
+    document.getElementById('interpretModal').addEventListener('click', (e) => {
+      if (e.target.classList.contains('modal')) closeModal();
+    });
+
+    init();
+  </script>
+
+</body>
+</html>
