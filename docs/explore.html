@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Futures Deck - Explore Spreads</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Source+Sans+Pro:wght@300;400;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #c9a227;
+      --dark: #0a0a12;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Source Sans Pro', sans-serif;
+      background: var(--dark);
+      color: #fff;
+      min-height: 100vh;
+      padding-top: 50px;
+    }
+
+    nav {
+      background: #111;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+    }
+
+    nav a {
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      font-size: 13px;
+    }
+    nav a:hover { color: var(--gold); }
+    nav a.active { color: var(--gold); }
+
+    header {
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    header p {
+      color: rgba(255,255,255,0.5);
+      font-size: 14px;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px 40px;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-gold { background: var(--gold); color: var(--dark); }
+    .btn-gold:hover { background: #d4b32a; transform: translateY(-2px); }
+    .btn-outline {
+      background: transparent;
+      color: rgba(255,255,255,0.7);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.1); }
+
+    .spread-container {
+      display: grid;
+      gap: 25px;
+    }
+
+    .spread-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .spread-header {
+      background: rgba(0,0,0,0.3);
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .spread-header h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 0.08em;
+      color: var(--gold);
+    }
+
+    .spread-cards {
+      display: flex;
+      gap: 10px;
+      padding: 20px;
+      overflow-x: auto;
+      justify-content: center;
+      background: #0a0a0a;
+    }
+
+    .spread-cards img {
+      width: 100px;
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+
+    .directions {
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    @media (max-width: 700px) {
+      .directions { grid-template-columns: 1fr; }
+    }
+
+    .direction {
+      background: rgba(0,0,0,0.2);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 15px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .direction:hover {
+      border-color: var(--gold);
+      background: rgba(201, 162, 39, 0.1);
+    }
+
+    .direction.selected {
+      border-color: var(--gold);
+      background: rgba(201, 162, 39, 0.15);
+    }
+
+    .direction h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .direction p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.5;
+    }
+
+    .generate-btn {
+      margin: 15px 20px 20px;
+    }
+
+    .generate-btn .btn {
+      width: 100%;
+    }
+
+    .scenario-output {
+      padding: 20px;
+      display: none;
+    }
+
+    .scenario-output.visible {
+      display: block;
+    }
+
+    .scenario-output.loading::after {
+      content: 'Generating scenario...';
+      display: block;
+      text-align: center;
+      color: var(--gold);
+      padding: 30px;
+      font-style: italic;
+    }
+
+    .scenario-content {
+      background: rgba(255,255,255,0.02);
+      border-radius: 8px;
+      padding: 25px;
+    }
+
+    .scenario-content h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      color: #fff;
+      margin-bottom: 5px;
+    }
+
+    .scenario-content .subtitle {
+      color: rgba(255,255,255,0.5);
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+
+    .scenario-content .text {
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .scenario-content .text p {
+      margin-bottom: 12px;
+    }
+
+    .scenario-content .scene {
+      background: rgba(201, 162, 39, 0.1);
+      border-left: 4px solid var(--gold);
+      padding: 15px 20px;
+      margin: 20px 0;
+      font-style: italic;
+      line-height: 1.6;
+    }
+
+    .scenario-content .implications {
+      background: rgba(255,255,255,0.03);
+      border-radius: 8px;
+      padding: 15px 20px;
+      margin-top: 20px;
+    }
+
+    .scenario-content .implications h5 {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 10px;
+    }
+
+    .scenario-content .implications ul {
+      margin-left: 20px;
+      line-height: 1.6;
+    }
+
+    .scenario-content .implications li {
+      margin-bottom: 8px;
+    }
+
+    .illustration-prompt {
+      background: #111;
+      border-radius: 6px;
+      padding: 12px 15px;
+      margin-top: 15px;
+      font-family: monospace;
+      font-size: 11px;
+      color: rgba(255,255,255,0.6);
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .action-buttons .btn {
+      flex: 1;
+    }
+
+    .error {
+      color: #f87171;
+      padding: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">About</a>
+    <a href="examples.html">Examples</a>
+    <a href="generate.html">Generate</a>
+    <a href="explore.html" class="active">Explore</a>
+    <a href="play-v2.html">Quick Draw</a>
+    <a href="../review.html">Review</a>
+  </nav>
+
+  <header>
+    <h1>EXPLORE SPREADS</h1>
+    <p>Random spreads with AI-generated scenario directions</p>
+  </header>
+
+  <main>
+    <div class="controls">
+      <button class="btn btn-gold" onclick="generateSpreads()">Generate 5 New Spreads</button>
+      <button class="btn btn-outline" onclick="addSpread()">Add One More</button>
+    </div>
+
+    <div class="spread-container" id="spreadContainer">
+      <p style="text-align: center; color: rgba(255,255,255,0.4); padding: 40px;">Click "Generate 5 New Spreads" to start exploring futures...</p>
+    </div>
+  </main>
+
+  <script>
+    const IMAGE_BASE = '../assets/cards-final/';
+
+    const CARDS = [
+      { id: 'arc-01', category: 'arc', name: 'Growth', description: 'Continuous expansion and progress' },
+      { id: 'arc-02', category: 'arc', name: 'Collapse', description: 'Systems failing and crumbling' },
+      { id: 'arc-03', category: 'arc', name: 'Discipline', description: 'Order imposed from above' },
+      { id: 'arc-04', category: 'arc', name: 'Transformation', description: 'Fundamental change in kind' },
+      { id: 'terrain-01', category: 'terrain', name: 'Agriculture', description: 'Food production and farming' },
+      { id: 'terrain-02', category: 'terrain', name: 'Warfare', description: 'Conflict and security' },
+      { id: 'terrain-03', category: 'terrain', name: 'Healthcare', description: 'Medicine and healing' },
+      { id: 'terrain-04', category: 'terrain', name: 'Education', description: 'Learning and knowledge' },
+      { id: 'terrain-05', category: 'terrain', name: 'The Ocean', description: 'Maritime life' },
+      { id: 'terrain-06', category: 'terrain', name: 'Governance', description: 'Politics and policy' },
+      { id: 'terrain-07', category: 'terrain', name: 'Entertainment', description: 'Leisure and art' },
+      { id: 'terrain-08', category: 'terrain', name: 'Transport', description: 'Movement and mobility' },
+      { id: 'terrain-09', category: 'terrain', name: 'Religion', description: 'Faith and spirituality' },
+      { id: 'terrain-10', category: 'terrain', name: 'Commerce', description: 'Trade and markets' },
+      { id: 'terrain-11', category: 'terrain', name: 'Startups', description: 'New ventures' },
+      { id: 'terrain-12', category: 'terrain', name: 'Arts & Culture', description: 'Creative expression' },
+      { id: 'terrain-13', category: 'terrain', name: 'Energy', description: 'Power generation' },
+      { id: 'terrain-14', category: 'terrain', name: 'Housing', description: 'Shelter and urban life' },
+      { id: 'terrain-15', category: 'terrain', name: 'Labor', description: 'Work and employment' },
+      { id: 'terrain-16', category: 'terrain', name: 'Climate', description: 'Environment and sustainability' },
+      { id: 'object-01', category: 'object', name: 'Device', description: 'Hardware artifact' },
+      { id: 'object-02', category: 'object', name: 'Law', description: 'Regulation or decree' },
+      { id: 'object-03', category: 'object', name: 'Ritual', description: 'Ceremonial action' },
+      { id: 'object-04', category: 'object', name: 'Beverage', description: 'Something to drink' },
+      { id: 'object-05', category: 'object', name: 'Vehicle', description: 'Mode of transport' },
+      { id: 'object-06', category: 'object', name: 'Building', description: 'A structure' },
+      { id: 'object-07', category: 'object', name: 'Garment', description: 'Clothing or wearable' },
+      { id: 'object-08', category: 'object', name: 'Game', description: 'A form of play' },
+      { id: 'object-09', category: 'object', name: 'Plant', description: 'Organic flora' },
+      { id: 'object-10', category: 'object', name: 'Advertisement', description: 'Commercial messaging' },
+      { id: 'well-01', category: 'wellbeing', name: 'Autonomy', description: 'Self-direction and freedom' },
+      { id: 'well-02', category: 'wellbeing', name: 'Beauty', description: 'Aesthetic pleasure' },
+      { id: 'well-03', category: 'wellbeing', name: 'Comfort', description: 'Physical ease' },
+      { id: 'well-04', category: 'wellbeing', name: 'Community', description: 'Group belonging' },
+      { id: 'well-05', category: 'wellbeing', name: 'Competence', description: 'Mastery and effectiveness' },
+      { id: 'well-06', category: 'wellbeing', name: 'Fitness', description: 'Physical health' },
+      { id: 'well-07', category: 'wellbeing', name: 'Impact', description: 'Influence and difference' },
+      { id: 'well-08', category: 'wellbeing', name: 'Morality', description: 'Living by values' },
+      { id: 'well-09', category: 'wellbeing', name: 'Purpose', description: 'Meaning in life' },
+      { id: 'well-10', category: 'wellbeing', name: 'Recognition', description: 'Being seen and respected' },
+      { id: 'well-11', category: 'wellbeing', name: 'Relatedness', description: 'Close relationships' },
+      { id: 'well-12', category: 'wellbeing', name: 'Security', description: 'Safety and stability' },
+      { id: 'well-13', category: 'wellbeing', name: 'Stimulation', description: 'Novelty and excitement' },
+      { id: 'time-01', category: 'timeframe', name: 'Now', description: 'Present moment' },
+      { id: 'time-02', category: 'timeframe', name: '6 Months', description: 'Near future' },
+      { id: 'time-03', category: 'timeframe', name: '1 Year', description: 'One year out' },
+      { id: 'time-04', category: 'timeframe', name: '2 Years', description: 'Two years ahead' },
+      { id: 'time-05', category: 'timeframe', name: '5 Years', description: 'Medium term' },
+      { id: 'time-06', category: 'timeframe', name: '10 Years', description: 'A decade out' },
+      { id: 'time-07', category: 'timeframe', name: '20 Years', description: 'A generation away' },
+      { id: 'mod-01', category: 'modifier', name: 'Major Breakthrough', description: 'Accelerates timeline -3 years' },
+      { id: 'mod-02', category: 'modifier', name: 'Accelerated Funding', description: 'Accelerates timeline -2 years' },
+      { id: 'mod-03', category: 'modifier', name: 'Steady Progress', description: 'Accelerates timeline -1 year' },
+      { id: 'mod-04', category: 'modifier', name: 'Technical Setback', description: 'Delays timeline +1 year' },
+      { id: 'mod-05', category: 'modifier', name: 'Funding Collapse', description: 'Delays timeline +2 years' },
+      { id: 'mod-06', category: 'modifier', name: 'Regulatory Delay', description: 'Delays timeline +3 years' },
+      { id: 'tech-01', category: 'technology', name: 'Fault-Tolerant Quantum', description: 'Error-corrected quantum computing' },
+      { id: 'tech-02', category: 'technology', name: 'Quantum Cryptography', description: 'Unbreakable encryption' },
+      { id: 'tech-03', category: 'technology', name: 'Quantum AI', description: 'Beyond classical machine learning' },
+      { id: 'tech-04', category: 'technology', name: 'Quantum Sensing', description: 'Ultra-precision measurement' },
+      { id: 'tech-05', category: 'technology', name: 'Quantum Simulation', description: 'Molecular modeling' },
+      { id: 'tech-06', category: 'technology', name: 'AGI', description: 'Artificial General Intelligence' },
+      { id: 'tech-07', category: 'technology', name: 'Brain-Computer Interface', description: 'Direct neural connection' },
+      { id: 'tech-08', category: 'technology', name: 'Synthetic Biology', description: 'Engineering living systems' },
+      { id: 'tech-09', category: 'technology', name: 'Fusion Power', description: 'Unlimited clean energy' },
+      { id: 'tech-10', category: 'technology', name: 'Room-Temp Superconductors', description: 'Lossless electricity' },
+      { id: 'prompt-01', category: 'prompt', name: 'The Innovator', description: 'Who creates this future?' },
+      { id: 'prompt-02', category: 'prompt', name: 'The Incumbent', description: 'Who resists this change?' },
+      { id: 'prompt-03', category: 'prompt', name: 'The Citizen', description: 'How does daily life change?' },
+      { id: 'prompt-04', category: 'prompt', name: 'The Edge Case', description: 'Who falls through the cracks?' },
+      { id: 'prompt-05', category: 'prompt', name: 'The Unintended', description: 'What goes wrong?' },
+      { id: 'prompt-06', category: 'prompt', name: 'The Threshold', description: 'Point of no return?' }
+    ];
+
+    // Direction templates for variety
+    const DIRECTION_TEMPLATES = [
+      { tone: 'utopian', desc: 'Focus on the positive possibilities and human flourishing' },
+      { tone: 'dystopian', desc: 'Focus on what could go wrong and unintended consequences' },
+      { tone: 'mundane', desc: 'Focus on ordinary daily life and small changes' },
+      { tone: 'revolutionary', desc: 'Focus on dramatic transformation and disruption' },
+      { tone: 'personal', desc: 'Focus on individual experience and relationships' },
+      { tone: 'systemic', desc: 'Focus on institutions, economics, and power structures' },
+      { tone: 'technological', desc: 'Focus on how the technology works and spreads' },
+      { tone: 'cultural', desc: 'Focus on beliefs, rituals, and social norms' },
+    ];
+
+    let spreadCounter = 0;
+
+    function pickRandom(arr, n = 1) {
+      const shuffled = [...arr].sort(() => Math.random() - 0.5);
+      return n === 1 ? shuffled[0] : shuffled.slice(0, n);
+    }
+
+    function generateBalancedSpread() {
+      const picks = [
+        ['arc'],
+        ['terrain'],
+        ['wellbeing', 'object'],
+        ['timeframe'],
+        ['technology', 'modifier', 'prompt']
+      ];
+
+      return picks.map(cats => {
+        const available = CARDS.filter(c => cats.includes(c.category));
+        return pickRandom(available);
+      });
+    }
+
+    function generateDirections(cards) {
+      const tones = pickRandom(DIRECTION_TEMPLATES, 2);
+      const cardNames = cards.map(c => c.name).join(', ');
+
+      return tones.map(t => ({
+        title: `${t.tone.charAt(0).toUpperCase() + t.tone.slice(1)} Future`,
+        description: `${t.desc}. Explore how ${cardNames} combine in a ${t.tone} scenario.`,
+        tone: t.tone
+      }));
+    }
+
+    function createSpreadElement(id, cards, directions) {
+      return `
+        <div class="spread-card" id="spread-${id}">
+          <div class="spread-header">
+            <h3>Spread #${id}</h3>
+            <span style="color: rgba(255,255,255,0.4); font-size: 12px;">${cards.map(c => c.name).join(' + ')}</span>
+          </div>
+          <div class="spread-cards">
+            ${cards.map(c => `<img src="${IMAGE_BASE}${c.id}.png" alt="${c.name}" title="${c.name}">`).join('')}
+          </div>
+          <div class="directions">
+            ${directions.map((d, i) => `
+              <div class="direction" data-spread="${id}" data-direction="${i}" onclick="selectDirection(${id}, ${i})">
+                <h4>${d.title}</h4>
+                <p>${d.description}</p>
+              </div>
+            `).join('')}
+          </div>
+          <div class="generate-btn">
+            <button class="btn btn-gold" onclick="generateScenario(${id})" id="gen-btn-${id}">Generate Scenario</button>
+          </div>
+          <div class="scenario-output" id="output-${id}"></div>
+        </div>
+      `;
+    }
+
+    const spreadData = {};
+
+    function addSpread() {
+      spreadCounter++;
+      const cards = generateBalancedSpread();
+      const directions = generateDirections(cards);
+
+      spreadData[spreadCounter] = { cards, directions, selectedDirection: null };
+
+      const container = document.getElementById('spreadContainer');
+      container.insertAdjacentHTML('beforeend', createSpreadElement(spreadCounter, cards, directions));
+    }
+
+    function generateSpreads() {
+      spreadCounter = 0;
+      spreadData.length = 0;
+      document.getElementById('spreadContainer').innerHTML = '';
+
+      for (let i = 0; i < 5; i++) {
+        addSpread();
+      }
+    }
+
+    function selectDirection(spreadId, directionIndex) {
+      spreadData[spreadId].selectedDirection = directionIndex;
+
+      document.querySelectorAll(`[data-spread="${spreadId}"]`).forEach((el, i) => {
+        el.classList.toggle('selected', i === directionIndex);
+      });
+    }
+
+    async function generateScenario(spreadId) {
+      const data = spreadData[spreadId];
+      if (!data) return;
+
+      const direction = data.selectedDirection !== null
+        ? data.directions[data.selectedDirection].description
+        : null;
+
+      const output = document.getElementById(`output-${spreadId}`);
+      const btn = document.getElementById(`gen-btn-${spreadId}`);
+
+      output.classList.add('visible', 'loading');
+      output.innerHTML = '';
+      btn.disabled = true;
+      btn.textContent = 'Generating...';
+
+      try {
+        const response = await fetch('/api/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ cards: data.cards, direction })
+        });
+
+        if (!response.ok) {
+          throw new Error(`API error: ${response.status}`);
+        }
+
+        const result = await response.json();
+
+        output.classList.remove('loading');
+        output.innerHTML = `
+          <div class="scenario-content">
+            <h4>${result.title}</h4>
+            <p class="subtitle">${result.subtitle}</p>
+            <div class="text">${result.scenario.split('\n\n').map(p => `<p>${p}</p>`).join('')}</div>
+            <div class="scene">${result.scene}</div>
+            <div class="implications">
+              <h5>Second-Order Implications</h5>
+              <ul>${result.implications.split('\n').filter(l => l.trim().startsWith('-')).map(l => `<li>${l.replace(/^-\s*/, '')}</li>`).join('')}</ul>
+            </div>
+            <div class="illustration-prompt">
+              <strong>Illustration Prompt:</strong><br>${result.illustrationPrompt}
+            </div>
+            <div class="action-buttons">
+              <button class="btn btn-outline" onclick="copyScenario(${spreadId})">Copy</button>
+              <button class="btn btn-gold" onclick="generateScenario(${spreadId})">Regenerate</button>
+            </div>
+          </div>
+        `;
+
+        spreadData[spreadId].result = result;
+
+      } catch (error) {
+        output.classList.remove('loading');
+        output.innerHTML = `<div class="error">Error: ${error.message}</div>`;
+      }
+
+      btn.disabled = false;
+      btn.textContent = 'Regenerate Scenario';
+    }
+
+    function copyScenario(spreadId) {
+      const result = spreadData[spreadId]?.result;
+      if (!result) return;
+
+      const text = `# ${result.title}\n\n${result.subtitle}\n\n${result.scenario}\n\n---\n\n${result.scene}\n\n## Implications\n${result.implications}\n\n## Illustration Prompt\n${result.illustrationPrompt}`;
+
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Scenario copied to clipboard!');
+      });
+    }
+
+    // Auto-generate on load
+    generateSpreads();
+  </script>
+
+</body>
+</html>

@@ -1,9 +1,13 @@
 {
   "framework": null,
-  "buildCommand": "",
-  "installCommand": "",
+  "installCommand": "npm install",
   "outputDirectory": ".",
   "rewrites": [
     { "source": "/", "destination": "/index-v2.html" }
-  ]
+  ],
+  "functions": {
+    "api/*.js": {
+      "runtime": "@vercel/node@3.0.0"
+    }
+  }
 }
