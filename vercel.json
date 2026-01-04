@@ -1,13 +1,9 @@
 {
-  "framework": null,
-  "installCommand": "npm install",
-  "outputDirectory": ".",
   "rewrites": [
     { "source": "/", "destination": "/index-v2.html" }
   ],
   "functions": {
-    "api/**/*.js": {
-      "memory": 1024,
+    "api/*.js": {
       "maxDuration": 300
     }
   }
