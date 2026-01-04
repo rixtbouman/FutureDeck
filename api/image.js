@@ -29,7 +29,7 @@ export default async function handler(req, res) {
     }
 
     // Create task
-    const createResponse = await fetch('https://api.mulerun.com/vendors/alibaba/v1/wan2.6-t2i/generation', {
+    const createResponse = await fetch('https://api.mulerouter.ai/vendors/alibaba/v1/wan2.6-t2i/generation', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${apiKey}`,
@@ -66,7 +66,7 @@ export default async function handler(req, res) {
     for (let attempt = 0; attempt < maxAttempts; attempt++) {
       await new Promise(resolve => setTimeout(resolve, pollInterval));
 
-      const statusResponse = await fetch(`https://api.mulerun.com/task/${taskId}`, {
+      const statusResponse = await fetch(`https://api.mulerouter.ai/task/${taskId}`, {
         headers: {
           'Authorization': `Bearer ${apiKey}`,
           'User-Agent': 'FuturesDeck/1.0.0',
