@@ -1,70 +1,136 @@
 # Futures Deck
 
-A speculative oracle for exploring possible futures. Draw cards, build spreads, and let AI interpret scenarios.
+A speculative oracle deck for exploring possible futures. 72 beautifully illustrated cards across 8 categories, with AI-powered scenario generation.
 
 ## Play Online
 
-**[Play the Digital Version](https://jdereklomas.github.io/futures-deck/play.html)**
+- **[Explore Futures](https://futures-deck.vercel.app/docs/explore.html)** - Generate spreads and AI scenarios with illustrations
+- **[Quick Draw](https://futures-deck.vercel.app/docs/play-v2.html)** - Draw cards interactively
+- **[Example Scenarios](https://futures-deck.vercel.app/docs/examples.html)** - See pre-generated future scenarios
 
-Draw cards interactively and generate AI prompts for scenario interpretation.
+## The Deck (72 Cards)
 
-## About
+| Category | Cards | Purpose |
+|----------|-------|---------|
+| **Arc** (4) | Growth, Collapse, Discipline, Transformation | Trajectory of change |
+| **Terrain** (16) | Agriculture, Warfare, Healthcare, Education, Ocean, Governance, Entertainment, Transport, Religion, Commerce, Startups, Arts & Culture, Energy, Housing, Labor, Climate | Domain/setting |
+| **Object** (10) | Device, Law, Ritual, Beverage, Vehicle, Building, Garment, Game, Plant, Advertisement | What emerges |
+| **Wellbeing** (13) | Autonomy, Beauty, Comfort, Community, Competence, Fitness, Impact, Morality, Purpose, Recognition, Relatedness, Security, Stimulation | Human needs at stake |
+| **Timeframe** (7) | Now, 6 Months, 1 Year, 2 Years, 5 Years, 10 Years, 20 Years | When it happens |
+| **Modifier** (6) | Major Breakthrough (-3yr), Accelerated Funding (-2yr), Steady Progress (-1yr), Technical Setback (+1yr), Funding Collapse (+2yr), Regulatory Delay (+3yr) | Timeline adjustments |
+| **Technology** (10) | Fault-Tolerant Quantum, Quantum Cryptography, Quantum AI, Quantum Sensing, Quantum Simulation, AGI, Brain-Computer Interface, Synthetic Biology, Fusion Power, Room-Temp Superconductors | Key technologies |
+| **Prompt** (6) | The Innovator, The Incumbent, The Citizen, The Edge Case, The Unintended, The Threshold | Story perspectives |
 
-Futures Deck is a card-based foresight tool that helps people imagine and explore possible futures. Each card represents a different dimension of a scenario:
+## Create Your Own Deck
 
-- **Wellbeing (8 cards)** - Human needs: Autonomy, Impact, Relatedness, Stimulation, Security, Purpose, Competence, Comfort
-- **Arc (4 cards)** - Trajectory of change: Growth, Collapse, Transformation, Discipline
-- **Terrain (7 cards)** - Setting: Ocean, City, Home, Wilderness, Workplace, School, Hospital
-- **Outcome (4 cards)** - What emerges: Ritual, Device, Startup, Government Service
-- **Timeframe (6 cards)** - When: Now, 6 Months, 1 Year, 2 Years, 5 Years, 10 Years
-- **Modifier (2 cards)** - Inflection: Breakthrough, Setback
-- **Technology (4 cards)** - Tech focus: AI, Quantum, Biotech, Robotics
+This repository is set up to make it easy to create your own card decks using Claude Code. See **[CREATING-CARDS.md](CREATING-CARDS.md)** for a complete guide.
 
-**35 vision cards + 4 prompt cards = 39 total**
+Quick overview:
+1. Edit `src/cards-v2.json` with your card data
+2. Generate artwork with `node src/generate-images.js`
+3. Render cards with `node src/render-final-cards.js`
+4. For print: `node src/render-print-cards.js`
 
-## How It Works
+## Print Your Deck
 
-1. **Draw cards** to build a spread (or use the digital version to draw randomly)
-2. **Photograph the spread** or copy the card descriptions
-3. **Send to AI** (ChatGPT, Claude, etc.) to generate a detailed scenario
-4. **Discuss and explore** the implications of this possible future
+### Print-Ready Files
 
-The cards include machine-readable prompts that help AI understand how to interpret each card in context.
+After running `node src/render-print-cards.js`:
+- **Location**: `assets/cards-print/`
+- **ZIP**: `assets/futures-deck-print-ready.zip`
 
-## Print Your Own Deck
+### Specifications
 
-**[Print-Ready Cards (PDF)](https://jdereklomas.github.io/futures-deck/print.html)**
+| Spec | Value |
+|------|-------|
+| Dimensions | 1050 × 1750 pixels |
+| Resolution | 300 DPI |
+| Print size | 89mm × 148mm with bleed |
+| Trim size | ~80mm × 140mm |
+| Bleed | 4mm on all sides |
+| Corners | Square (printer die-cuts) |
+| Format | PNG (RGB) |
 
-- Poker-sized cards (2.5" × 3.5")
-- Print double-sided, flip on long edge
-- Category-colored panels for easy sorting
-- Includes card backs
+### Recommended Printers
+
+**Netherlands:**
+- [DigiDecks](https://digidecks.nl/) - Custom formats, 20-25 deck minimum, email: info@digidecks.nl
+- [PeterPrint](https://www.peterprint.nl/speelkaarten-bedrukken.html) - Any format, small runs
+- [Maxilia](https://www.maxilia.nl/spellen-bedrukken/speelkaarten-bedrukken/) - B Corp certified, from 25 decks
+
+**International:**
+- [MakePlayingCards.com](https://www.makeplayingcards.com/promotional/personalized-tarot-cards.html) - Cheapest for 1-10 decks, ships worldwide
+- [Acelion](https://acelioncards.com/custom-tarot-cards/) - Professional quality, 100+ decks
+
+### MakePlayingCards Specs
+
+| Spec | Requirement |
+|------|-------------|
+| Tarot size | 2.75" × 4.75" (70 × 120mm) |
+| Minimum upload | 897 × 1497 pixels |
+| DPI | 300 minimum |
+| Bleed | 1/8" (36px) per side |
+| Safe area | 1/8" (36px) margin |
+| Formats | PNG, JPG, PDF |
 
 ## Project Structure
 
 ```
 futures-deck/
-├── docs/                    # GitHub Pages site
-│   ├── index.html          # Main documentation
-│   ├── play.html           # Digital card game
-│   ├── print.html          # Printable card sheets
-│   └── cards/              # Card artwork for web
+├── src/
+│   ├── cards-v2.json           # Card definitions
+│   ├── generate-images.js      # Generate AI artwork
+│   ├── render-final-cards.js   # Render web cards (rounded corners)
+│   └── render-print-cards.js   # Render print cards (square corners)
 ├── assets/
-│   └── deck-artwork/       # Source card artwork (PNG)
-└── src/
-    └── generate-*.js       # Image generation scripts
+│   ├── artwork/                # Generated AI artwork
+│   ├── cards-final/            # Web-ready cards (900×1500)
+│   ├── cards-print/            # Print-ready cards (1050×1750)
+│   └── futures-deck-print-ready.zip
+├── docs/                       # Website
+│   ├── explore.html            # AI scenario generator
+│   ├── play-v2.html            # Card drawing interface
+│   └── examples.html           # Example scenarios
+├── api/                        # Vercel serverless functions
+│   ├── generate.js             # Claude API for scenarios
+│   └── image.js                # MuleRouter API for images
+├── CREATING-CARDS.md           # Guide for making your own deck
+└── README.md
 ```
 
-## Card Art Style
+## Development
 
-Art deco engraving illustration with hand-tinted vintage colors, intricate linework, ornate geometric borders, and tarot card aesthetic. Generated using Flux 1.1 Pro via Replicate.
+```bash
+# Install dependencies
+npm install
 
-## Links
+# Generate card artwork (requires REPLICATE_API_TOKEN)
+node src/generate-images.js
 
-- **Play Online**: https://jdereklomas.github.io/futures-deck/play.html
-- **Documentation**: https://jdereklomas.github.io/futures-deck/
-- **Print Cards**: https://jdereklomas.github.io/futures-deck/print.html
+# Render web cards
+node src/render-final-cards.js
+
+# Render print cards
+node src/render-print-cards.js
+
+# Local dev server
+npm run dev
+```
+
+## Environment Variables
+
+For the web app (Vercel):
+- `ANTHROPIC_API_KEY` - Claude API for scenario generation
+- `MULEROUTER_API_KEY` - MuleRouter for image generation
+
+For local artwork generation:
+- `REPLICATE_API_TOKEN` - Replicate API for Flux image generation
 
 ## License
 
 MIT
+
+## Links
+
+- **Live Site**: https://futures-deck.vercel.app
+- **GitHub**: https://github.com/JDerekLomas/futures-deck

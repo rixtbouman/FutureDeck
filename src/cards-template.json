@@ -1,0 +1,49 @@
+{
+  "meta": {
+    "name": "Your Deck Name",
+    "version": "1.0.0",
+    "description": "A brief description of your oracle deck"
+  },
+
+  "example_category": [
+    {
+      "id": "example-01",
+      "name": "Example Card",
+      "description": "A short tagline for the card",
+      "symbols": ["Symbol 1", "Symbol 2", "Symbol 3"],
+      "context": "A longer explanation of what this card represents or means when drawn."
+    },
+    {
+      "id": "example-02",
+      "name": "Another Card",
+      "description": "Another short tagline",
+      "symbols": ["Symbol A", "Symbol B"],
+      "context": "Another longer explanation text."
+    }
+  ],
+
+  "wellbeing_example": [
+    {
+      "id": "well-example-01",
+      "name": "Balance",
+      "description": "Harmony between opposing forces",
+      "positive": "Stability, peace, equilibrium",
+      "negative": "Stagnation, indecision, avoidance"
+    }
+  ],
+
+  "modifier_example": [
+    {
+      "id": "mod-example-01",
+      "label": "Acceleration",
+      "value": -2,
+      "context": "Events unfold faster than expected"
+    },
+    {
+      "id": "mod-example-02",
+      "label": "Delay",
+      "value": 2,
+      "context": "Events unfold slower than expected"
+    }
+  ]
+}
