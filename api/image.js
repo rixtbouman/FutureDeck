@@ -33,7 +33,17 @@ export default async function handler(req, res) {
         },
       });
 
-      const statusData = await statusResponse.json();
+      const statusText = await statusResponse.text();
+      if (!statusText) {
+        return res.status(200).json({ status: 'processing', taskId: taskId });
+      }
+
+      let statusData;
+      try {
+        statusData = JSON.parse(statusText);
+      } catch (e) {
+        return res.status(200).json({ status: 'processing', taskId: taskId });
+      }
       const status = statusData?.task_info?.status;
 
       if (status === 'completed' || status === 'success') {
