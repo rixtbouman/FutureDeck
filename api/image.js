@@ -26,7 +26,7 @@ export default async function handler(req, res) {
     }
 
     try {
-      const statusResponse = await fetch(`https://api.mulerouter.ai/task/${taskId}`, {
+      const statusResponse = await fetch(`https://api.mulerouter.ai/vendors/alibaba/v1/wan2.6-t2i/generation/${taskId}`, {
         headers: {
           'Authorization': `Bearer ${apiKey}`,
           'User-Agent': 'FuturesDeck/1.0.0',
