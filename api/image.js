@@ -44,7 +44,13 @@ export default async function handler(req, res) {
       }),
     });
 
-    const createData = await createResponse.json();
+    const createText = await createResponse.text();
+    let createData;
+    try {
+      createData = JSON.parse(createText);
+    } catch (e) {
+      return res.status(500).json({ error: 'Invalid response from MuleRouter: ' + createText.substring(0, 200) });
+    }
 
     if (!createResponse.ok) {
       console.error('MuleRouter create error:', createData);
@@ -73,7 +79,14 @@ export default async function handler(req, res) {
         },
       });
 
-      const statusData = await statusResponse.json();
+      const statusText = await statusResponse.text();
+      let statusData;
+      try {
+        statusData = JSON.parse(statusText);
+      } catch (e) {
+        console.error('Failed to parse status response:', statusText);
+        continue; // Try again
+      }
       const status = statusData?.task_info?.status;
 
       if (status === 'completed' || status === 'success') {
