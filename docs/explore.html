@@ -9,149 +9,200 @@
     :root {
       --gold: #c9a227;
       --dark: #0a0a12;
+      --light: #f8f6f0;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Source Sans Pro', sans-serif;
-      background: var(--dark);
-      color: #fff;
-      min-height: 100vh;
-      padding-top: 50px;
+      background: var(--light);
+      color: #333;
+      line-height: 1.7;
     }
 
     nav {
-      background: #111;
-      padding: 12px 20px;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
+      background: #1a1a1a;
+      padding: 15px 20px;
+      text-align: center;
     }
 
     nav a {
-      color: rgba(255,255,255,0.6);
+      color: rgba(255,255,255,0.7);
       text-decoration: none;
-      font-size: 13px;
+      margin: 0 15px;
+      font-size: 14px;
     }
+
     nav a:hover { color: var(--gold); }
     nav a.active { color: var(--gold); }
 
     header {
+      background: var(--dark);
+      color: #fff;
+      padding: 50px 20px;
       text-align: center;
-      padding: 30px 20px;
     }
 
     header h1 {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 32px;
+      font-size: 42px;
       letter-spacing: 0.12em;
       color: var(--gold);
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     header p {
-      color: rgba(255,255,255,0.5);
-      font-size: 14px;
-    }
-
-    main {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px 40px;
+      color: rgba(255,255,255,0.7);
+      font-size: 16px;
     }
 
     .controls {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      margin-bottom: 30px;
-      flex-wrap: wrap;
+      background: linear-gradient(135deg, #1a1a2e 0%, #0d0d15 100%);
+      padding: 30px 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(201, 162, 39, 0.2);
     }
 
-    .btn {
-      padding: 12px 24px;
-      border: none;
-      border-radius: 6px;
-      font-size: 14px;
+    .controls .btn {
+      display: inline-block;
+      padding: 14px 30px;
+      font-size: 15px;
       font-weight: 600;
+      text-decoration: none;
+      border-radius: 6px;
       cursor: pointer;
+      border: none;
       transition: all 0.2s;
+      margin: 5px;
     }
 
-    .btn-gold { background: var(--gold); color: var(--dark); }
-    .btn-gold:hover { background: #d4b32a; transform: translateY(-2px); }
+    .btn-gold {
+      background: var(--gold);
+      color: var(--dark);
+    }
+
+    .btn-gold:hover {
+      background: #d4b32a;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(201, 162, 39, 0.3);
+    }
+
     .btn-outline {
       background: transparent;
       color: rgba(255,255,255,0.7);
-      border: 1px solid rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.3);
     }
-    .btn-outline:hover { background: rgba(255,255,255,0.1); }
 
-    .spread-container {
-      display: grid;
-      gap: 25px;
+    .btn-outline:hover {
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 50px 20px;
     }
 
     .spread-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: #fff;
       border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      margin-bottom: 50px;
       overflow: hidden;
     }
 
     .spread-header {
-      background: rgba(0,0,0,0.3);
-      padding: 15px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
+      background: var(--dark);
+      color: #fff;
+      padding: 20px 25px;
     }
 
-    .spread-header h3 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 18px;
-      letter-spacing: 0.08em;
-      color: var(--gold);
+    .spread-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      margin-bottom: 5px;
+    }
+
+    .spread-header p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
     }
 
     .spread-cards {
       display: flex;
-      gap: 10px;
-      padding: 20px;
+      gap: 12px;
+      padding: 25px;
+      background: #1a1a1a;
       overflow-x: auto;
-      justify-content: center;
-      background: #0a0a0a;
     }
 
-    .spread-cards img {
+    .mini-card {
+      flex-shrink: 0;
       width: 100px;
       border-radius: 6px;
-      flex-shrink: 0;
+      overflow: hidden;
+      background: #2a2a2a;
     }
 
+    .mini-card img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      object-position: top;
+    }
+
+    .mini-card .info {
+      padding: 6px 8px;
+    }
+
+    .mini-card .cat {
+      font-size: 7px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+
+    .mini-card .name {
+      font-family: 'Playfair Display', serif;
+      font-size: 11px;
+      color: #fff;
+    }
+
+    .mini-card.wellbeing .info { background: linear-gradient(to bottom, #4a3d10, #3d3008); }
+    .mini-card.wellbeing .cat { color: #FFD93D; }
+    .mini-card.arc .info { background: linear-gradient(to bottom, #2d1f4d, #231839); }
+    .mini-card.arc .cat { color: #c084fc; }
+    .mini-card.terrain .info { background: linear-gradient(to bottom, #1a3d3a, #132d2b); }
+    .mini-card.terrain .cat { color: #4ECDC4; }
+    .mini-card.object .info { background: linear-gradient(to bottom, #4d2a10, #3d2008); }
+    .mini-card.object .cat { color: #FF8C42; }
+    .mini-card.timeframe .info { background: linear-gradient(to bottom, #1a2a4d, #132039); }
+    .mini-card.timeframe .cat { color: #60a5fa; }
+    .mini-card.modifier .info { background: linear-gradient(to bottom, #4d1a1a, #3d1313); }
+    .mini-card.modifier .cat { color: #f87171; }
+    .mini-card.technology .info { background: linear-gradient(to bottom, #1a3d4d, #133039); }
+    .mini-card.technology .cat { color: #22d3ee; }
+    .mini-card.prompt .info { background: linear-gradient(to bottom, #3d1a4d, #301339); }
+    .mini-card.prompt .cat { color: #e879f9; }
+
     .directions {
-      padding: 20px;
+      padding: 25px;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 15px;
+      background: #fafafa;
     }
 
-    @media (max-width: 700px) {
+    @media (max-width: 600px) {
       .directions { grid-template-columns: 1fr; }
     }
 
     .direction {
-      background: rgba(0,0,0,0.2);
-      border: 1px solid rgba(255,255,255,0.1);
+      background: #fff;
+      border: 2px solid #eee;
       border-radius: 8px;
       padding: 15px;
       cursor: pointer;
@@ -160,37 +211,39 @@
 
     .direction:hover {
       border-color: var(--gold);
-      background: rgba(201, 162, 39, 0.1);
+      background: rgba(201, 162, 39, 0.05);
     }
 
     .direction.selected {
       border-color: var(--gold);
-      background: rgba(201, 162, 39, 0.15);
+      background: rgba(201, 162, 39, 0.1);
     }
 
     .direction h4 {
       font-family: 'Playfair Display', serif;
       font-size: 16px;
-      color: var(--gold);
+      color: var(--dark);
       margin-bottom: 8px;
     }
 
     .direction p {
       font-size: 13px;
-      color: rgba(255,255,255,0.7);
+      color: #666;
       line-height: 1.5;
     }
 
-    .generate-btn {
-      margin: 15px 20px 20px;
+    .generate-section {
+      padding: 20px 25px;
+      background: #fafafa;
+      border-top: 1px solid #eee;
+      text-align: center;
     }
 
-    .generate-btn .btn {
-      width: 100%;
+    .generate-section .btn {
+      min-width: 200px;
     }
 
     .scenario-output {
-      padding: 20px;
       display: none;
     }
 
@@ -198,134 +251,145 @@
       display: block;
     }
 
-    .scenario-output.loading::after {
-      content: 'Generating scenario...';
-      display: block;
+    .scenario-output.loading {
+      padding: 60px 25px;
       text-align: center;
       color: var(--gold);
+      font-style: italic;
+      background: #fafafa;
+    }
+
+    .scenario-output.loading::after {
+      content: 'Generating scenario...';
+    }
+
+    .scenario {
       padding: 30px;
-      font-style: italic;
     }
 
-    .scenario-content {
-      background: rgba(255,255,255,0.02);
-      border-radius: 8px;
-      padding: 25px;
-    }
-
-    .scenario-content h4 {
+    .scenario h3 {
       font-family: 'Playfair Display', serif;
-      font-size: 24px;
-      color: #fff;
-      margin-bottom: 5px;
+      font-size: 28px;
+      color: var(--dark);
+      margin-bottom: 8px;
     }
 
-    .scenario-content .subtitle {
-      color: rgba(255,255,255,0.5);
+    .scenario .subtitle {
+      font-size: 16px;
+      color: #666;
       font-style: italic;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid var(--gold);
     }
 
-    .scenario-content .text {
-      line-height: 1.7;
-      margin-bottom: 20px;
+    .scenario-illustration {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
 
-    .scenario-content .text p {
-      margin-bottom: 12px;
+    .scenario .text p {
+      margin-bottom: 16px;
     }
 
-    .scenario-content .scene {
+    .scenario .scene {
       background: rgba(201, 162, 39, 0.1);
       border-left: 4px solid var(--gold);
-      padding: 15px 20px;
-      margin: 20px 0;
+      padding: 20px;
+      margin: 25px 0;
       font-style: italic;
-      line-height: 1.6;
     }
 
-    .scenario-content .implications {
-      background: rgba(255,255,255,0.03);
+    .scenario .implications {
+      background: #f5f5f5;
       border-radius: 8px;
-      padding: 15px 20px;
-      margin-top: 20px;
+      padding: 20px;
+      margin-top: 25px;
     }
 
-    .scenario-content .implications h5 {
-      font-size: 12px;
+    .scenario .implications h4 {
+      font-size: 14px;
       font-weight: 600;
-      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+      color: #666;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
-      margin-bottom: 10px;
+      letter-spacing: 0.05em;
     }
 
-    .scenario-content .implications ul {
+    .scenario .implications ul {
       margin-left: 20px;
-      line-height: 1.6;
     }
 
-    .scenario-content .implications li {
+    .scenario .implications li {
       margin-bottom: 8px;
     }
 
     .illustration-prompt {
-      background: #111;
-      border-radius: 6px;
-      padding: 12px 15px;
-      margin-top: 15px;
+      background: var(--dark);
+      border-radius: 8px;
+      padding: 15px 20px;
+      margin-top: 25px;
       font-family: monospace;
-      font-size: 11px;
-      color: rgba(255,255,255,0.6);
+      font-size: 12px;
+      line-height: 1.5;
+      color: rgba(255,255,255,0.8);
       white-space: pre-wrap;
       word-break: break-word;
     }
 
-    .generated-image {
-      margin-top: 20px;
+    .illustration-prompt h4 {
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+
+    .image-loading {
+      background: #f5f5f5;
+      border-radius: 8px;
+      padding: 40px 20px;
       text-align: center;
-    }
-
-    .generated-image img {
-      max-width: 100%;
-      border-radius: 8px;
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .generated-image.loading {
-      background: rgba(255,255,255,0.02);
-      border-radius: 8px;
-      padding: 60px 20px;
       color: var(--gold);
       font-style: italic;
-    }
-
-    .generated-image.loading::before {
-      content: 'Generating illustration... (this may take 1-2 minutes)';
-    }
-
-    .image-actions {
-      margin-top: 10px;
-      display: flex;
-      gap: 10px;
-      justify-content: center;
+      margin-bottom: 25px;
     }
 
     .action-buttons {
       display: flex;
       gap: 10px;
-      margin-top: 20px;
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
     }
 
     .action-buttons .btn {
       flex: 1;
+      padding: 12px 20px;
+      font-size: 14px;
     }
 
     .error {
-      color: #f87171;
+      color: #dc2626;
       padding: 20px;
       text-align: center;
+      background: #fef2f2;
+      border-radius: 8px;
+      margin: 20px 0;
     }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: #999;
+      font-size: 14px;
+    }
+
+    footer a { color: var(--gold); }
   </style>
 </head>
 <body>
@@ -340,20 +404,22 @@
   </nav>
 
   <header>
-    <h1>EXPLORE SPREADS</h1>
-    <p>Random spreads with AI-generated scenario directions</p>
+    <h1>EXPLORE FUTURES</h1>
+    <p>Generate random spreads and create AI-powered scenarios with illustrations</p>
   </header>
 
-  <main>
-    <div class="controls">
-      <button class="btn btn-gold" onclick="generateSpreads()">Generate 5 New Spreads</button>
-      <button class="btn btn-outline" onclick="addSpread()">Add One More</button>
-    </div>
+  <div class="controls">
+    <button class="btn btn-gold" onclick="generateSpreads()">Generate 5 New Spreads</button>
+    <button class="btn btn-outline" onclick="addSpread()">Add One More</button>
+  </div>
 
-    <div class="spread-container" id="spreadContainer">
-      <p style="text-align: center; color: rgba(255,255,255,0.4); padding: 40px;">Click "Generate 5 New Spreads" to start exploring futures...</p>
-    </div>
+  <main id="spreadContainer">
+    <p style="text-align: center; color: #999; padding: 60px 20px;">Click "Generate 5 New Spreads" to start exploring futures...</p>
   </main>
+
+  <footer>
+    <p>Futures Deck &mdash; <a href="play-v2.html">Draw your own cards</a></p>
+  </footer>
 
   <script>
     const IMAGE_BASE = '../assets/cards-final/';
@@ -433,7 +499,6 @@
       { id: 'prompt-06', category: 'prompt', name: 'The Threshold', description: 'Point of no return?' }
     ];
 
-    // Direction templates for variety
     const DIRECTION_TEMPLATES = [
       { tone: 'utopian', desc: 'Focus on the positive possibilities and human flourishing' },
       { tone: 'dystopian', desc: 'Focus on what could go wrong and unintended consequences' },
@@ -446,6 +511,7 @@
     ];
 
     let spreadCounter = 0;
+    const spreadData = {};
 
     function pickRandom(arr, n = 1) {
       const shuffled = [...arr].sort(() => Math.random() - 0.5);
@@ -479,14 +545,23 @@
     }
 
     function createSpreadElement(id, cards, directions) {
+      const cardNames = cards.map(c => c.name).join(' + ');
       return `
         <div class="spread-card" id="spread-${id}">
           <div class="spread-header">
-            <h3>Spread #${id}</h3>
-            <span style="color: rgba(255,255,255,0.4); font-size: 12px;">${cards.map(c => c.name).join(' + ')}</span>
+            <h2>Spread #${id}</h2>
+            <p>${cardNames}</p>
           </div>
           <div class="spread-cards">
-            ${cards.map(c => `<img src="${IMAGE_BASE}${c.id}.png" alt="${c.name}" title="${c.name}">`).join('')}
+            ${cards.map(c => `
+              <div class="mini-card ${c.category}">
+                <img src="${IMAGE_BASE}${c.id}.png" alt="${c.name}">
+                <div class="info">
+                  <div class="cat">${c.category}</div>
+                  <div class="name">${c.name}</div>
+                </div>
+              </div>
+            `).join('')}
           </div>
           <div class="directions">
             ${directions.map((d, i) => `
@@ -496,15 +571,13 @@
               </div>
             `).join('')}
           </div>
-          <div class="generate-btn">
+          <div class="generate-section">
             <button class="btn btn-gold" onclick="generateScenario(${id})" id="gen-btn-${id}">Generate Scenario</button>
           </div>
           <div class="scenario-output" id="output-${id}"></div>
         </div>
       `;
     }
-
-    const spreadData = {};
 
     function addSpread() {
       spreadCounter++;
@@ -514,12 +587,15 @@
       spreadData[spreadCounter] = { cards, directions, selectedDirection: null };
 
       const container = document.getElementById('spreadContainer');
+      if (spreadCounter === 1) {
+        container.innerHTML = '';
+      }
       container.insertAdjacentHTML('beforeend', createSpreadElement(spreadCounter, cards, directions));
     }
 
     function generateSpreads() {
       spreadCounter = 0;
-      spreadData.length = 0;
+      Object.keys(spreadData).forEach(k => delete spreadData[k]);
       document.getElementById('spreadContainer').innerHTML = '';
 
       for (let i = 0; i < 5; i++) {
@@ -566,22 +642,23 @@
 
         output.classList.remove('loading');
         output.innerHTML = `
-          <div class="scenario-content">
-            <h4>${result.title}</h4>
+          <div class="scenario">
+            <h3>${result.title}</h3>
             <p class="subtitle">${result.subtitle}</p>
+            <div id="image-container-${spreadId}"></div>
             <div class="text">${result.scenario.split('\n\n').map(p => `<p>${p}</p>`).join('')}</div>
             <div class="scene">${result.scene}</div>
             <div class="implications">
-              <h5>Second-Order Implications</h5>
+              <h4>Second-Order Implications</h4>
               <ul>${result.implications.split('\n').filter(l => l.trim().startsWith('-')).map(l => `<li>${l.replace(/^-\s*/, '')}</li>`).join('')}</ul>
             </div>
             <div class="illustration-prompt">
-              <strong>Illustration Prompt:</strong><br>${result.illustrationPrompt}
+              <h4>Illustration Prompt</h4>
+              ${result.illustrationPrompt}
             </div>
-            <div class="generated-image" id="image-${spreadId}"></div>
             <div class="action-buttons">
-              <button class="btn btn-outline" onclick="copyScenario(${spreadId})">Copy</button>
-              <button class="btn btn-gold" onclick="generateImage(${spreadId})">Generate Image</button>
+              <button class="btn btn-outline" onclick="copyScenario(${spreadId})">Copy Text</button>
+              <button class="btn btn-gold" onclick="generateImage(${spreadId})">Generate Illustration</button>
               <button class="btn btn-outline" onclick="generateScenario(${spreadId})">Regenerate</button>
             </div>
           </div>
@@ -616,12 +693,10 @@
         return;
       }
 
-      const imageContainer = document.getElementById(`image-${spreadId}`);
-      imageContainer.innerHTML = '';
-      imageContainer.classList.add('loading');
+      const imageContainer = document.getElementById(`image-container-${spreadId}`);
+      imageContainer.innerHTML = '<div class="image-loading">Generating illustration... (this may take 1-2 minutes)</div>';
 
       try {
-        // Start the task
         const response = await fetch('/api/image', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -642,7 +717,7 @@
         const taskId = data.taskId;
 
         // Poll for completion
-        const maxAttempts = 60; // 5 minutes at 5-second intervals
+        const maxAttempts = 60;
         for (let i = 0; i < maxAttempts; i++) {
           await new Promise(r => setTimeout(r, 5000));
 
@@ -650,13 +725,8 @@
           const statusData = await statusRes.json();
 
           if (statusData.status === 'completed' && statusData.imageUrl) {
-            imageContainer.classList.remove('loading');
             imageContainer.innerHTML = `
-              <img src="${statusData.imageUrl}" alt="${result.title}">
-              <div class="image-actions">
-                <a href="${statusData.imageUrl}" target="_blank" class="btn btn-outline" download>Download</a>
-                <button class="btn btn-outline" onclick="generateImage(${spreadId})">Regenerate</button>
-              </div>
+              <img src="${statusData.imageUrl}" alt="${result.title}" class="scenario-illustration">
             `;
             spreadData[spreadId].imageUrl = statusData.imageUrl;
             return;
@@ -670,7 +740,6 @@
         throw new Error('Image generation timed out');
 
       } catch (error) {
-        imageContainer.classList.remove('loading');
         imageContainer.innerHTML = `<div class="error">Image Error: ${error.message}</div>`;
       }
     }
