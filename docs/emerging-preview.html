@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emerging Technologies Futures - Card Preview</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Source+Sans+Pro:wght@300;400;600&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cyan: #38bdf8;
+      --purple: #a78bfa;
+      --orange: #fb923c;
+      --green: #4ade80;
+      --dark: #0a0a12;
+      --darker: #050810;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Source Sans Pro', sans-serif;
+      background: var(--darker);
+      color: #fff;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0a1628 0%, #050d18 100%);
+      padding: 60px 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+    }
+
+    header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      letter-spacing: 0.12em;
+      color: var(--cyan);
+      margin-bottom: 10px;
+    }
+
+    header p {
+      color: rgba(255,255,255,0.6);
+      font-size: 18px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 30px;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 36px;
+      color: var(--cyan);
+    }
+
+    .stat-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.5);
+    }
+
+    main {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .category {
+      margin-bottom: 60px;
+    }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid rgba(255,255,255,0.1);
+    }
+
+    .category-header h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: 0.08em;
+    }
+
+    .category-header .count {
+      background: rgba(255,255,255,0.1);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .category.technology .category-header h2 { color: var(--cyan); }
+    .category.actors .category-header h2 { color: var(--purple); }
+    .category.events .category-header h2 { color: var(--orange); }
+    .category.wellbeing .category-header h2 { color: var(--green); }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #111;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    .card img {
+      width: 100%;
+      aspect-ratio: 3/5;
+      object-fit: cover;
+      object-position: top;
+    }
+
+    .card .info {
+      padding: 12px 15px;
+    }
+
+    .card .cat {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .card .name {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      color: #fff;
+    }
+
+    .card .desc {
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+      margin-top: 4px;
+    }
+
+    .category.technology .card .info { background: linear-gradient(to bottom, #0a1628, #050d18); }
+    .category.technology .card .cat { color: var(--cyan); }
+    .category.actors .card .info { background: linear-gradient(to bottom, #1a1a2e, #0f0f1a); }
+    .category.actors .card .cat { color: var(--purple); }
+    .category.events .card .info { background: linear-gradient(to bottom, #1f1a1a, #140a0a); }
+    .category.events .card .cat { color: var(--orange); }
+    .category.wellbeing .card .info { background: linear-gradient(to bottom, #1a2a1a, #0a1a0a); }
+    .category.wellbeing .card .cat { color: var(--green); }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.95);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    .lightbox .close-hint {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.4);
+      font-size: 14px;
+    }
+
+    .lightbox .nav-hint {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255,255,255,0.3);
+      font-size: 48px;
+      padding: 20px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .lightbox .nav-hint:hover {
+      color: rgba(255,255,255,0.7);
+    }
+
+    .lightbox .prev { left: 20px; }
+    .lightbox .next { right: 20px; }
+
+    footer {
+      text-align: center;
+      padding: 60px 20px;
+      color: rgba(255,255,255,0.4);
+      font-size: 14px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    footer a { color: var(--cyan); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 32px; }
+      .stats { gap: 20px; }
+      .stat-value { font-size: 28px; }
+      .cards-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <span class="nav-hint prev" onclick="navigate(-1, event)">&lsaquo;</span>
+    <img id="lightboxImage" src="" alt="Card">
+    <span class="nav-hint next" onclick="navigate(1, event)">&rsaquo;</span>
+    <div class="close-hint">Click anywhere to close &middot; Use arrow keys to navigate</div>
+  </div>
+
+  <header>
+    <h1>EMERGING TECHNOLOGIES FUTURES</h1>
+    <p>A disruption scenario deck for policymakers and strategists exploring how emerging technologies might impact the future</p>
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-value">48</div>
+        <div class="stat-label">Cards</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">4</div>
+        <div class="stat-label">Categories</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">1050&times;1750</div>
+        <div class="stat-label">Print Ready</div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Technology -->
+    <section class="category technology">
+      <div class="category-header">
+        <h2>TECHNOLOGY</h2>
+        <span class="count">8 cards</span>
+      </div>
+      <div class="cards-grid" id="technology-cards"></div>
+    </section>
+
+    <!-- Actors -->
+    <section class="category actors">
+      <div class="category-header">
+        <h2>ACTORS</h2>
+        <span class="count">10 cards</span>
+      </div>
+      <div class="cards-grid" id="actors-cards"></div>
+    </section>
+
+    <!-- Events -->
+    <section class="category events">
+      <div class="category-header">
+        <h2>EVENTS</h2>
+        <span class="count">13 cards</span>
+      </div>
+      <div class="cards-grid" id="events-cards"></div>
+    </section>
+
+    <!-- Wellbeing -->
+    <section class="category wellbeing">
+      <div class="category-header">
+        <h2>WELLBEING</h2>
+        <span class="count">17 cards</span>
+      </div>
+      <div class="cards-grid" id="wellbeing-cards"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Emerging Technologies Futures Deck &mdash; Created with <a href="https://github.com/anthropics/claude-code" target="_blank">Claude Code</a></p>
+  </footer>
+
+  <script>
+    const IMAGE_BASE = '../assets/cards-emerging/';
+
+    const CARDS = {
+      technology: [
+        { id: 'tech-01', name: 'AGI', desc: 'Artificial General Intelligence' },
+        { id: 'tech-02', name: 'BCI', desc: 'Brain-Computer Interface' },
+        { id: 'tech-03', name: 'Quantum Communication', desc: 'Unhackable information transfer' },
+        { id: 'tech-04', name: 'Quantum Sensing', desc: 'Ultra-precise measurement' },
+        { id: 'tech-05', name: 'Quantum Computing', desc: 'Exponential computational power' },
+        { id: 'tech-06', name: 'Robotics', desc: 'Autonomous physical systems' },
+        { id: 'tech-07', name: 'Synthetic Biology', desc: 'Engineering life itself' },
+        { id: 'tech-08', name: 'Neurotechnology', desc: 'Interfacing with the nervous system' }
+      ],
+      actors: [
+        { id: 'actor-01', name: 'Foreign States', desc: 'International government actors' },
+        { id: 'actor-02', name: 'Dutch Government', desc: 'National policy and regulation' },
+        { id: 'actor-03', name: 'Criminal Networks', desc: 'Organized illegal actors' },
+        { id: 'actor-04', name: 'Tech Companies', desc: 'Private sector innovators' },
+        { id: 'actor-05', name: 'Big Tech', desc: 'Dominant platform giants' },
+        { id: 'actor-06', name: 'Hacktivists', desc: 'Ideologically motivated actors' },
+        { id: 'actor-07', name: 'Research Institutions', desc: 'Universities and labs' },
+        { id: 'actor-08', name: 'NGOs', desc: 'Civil society organizations' },
+        { id: 'actor-09', name: 'Journalists', desc: 'Media and investigative reporters' },
+        { id: 'actor-10', name: 'Citizens', desc: 'The general public' }
+      ],
+      events: [
+        { id: 'event-01', name: 'Major Breakthrough', desc: 'Unexpected leap forward' },
+        { id: 'event-02', name: 'Security Breach', desc: 'Critical vulnerability exposed' },
+        { id: 'event-03', name: 'Accelerated Funding', desc: 'Massive investment influx' },
+        { id: 'event-04', name: 'Technical Setback', desc: 'Critical failure or limitation' },
+        { id: 'event-05', name: 'Regulatory Change', desc: 'New rules of the game' },
+        { id: 'event-06', name: 'Public Backlash', desc: 'Widespread resistance' },
+        { id: 'event-07', name: 'International Treaty', desc: 'Global agreement' },
+        { id: 'event-08', name: 'Market Collapse', desc: 'Economic disruption' },
+        { id: 'event-09', name: 'Talent Exodus', desc: 'Brain drain' },
+        { id: 'event-10', name: 'Open Source Release', desc: 'Democratized access' },
+        { id: 'event-11', name: 'War', desc: 'Armed conflict erupts' },
+        { id: 'event-12', name: 'Leak', desc: 'Secrets exposed' },
+        { id: 'event-13', name: 'Natural Disaster', desc: 'Catastrophic event strikes' }
+      ],
+      wellbeing: [
+        { id: 'well-01', name: 'Autonomy', desc: 'Freedom to choose' },
+        { id: 'well-02', name: 'Safety', desc: 'Freedom from harm' },
+        { id: 'well-03', name: 'Security', desc: 'Protection and stability' },
+        { id: 'well-04', name: 'Comfort', desc: 'Ease and convenience' },
+        { id: 'well-05', name: 'Community', desc: 'Belonging and connection' },
+        { id: 'well-06', name: 'Beauty', desc: 'Aesthetic experience' },
+        { id: 'well-07', name: 'Competence', desc: 'Skill and mastery' },
+        { id: 'well-08', name: 'Fitness', desc: 'Health and vitality' },
+        { id: 'well-09', name: 'Impact', desc: 'Making a difference' },
+        { id: 'well-10', name: 'Purpose', desc: 'Meaning and direction' },
+        { id: 'well-11', name: 'Relatedness', desc: 'Human connection' },
+        { id: 'well-12', name: 'Stimulation', desc: 'Engagement and novelty' },
+        { id: 'well-13', name: 'Privacy', desc: 'Control over personal information' },
+        { id: 'well-14', name: 'Trust', desc: 'Confidence in systems and others' },
+        { id: 'well-15', name: 'Fairness', desc: 'Just and equitable treatment' },
+        { id: 'well-16', name: 'Livelihood', desc: 'Means of earning a living' },
+        { id: 'well-17', name: 'Identity', desc: 'Sense of self and belonging' }
+      ]
+    };
+
+    // Flatten all cards for navigation
+    const allCards = [
+      ...CARDS.technology.map(c => ({ ...c, category: 'Technology' })),
+      ...CARDS.actors.map(c => ({ ...c, category: 'Actor' })),
+      ...CARDS.events.map(c => ({ ...c, category: 'Event' })),
+      ...CARDS.wellbeing.map(c => ({ ...c, category: 'Wellbeing' }))
+    ];
+
+    let currentIndex = 0;
+
+    function renderCards(category, containerId) {
+      const container = document.getElementById(containerId);
+      const categoryLabel = {
+        technology: 'Technology',
+        actors: 'Actor',
+        events: 'Event',
+        wellbeing: 'Wellbeing'
+      }[category];
+
+      container.innerHTML = CARDS[category].map(card => `
+        <div class="card" onclick="openLightbox('${card.id}')">
+          <img src="${IMAGE_BASE}${card.id}.png" alt="${card.name}" loading="lazy">
+          <div class="info">
+            <div class="cat">${categoryLabel}</div>
+            <div class="name">${card.name}</div>
+            <div class="desc">${card.desc}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function openLightbox(cardId) {
+      currentIndex = allCards.findIndex(c => c.id === cardId);
+      updateLightboxImage();
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox(event) {
+      if (event.target.classList.contains('nav-hint')) return;
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function navigate(direction, event) {
+      if (event) event.stopPropagation();
+      currentIndex = (currentIndex + direction + allCards.length) % allCards.length;
+      updateLightboxImage();
+    }
+
+    function updateLightboxImage() {
+      const card = allCards[currentIndex];
+      document.getElementById('lightboxImage').src = `${IMAGE_BASE}${card.id}.png`;
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      const lightbox = document.getElementById('lightbox');
+      if (!lightbox.classList.contains('active')) return;
+
+      if (e.key === 'Escape') {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+      } else if (e.key === 'ArrowLeft') {
+        navigate(-1);
+      } else if (e.key === 'ArrowRight') {
+        navigate(1);
+      }
+    });
+
+    // Initialize
+    renderCards('technology', 'technology-cards');
+    renderCards('actors', 'actors-cards');
+    renderCards('events', 'events-cards');
+    renderCards('wellbeing', 'wellbeing-cards');
+  </script>
+
+</body>
+</html>

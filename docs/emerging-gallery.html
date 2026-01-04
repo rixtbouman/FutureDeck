@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emerging Technologies Futures - Gallery</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0a0a0a;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .gallery img:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+    }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.95);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .lightbox.active { display: flex; }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 8px;
+    }
+
+    .nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255,255,255,0.3);
+      font-size: 60px;
+      padding: 20px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .nav:hover { color: rgba(255,255,255,0.8); }
+    .prev { left: 10px; }
+    .next { right: 10px; }
+
+    .hint {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.3);
+      font-family: system-ui, sans-serif;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="lightbox" id="lightbox" onclick="close(event)">
+    <span class="nav prev" onclick="nav(-1, event)">&lsaquo;</span>
+    <img id="lbImg" src="">
+    <span class="nav next" onclick="nav(1, event)">&rsaquo;</span>
+    <div class="hint">Click to close &middot; Arrow keys to navigate</div>
+  </div>
+
+  <div class="gallery" id="gallery"></div>
+
+  <script>
+    const cards = [
+      'tech-01','tech-02','tech-03','tech-04','tech-05','tech-06','tech-07','tech-08',
+      'actor-01','actor-02','actor-03','actor-04','actor-05','actor-06','actor-07','actor-08','actor-09','actor-10',
+      'event-01','event-02','event-03','event-04','event-05','event-06','event-07','event-08','event-09','event-10','event-11','event-12','event-13',
+      'well-01','well-02','well-03','well-04','well-05','well-06','well-07','well-08','well-09','well-10','well-11','well-12','well-13','well-14','well-15','well-16','well-17'
+    ];
+
+    const base = '../assets/cards-emerging/';
+    let idx = 0;
+
+    document.getElementById('gallery').innerHTML = cards.map((id, i) =>
+      `<img src="${base}${id}.png" onclick="open(${i})" loading="lazy">`
+    ).join('');
+
+    function open(i) {
+      idx = i;
+      document.getElementById('lbImg').src = base + cards[idx] + '.png';
+      document.getElementById('lightbox').classList.add('active');
+    }
+
+    function close(e) {
+      if (e.target.classList.contains('nav')) return;
+      document.getElementById('lightbox').classList.remove('active');
+    }
+
+    function nav(d, e) {
+      e.stopPropagation();
+      idx = (idx + d + cards.length) % cards.length;
+      document.getElementById('lbImg').src = base + cards[idx] + '.png';
+    }
+
+    document.addEventListener('keydown', e => {
+      if (!document.getElementById('lightbox').classList.contains('active')) return;
+      if (e.key === 'Escape') document.getElementById('lightbox').classList.remove('active');
+      if (e.key === 'ArrowLeft') nav(-1, e);
+      if (e.key === 'ArrowRight') nav(1, e);
+    });
+  </script>
+
+</body>
+</html>

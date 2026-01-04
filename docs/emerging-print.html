@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Emerging Technologies Futures - Print Sheet</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: A4;
+      margin: 10mm;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #444;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .info {
+      max-width: 210mm;
+      margin: 20px auto;
+      padding: 16px 20px;
+      background: #1a1a2e;
+      color: #fff;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .info h1 {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 18px;
+      color: #38bdf8;
+    }
+
+    .info p {
+      font-size: 13px;
+      color: #888;
+      margin-top: 4px;
+    }
+
+    .info .buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .info button {
+      background: #38bdf8;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .info button:hover {
+      background: #7dd3fc;
+    }
+
+    /*
+     * A4 = 210mm × 297mm
+     * With 10mm margins = 190mm × 277mm usable
+     * Card aspect ratio = 1050:1750 = 3:5 = 0.6
+     *
+     * For 3 cards across with 5mm gaps:
+     *   Total gap width = 10mm
+     *   Card width = (190 - 10) / 3 = 60mm
+     *   Card height = 60 / 0.6 = 100mm
+     *
+     * For 3 rows with 5mm gaps:
+     *   Total height = 100 × 3 + 10 = 310mm > 277mm (too tall!)
+     *
+     * Constrain by height instead:
+     *   Card height = (277 - 10) / 3 = 89mm
+     *   Card width = 89 × 0.6 = 53.4mm
+     *   Total width = 53.4 × 3 + 10 = 170.2mm ✓
+     */
+
+    .page {
+      width: 210mm;
+      height: 297mm;
+      padding: 10mm;
+      display: grid;
+      grid-template-columns: repeat(3, 53.4mm);
+      grid-template-rows: repeat(3, 89mm);
+      gap: 5mm;
+      justify-content: center;
+      align-content: center;
+      page-break-after: always;
+      background: white;
+      margin: 20px auto;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+
+    .page:last-child {
+      page-break-after: auto;
+    }
+
+    .card {
+      width: 53.4mm;
+      height: 89mm;
+      border-radius: 2mm;
+      overflow: hidden;
+      background: #f0f0f0;
+    }
+
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: white;
+    }
+
+    /* Empty slot */
+    .empty {
+      width: 53.4mm;
+      height: 89mm;
+    }
+
+    /* Card back */
+    .card-back {
+      width: 53.4mm;
+      height: 89mm;
+      border-radius: 2mm;
+      overflow: hidden;
+      position: relative;
+      background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 50%, #e0f2fe 100%);
+    }
+
+    .card-back .pattern {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image:
+        repeating-linear-gradient(45deg, transparent, transparent 3mm, rgba(3, 105, 161, 0.08) 3mm, rgba(3, 105, 161, 0.08) 3.3mm),
+        repeating-linear-gradient(-45deg, transparent, transparent 3mm, rgba(3, 105, 161, 0.08) 3mm, rgba(3, 105, 161, 0.08) 3.3mm);
+    }
+
+    .card-back .border-outer {
+      position: absolute;
+      top: 4mm; left: 4mm; right: 4mm; bottom: 4mm;
+      border: 0.5mm solid #0369a1;
+      border-radius: 1.5mm;
+    }
+
+    .card-back .border-inner {
+      position: absolute;
+      top: 6mm; left: 6mm; right: 6mm; bottom: 6mm;
+      border: 0.3mm solid rgba(3, 105, 161, 0.4);
+      border-radius: 1mm;
+    }
+
+    .card-back .center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .card-back .symbol {
+      font-size: 12mm;
+      color: #0369a1;
+      margin-bottom: 3mm;
+    }
+
+    .card-back .back-title {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 4mm;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #0c4a6e;
+      text-transform: uppercase;
+    }
+
+    .card-back .back-subtitle {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 3mm;
+      font-weight: 500;
+      color: #0369a1;
+      letter-spacing: 0.1em;
+      margin-top: 1mm;
+    }
+
+    .card-back .back-tagline {
+      font-size: 2.2mm;
+      color: #0c4a6e;
+      opacity: 0.7;
+      margin-top: 2.5mm;
+    }
+
+    /* Print styles */
+    @media print {
+      body {
+        background: white;
+      }
+
+      .info {
+        display: none;
+      }
+
+      .page {
+        margin: 0;
+        box-shadow: none;
+      }
+
+      .card, .card-back {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="info">
+    <div>
+      <h1>EMERGING TECHNOLOGIES FUTURES</h1>
+      <p>48 cards | A4 paper | Print double-sided, flip on long edge | Cut along card edges</p>
+      <p style="margin-top: 8px;">
+        <a href="emerging-gallery.html" style="color: #38bdf8;">Gallery</a> &middot;
+        <a href="emerging-preview.html" style="color: #38bdf8;">Preview</a>
+      </p>
+    </div>
+    <div class="buttons">
+      <button onclick="window.print()">Print All</button>
+    </div>
+  </div>
+
+  <!-- Page 1: Cards 1-9 (Technology 8 + Actor 1) -->
+  <div class="page">
+    <div class="card"><img src="../assets/cards-emerging/tech-01.png" alt="AGI"></div>
+    <div class="card"><img src="../assets/cards-emerging/tech-02.png" alt="BCI"></div>
+    <div class="card"><img src="../assets/cards-emerging/tech-03.png" alt="Quantum Communication"></div>
+    <div class="card"><img src="../assets/cards-emerging/tech-04.png" alt="Quantum Sensing"></div>
+    <div class="card"><img src="../assets/cards-emerging/tech-05.png" alt="Quantum Computing"></div>
+    <div class="card"><img src="../assets/cards-emerging/tech-06.png" alt="Robotics"></div>
+    <div class="card"><img src="../assets/cards-emerging/tech-07.png" alt="Synthetic Biology"></div>
+    <div class="card"><img src="../assets/cards-emerging/tech-08.png" alt="Neurotechnology"></div>
+    <div class="card"><img src="../assets/cards-emerging/actor-01.png" alt="Foreign States"></div>
+  </div>
+
+  <!-- Page 2: Cards 10-18 (Actors) -->
+  <div class="page">
+    <div class="card"><img src="../assets/cards-emerging/actor-02.png" alt="Dutch Government"></div>
+    <div class="card"><img src="../assets/cards-emerging/actor-03.png" alt="Criminal Networks"></div>
+    <div class="card"><img src="../assets/cards-emerging/actor-04.png" alt="Tech Companies"></div>
+    <div class="card"><img src="../assets/cards-emerging/actor-05.png" alt="Big Tech"></div>
+    <div class="card"><img src="../assets/cards-emerging/actor-06.png" alt="Hacktivists"></div>
+    <div class="card"><img src="../assets/cards-emerging/actor-07.png" alt="Research Institutions"></div>
+    <div class="card"><img src="../assets/cards-emerging/actor-08.png" alt="NGOs"></div>
+    <div class="card"><img src="../assets/cards-emerging/actor-09.png" alt="Journalists"></div>
+    <div class="card"><img src="../assets/cards-emerging/actor-10.png" alt="Citizens"></div>
+  </div>
+
+  <!-- Page 3: Cards 19-27 (Events) -->
+  <div class="page">
+    <div class="card"><img src="../assets/cards-emerging/event-01.png" alt="Major Breakthrough"></div>
+    <div class="card"><img src="../assets/cards-emerging/event-02.png" alt="Security Breach"></div>
+    <div class="card"><img src="../assets/cards-emerging/event-03.png" alt="Accelerated Funding"></div>
+    <div class="card"><img src="../assets/cards-emerging/event-04.png" alt="Technical Setback"></div>
+    <div class="card"><img src="../assets/cards-emerging/event-05.png" alt="Regulatory Change"></div>
+    <div class="card"><img src="../assets/cards-emerging/event-06.png" alt="Public Backlash"></div>
+    <div class="card"><img src="../assets/cards-emerging/event-07.png" alt="International Treaty"></div>
+    <div class="card"><img src="../assets/cards-emerging/event-08.png" alt="Market Collapse"></div>
+    <div class="card"><img src="../assets/cards-emerging/event-09.png" alt="Talent Exodus"></div>
+  </div>
+
+  <!-- Page 4: Cards 28-36 (Events + Wellbeing) -->
+  <div class="page">
+    <div class="card"><img src="../assets/cards-emerging/event-10.png" alt="Open Source Release"></div>
+    <div class="card"><img src="../assets/cards-emerging/event-11.png" alt="War"></div>
+    <div class="card"><img src="../assets/cards-emerging/event-12.png" alt="Leak"></div>
+    <div class="card"><img src="../assets/cards-emerging/event-13.png" alt="Natural Disaster"></div>
+    <div class="card"><img src="../assets/cards-emerging/well-01.png" alt="Autonomy"></div>
+    <div class="card"><img src="../assets/cards-emerging/well-02.png" alt="Safety"></div>
+    <div class="card"><img src="../assets/cards-emerging/well-03.png" alt="Security"></div>
+    <div class="card"><img src="../assets/cards-emerging/well-04.png" alt="Comfort"></div>
+    <div class="card"><img src="../assets/cards-emerging/well-05.png" alt="Community"></div>
+  </div>
+
+  <!-- Page 5: Cards 37-45 (Wellbeing) -->
+  <div class="page">
+    <div class="card"><img src="../assets/cards-emerging/well-06.png" alt="Beauty"></div>
+    <div class="card"><img src="../assets/cards-emerging/well-07.png" alt="Competence"></div>
+    <div class="card"><img src="../assets/cards-emerging/well-08.png" alt="Fitness"></div>
+    <div class="card"><img src="../assets/cards-emerging/well-09.png" alt="Impact"></div>
+    <div class="card"><img src="../assets/cards-emerging/well-10.png" alt="Purpose"></div>
+    <div class="card"><img src="../assets/cards-emerging/well-11.png" alt="Relatedness"></div>
+    <div class="card"><img src="../assets/cards-emerging/well-12.png" alt="Stimulation"></div>
+    <div class="card"><img src="../assets/cards-emerging/well-13.png" alt="Privacy"></div>
+    <div class="card"><img src="../assets/cards-emerging/well-14.png" alt="Trust"></div>
+  </div>
+
+  <!-- Page 6: Cards 46-48 (Remaining Wellbeing) -->
+  <div class="page">
+    <div class="card"><img src="../assets/cards-emerging/well-15.png" alt="Fairness"></div>
+    <div class="card"><img src="../assets/cards-emerging/well-16.png" alt="Livelihood"></div>
+    <div class="card"><img src="../assets/cards-emerging/well-17.png" alt="Identity"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+  </div>
+
+  <!-- Card Backs - Page 7 -->
+  <div class="page">
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+  </div>
+
+  <!-- Card Backs - Page 8 -->
+  <div class="page">
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+  </div>
+
+  <!-- Card Backs - Page 9 -->
+  <div class="page">
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+  </div>
+
+  <!-- Card Backs - Page 10 -->
+  <div class="page">
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+  </div>
+
+  <!-- Card Backs - Page 11 -->
+  <div class="page">
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+  </div>
+
+  <!-- Card Backs - Page 12 (remaining 3) -->
+  <div class="page">
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="card-back"><div class="pattern"></div><div class="border-outer"></div><div class="border-inner"></div><div class="center"><div class="symbol">◈</div><div class="back-title">Emerging Tech</div><div class="back-subtitle">Futures</div><div class="back-tagline">A Disruption Scenario Deck</div></div></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+  </div>
+
+</body>
+</html>

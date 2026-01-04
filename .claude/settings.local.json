@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(REPLICATE_API_TOKEN=r8_ORvfXiVFi0W2moZ3kenueBvd3IEBri00uxgOF node:*)",
+      "Bash(node src/render-cards-emerging.js:*)",
+      "Bash(node src/print-emerging-pdf.js:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd Emerging Technologies Futures card deck\n\nComplete oracle card deck for policymakers and strategists featuring:\n- 8 Technology cards \\(AGI, BCI, Quantum, Robotics, etc.\\)\n- 10 Actor cards \\(governments, companies, hacktivists, etc.\\)\n- 13 Event cards \\(breakthroughs, breaches, regulations, etc.\\)\n- 17 Wellbeing cards \\(autonomy, safety, privacy, trust, etc.\\)\n\nIncludes:\n- AI-generated artwork via Replicate Flux 1.1 Pro\n- Rendered card images \\(1050x1750px\\)\n- HTML preview and gallery pages\n- Print-ready PDF layout \\(A4, 3x3 grid\\)\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push:*)"
+    ]
+  }
+}
