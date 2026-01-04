@@ -621,7 +621,7 @@
       imageContainer.classList.add('loading');
 
       try {
-        const response = await fetch('/api/generate-image', {
+        const response = await fetch('/api/image', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ prompt: result.illustrationPrompt })
