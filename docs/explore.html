@@ -281,6 +281,36 @@
       word-break: break-word;
     }
 
+    .generated-image {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .generated-image img {
+      max-width: 100%;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .generated-image.loading {
+      background: rgba(255,255,255,0.02);
+      border-radius: 8px;
+      padding: 60px 20px;
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    .generated-image.loading::before {
+      content: 'Generating illustration... (this may take 1-2 minutes)';
+    }
+
+    .image-actions {
+      margin-top: 10px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
     .action-buttons {
       display: flex;
       gap: 10px;
@@ -548,9 +578,11 @@
             <div class="illustration-prompt">
               <strong>Illustration Prompt:</strong><br>${result.illustrationPrompt}
             </div>
+            <div class="generated-image" id="image-${spreadId}"></div>
             <div class="action-buttons">
               <button class="btn btn-outline" onclick="copyScenario(${spreadId})">Copy</button>
-              <button class="btn btn-gold" onclick="generateScenario(${spreadId})">Regenerate</button>
+              <button class="btn btn-gold" onclick="generateImage(${spreadId})">Generate Image</button>
+              <button class="btn btn-outline" onclick="generateScenario(${spreadId})">Regenerate</button>
             </div>
           </div>
         `;
@@ -575,6 +607,48 @@
       navigator.clipboard.writeText(text).then(() => {
         alert('Scenario copied to clipboard!');
       });
+    }
+
+    async function generateImage(spreadId) {
+      const result = spreadData[spreadId]?.result;
+      if (!result || !result.illustrationPrompt) {
+        alert('Generate a scenario first!');
+        return;
+      }
+
+      const imageContainer = document.getElementById(`image-${spreadId}`);
+      imageContainer.innerHTML = '';
+      imageContainer.classList.add('loading');
+
+      try {
+        const response = await fetch('/api/generate-image', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prompt: result.illustrationPrompt })
+        });
+
+        if (!response.ok) {
+          const err = await response.json();
+          throw new Error(err.error || `API error: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        imageContainer.classList.remove('loading');
+        imageContainer.innerHTML = `
+          <img src="${data.imageUrl}" alt="${result.title}">
+          <div class="image-actions">
+            <a href="${data.imageUrl}" target="_blank" class="btn btn-outline" download>Download</a>
+            <button class="btn btn-outline" onclick="generateImage(${spreadId})">Regenerate</button>
+          </div>
+        `;
+
+        spreadData[spreadId].imageUrl = data.imageUrl;
+
+      } catch (error) {
+        imageContainer.classList.remove('loading');
+        imageContainer.innerHTML = `<div class="error">Image Error: ${error.message}</div>`;
+      }
     }
 
     // Auto-generate on load
