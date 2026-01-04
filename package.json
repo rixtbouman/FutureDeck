@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "Speculative futures card game for imagining quantum technology impacts",
   "type": "module",
-  "engines": {
-    "node": "20.x"
-  },
   "main": "src/generator.js",
   "scripts": {
     "generate:svg": "node src/generator.js svg",
