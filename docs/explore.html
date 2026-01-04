@@ -621,6 +621,7 @@
       imageContainer.classList.add('loading');
 
       try {
+        // Start the task
         const response = await fetch('/api/image', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -634,16 +635,39 @@
 
         const data = await response.json();
 
-        imageContainer.classList.remove('loading');
-        imageContainer.innerHTML = `
-          <img src="${data.imageUrl}" alt="${result.title}">
-          <div class="image-actions">
-            <a href="${data.imageUrl}" target="_blank" class="btn btn-outline" download>Download</a>
-            <button class="btn btn-outline" onclick="generateImage(${spreadId})">Regenerate</button>
-          </div>
-        `;
+        if (data.error) {
+          throw new Error(data.error);
+        }
 
-        spreadData[spreadId].imageUrl = data.imageUrl;
+        const taskId = data.taskId;
+
+        // Poll for completion
+        const maxAttempts = 60; // 5 minutes at 5-second intervals
+        for (let i = 0; i < maxAttempts; i++) {
+          await new Promise(r => setTimeout(r, 5000));
+
+          const statusRes = await fetch(`/api/image?taskId=${taskId}`);
+          const statusData = await statusRes.json();
+
+          if (statusData.status === 'completed' && statusData.imageUrl) {
+            imageContainer.classList.remove('loading');
+            imageContainer.innerHTML = `
+              <img src="${statusData.imageUrl}" alt="${result.title}">
+              <div class="image-actions">
+                <a href="${statusData.imageUrl}" target="_blank" class="btn btn-outline" download>Download</a>
+                <button class="btn btn-outline" onclick="generateImage(${spreadId})">Regenerate</button>
+              </div>
+            `;
+            spreadData[spreadId].imageUrl = statusData.imageUrl;
+            return;
+          }
+
+          if (statusData.status === 'failed' || statusData.error) {
+            throw new Error(statusData.error || 'Image generation failed');
+          }
+        }
+
+        throw new Error('Image generation timed out');
 
       } catch (error) {
         imageContainer.classList.remove('loading');
