@@ -8,3 +8,4 @@ node_modules/
 # Temp files
 .DS_Store
 assets/futures-deck-print-ready.zip
+output/emerging-tech-futures.pdf

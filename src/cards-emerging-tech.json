@@ -1,139 +1,153 @@
 {
   "meta": {
     "name": "Emerging Technologies Futures",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "description": "A disruption scenario deck for policymakers and strategists exploring how emerging technologies might impact the future"
   },
 
   "technology": [
     {
       "id": "tech-01",
-      "name": "AGI",
-      "description": "Artificial General Intelligence",
-      "context": "Machine intelligence matching or exceeding human cognitive abilities across all domains. Self-improving systems capable of autonomous goal-setting and problem-solving.",
-      "symbols": ["Neural Network", "Singularity", "Emergent Mind"]
+      "name": "Quantum Sensing",
+      "description": "Ultra-precise sensors that measure time, gravity, magnetic fields, and acceleration with atomic precision",
+      "context": "Exploiting quantum phenomena for unprecedented measurement precision. Applications in navigation, medical imaging, underground mapping, and detecting hidden objects or activities.",
+      "symbols": ["Atomic Clock", "Gravity Map", "Magnetic Field"]
     },
     {
       "id": "tech-02",
-      "name": "BCI",
-      "description": "Brain-Computer Interface",
-      "context": "Direct communication pathways between the brain and external devices. Enables neural control, sensory augmentation, and potential thought-to-machine transmission.",
-      "symbols": ["Neural Link", "Mind Bridge", "Synaptic Gateway"]
+      "name": "Quantum Computing",
+      "description": "Computers using quantum bits (qubits) to solve problems exponentially faster than classical computers",
+      "context": "Computation using quantum mechanical phenomena. Potential to break current encryption, simulate molecular systems, optimize complex logistics, and solve previously intractable problems.",
+      "symbols": ["Qubit", "Superposition", "Entanglement"]
     },
     {
       "id": "tech-03",
       "name": "Quantum Communication",
-      "description": "Unhackable information transfer",
-      "context": "Quantum key distribution and entanglement-based communication enabling theoretically unbreakable encryption and secure data transmission.",
+      "description": "Transmission of information using quantum states to create unhackable communication channels",
+      "context": "Quantum key distribution and entanglement-based communication enabling theoretically unbreakable encryption and secure data transmission across networks.",
       "symbols": ["Entangled Photons", "Secure Channel", "Quantum Key"]
     },
     {
       "id": "tech-04",
-      "name": "Quantum Sensing",
-      "description": "Ultra-precise measurement",
-      "context": "Exploiting quantum phenomena for unprecedented measurement precision. Applications in navigation, medical imaging, and detecting hidden objects or activities.",
-      "symbols": ["Atomic Clock", "Gravity Map", "Magnetic Field"]
+      "name": "Climate Tech",
+      "description": "Technologies designed to monitor, mitigate, or adapt to climate change, from carbon capture to weather prediction",
+      "context": "Systems for measuring environmental change, capturing carbon, generating clean energy, and engineering resilience. Balancing urgency with unintended consequences.",
+      "symbols": ["Carbon Capture", "Solar Array", "Climate Model"]
     },
     {
       "id": "tech-05",
-      "name": "Quantum Computing",
-      "description": "Exponential computational power",
-      "context": "Computation using quantum mechanical phenomena. Potential to break current encryption, simulate molecular systems, and solve previously intractable problems.",
-      "symbols": ["Qubit", "Superposition", "Entanglement"]
+      "name": "Biotech",
+      "description": "Technologies that manipulate biological systems, including gene editing, synthetic biology, and personalized medicine",
+      "context": "Design and modification of biological parts, devices, and systems. Potential for new medicines, materials, fuels, and organisms with novel capabilities.",
+      "symbols": ["DNA Helix", "CRISPR", "Engineered Cell"]
     },
     {
       "id": "tech-06",
-      "name": "Robotics",
-      "description": "Autonomous physical systems",
-      "context": "Advanced autonomous machines capable of operating in complex environments. From manufacturing to caregiving, reshaping labor and human-machine interaction.",
-      "symbols": ["Actuator", "Sensor Array", "Autonomous Agent"]
+      "name": "Neurotech",
+      "description": "Technologies that interface with the brain and nervous system, from brain scans to implants that read or influence thoughts",
+      "context": "Direct communication pathways between the brain and external devices. Enables neural control, sensory augmentation, memory enhancement, and treatment of neurological conditions.",
+      "symbols": ["Neural Link", "Brainwave", "Synaptic Interface"]
     },
     {
       "id": "tech-07",
-      "name": "Synthetic Biology",
-      "description": "Engineering life itself",
-      "context": "Design and construction of new biological parts, devices, and systems. Potential for new medicines, materials, fuels, and organisms with novel capabilities.",
-      "symbols": ["DNA Helix", "Bioreactor", "Engineered Cell"]
+      "name": "Space Tech",
+      "description": "Technologies for operating in space, including satellites, space-based infrastructure, and off-Earth resources",
+      "context": "Systems for Earth observation, global communications, positioning, and resource extraction beyond Earth. New frontiers for commerce, security, and human expansion.",
+      "symbols": ["Satellite", "Orbit", "Launch Vehicle"]
     },
     {
       "id": "tech-08",
-      "name": "Neurotechnology",
-      "description": "Interfacing with the nervous system",
-      "context": "Technologies that interact with the brain and nervous system. Memory enhancement, mood regulation, and treatment of neurological conditions.",
-      "symbols": ["Neuron", "Brainwave", "Synaptic Pulse"]
+      "name": "AGI",
+      "description": "AI systems that match human-level reasoning across all domains, capable of learning any task a human can",
+      "context": "Artificial General Intelligence matching human cognitive abilities across all domains. Self-improving systems capable of autonomous goal-setting and problem-solving.",
+      "symbols": ["Neural Network", "General Learner", "Emergent Mind"]
+    },
+    {
+      "id": "tech-09",
+      "name": "ASI",
+      "description": "AI systems that surpass human intelligence in every domain, potentially beyond human understanding or control",
+      "context": "Artificial Superintelligence exceeding human capabilities in all cognitive tasks. Raises fundamental questions about control, alignment, and humanity's role.",
+      "symbols": ["Singularity", "Transcendence", "Unknown Horizon"]
+    },
+    {
+      "id": "tech-10",
+      "name": "Robotics",
+      "description": "Autonomous physical machines that can sense, decide, and act in the real world, from drones to humanoid robots",
+      "context": "Advanced autonomous machines operating in complex environments. From manufacturing to caregiving, reshaping labor, warfare, and human-machine interaction.",
+      "symbols": ["Actuator", "Sensor Array", "Autonomous Agent"]
     }
   ],
 
   "actors": [
     {
       "id": "actor-01",
-      "name": "Foreign States",
-      "description": "International government actors",
-      "context": "Nation-states pursuing strategic advantages through technology adoption, regulation, or disruption. Geopolitical competition and cooperation dynamics.",
-      "symbols": ["Flag", "Embassy", "Strategic Interest"]
-    },
-    {
-      "id": "actor-02",
-      "name": "Dutch Government",
-      "description": "National policy and regulation",
-      "context": "The Netherlands' executive, legislative, and regulatory bodies. Balancing innovation promotion, citizen protection, and international obligations.",
-      "symbols": ["Parliament", "Ministry", "Policy Framework"]
-    },
-    {
-      "id": "actor-03",
       "name": "Criminal Networks",
-      "description": "Organized illegal actors",
+      "description": "Organized crime groups that are often early adopters of new technologies to exploit vulnerabilities",
       "context": "Transnational criminal organizations exploiting technologies for profit, disruption, or power. Rapid adaptation to new opportunities and vulnerabilities.",
       "symbols": ["Shadow Network", "Dark Market", "Exploit"]
     },
     {
-      "id": "actor-04",
-      "name": "Tech Companies",
-      "description": "Private sector innovators",
-      "context": "Startups and mid-size companies driving innovation while pursuing profit. Agile players racing for market position and technological breakthroughs.",
-      "symbols": ["Startup", "Innovation", "Market Share"]
+      "id": "actor-02",
+      "name": "Foreign States",
+      "description": "National governments that may use technology for espionage, cyber warfare, or geopolitical pressure",
+      "context": "Nation-states pursuing strategic advantages through technology adoption, regulation, or disruption. Geopolitical competition, espionage, and influence operations.",
+      "symbols": ["Flag", "Embassy", "Strategic Interest"]
     },
     {
-      "id": "actor-05",
+      "id": "actor-03",
       "name": "Big Tech",
-      "description": "Dominant platform giants",
-      "context": "The handful of trillion-dollar technology corporations with unprecedented market power, data access, and infrastructure control. Gatekeepers of the digital economy.",
-      "symbols": ["Platform", "Monopoly", "Infrastructure"]
+      "description": "Large technology corporations that control platforms, data, and infrastructure",
+      "context": "Trillion-dollar technology corporations with unprecedented market power, data access, and infrastructure control. Gatekeepers of the digital economy.",
+      "symbols": ["Platform", "Data Center", "Infrastructure"]
     },
     {
-      "id": "actor-06",
-      "name": "Hacktivists",
-      "description": "Ideologically motivated actors",
-      "context": "Individuals and groups using technology for political or social causes. Exposing secrets, disrupting systems, or enabling resistance movements.",
-      "symbols": ["Anonymous Mask", "Leak", "Digital Resistance"]
-    },
-    {
-      "id": "actor-07",
+      "id": "actor-04",
       "name": "Research Institutions",
-      "description": "Universities and labs",
-      "context": "Academic and government research organizations advancing fundamental science and applied technology. Knowledge creation and talent development.",
+      "description": "Universities and labs that drive innovation but also face questions about ethics and knowledge security",
+      "context": "Academic and government research organizations advancing fundamental science and applied technology. Knowledge creation, talent development, and ethical oversight.",
       "symbols": ["Laboratory", "Publication", "Discovery"]
     },
     {
-      "id": "actor-08",
+      "id": "actor-05",
       "name": "NGOs",
-      "description": "Civil society organizations",
-      "context": "Non-governmental organizations advocating for rights, ethics, transparency, and public interest in technology development and deployment.",
+      "description": "Non-governmental organizations that act as watchdogs, advocates, or alternative governance structures",
+      "context": "Civil society organizations advocating for rights, ethics, transparency, and public interest in technology development and deployment.",
       "symbols": ["Advocacy", "Watchdog", "Public Interest"]
     },
     {
-      "id": "actor-09",
+      "id": "actor-06",
+      "name": "Citizens",
+      "description": "The general public as adopters, resisters, or grassroots movements",
+      "context": "Individual people and communities as users, subjects, and stakeholders of emerging technologies. Public opinion, adoption patterns, and collective action.",
+      "symbols": ["Community", "Consumer", "Movement"]
+    },
+    {
+      "id": "actor-07",
       "name": "Journalists",
-      "description": "Media and investigative reporters",
-      "context": "Traditional and independent journalists investigating, reporting, and shaping public narrative around technology. Watchdogs, amplifiers, and sense-makers.",
+      "description": "Media actors who expose information, hold power accountable, or become targets of information warfare",
+      "context": "Traditional and independent journalists investigating, reporting, and shaping public narrative around technology. Watchdogs, amplifiers, and targets.",
       "symbols": ["Press", "Investigation", "Narrative"]
     },
     {
+      "id": "actor-08",
+      "name": "Startups",
+      "description": "Fast-moving new companies that disrupt markets and often outpace regulation",
+      "context": "Agile companies racing for market position and technological breakthroughs. Move fast, break things, and challenge incumbents.",
+      "symbols": ["Disruption", "Innovation", "Venture Capital"]
+    },
+    {
+      "id": "actor-09",
+      "name": "Insurance Companies",
+      "description": "Risk assessors that influence behavior through pricing, coverage decisions, and data requirements",
+      "context": "Financial institutions that price and distribute risk. Shape adoption through coverage terms, influence standards through requirements, and collect vast behavioral data.",
+      "symbols": ["Risk Model", "Premium", "Actuary"]
+    },
+    {
       "id": "actor-10",
-      "name": "Citizens",
-      "description": "The general public",
-      "context": "Individual people and communities as users, subjects, and stakeholders of emerging technologies. Public opinion, adoption, and resistance.",
-      "symbols": ["Community", "Consumer", "Voter"]
+      "name": "Blank Card",
+      "description": "Space for participants to write their own actor",
+      "context": "An open slot for workshop participants to introduce an actor relevant to their specific context or scenario.",
+      "symbols": ["Your Choice", "Custom Actor", "Write Your Own"]
     }
   ],
 
@@ -141,215 +155,72 @@
     {
       "id": "event-01",
       "name": "Major Breakthrough",
-      "description": "Unexpected leap forward",
+      "description": "A sudden leap in technological capability that changes what is possible",
       "context": "A significant scientific or engineering advancement that dramatically accelerates a technology's capabilities or accessibility.",
       "symbols": ["Eureka", "Paradigm Shift", "Leap"]
     },
     {
       "id": "event-02",
       "name": "Security Breach",
-      "description": "Critical vulnerability exposed",
+      "description": "A hack, leak, or compromise that exposes data or system vulnerabilities",
       "context": "A major hack, leak, or security failure exposing sensitive data, infrastructure vulnerabilities, or compromising critical systems.",
       "symbols": ["Breach", "Vulnerability", "Exposure"]
     },
     {
       "id": "event-03",
-      "name": "Accelerated Funding",
-      "description": "Massive investment influx",
-      "context": "Sudden surge in public or private funding dramatically accelerating development, deployment, or scaling of a technology.",
-      "symbols": ["Capital", "Investment", "Resources"]
+      "name": "Regulatory Shift",
+      "description": "A change in rules such as a new law, lifted ban, or policy reversal",
+      "context": "Significant new laws, regulations, or standards that reshape what is permitted, required, or prohibited in technology development and use.",
+      "symbols": ["Legislation", "Policy Change", "New Rules"]
     },
     {
       "id": "event-04",
-      "name": "Technical Setback",
-      "description": "Critical failure or limitation",
-      "context": "A major technical failure, discovered limitation, or fundamental barrier that significantly delays or redirects a technology's development.",
-      "symbols": ["Failure", "Barrier", "Limitation"]
-    },
-    {
-      "id": "event-05",
-      "name": "Regulatory Change",
-      "description": "New rules of the game",
-      "context": "Significant new laws, regulations, or standards that reshape what is permitted, required, or prohibited in technology development and use.",
-      "symbols": ["Legislation", "Compliance", "Framework"]
-    },
-    {
-      "id": "event-06",
-      "name": "Public Backlash",
-      "description": "Widespread resistance",
-      "context": "Strong public opposition to a technology or its applications, potentially leading to protests, boycotts, or political pressure.",
-      "symbols": ["Protest", "Rejection", "Outrage"]
-    },
-    {
-      "id": "event-07",
-      "name": "International Treaty",
-      "description": "Global agreement",
-      "context": "A binding international agreement establishing norms, restrictions, or cooperation frameworks for technology development or use.",
-      "symbols": ["Accord", "Cooperation", "Global Norm"]
-    },
-    {
-      "id": "event-08",
-      "name": "Market Collapse",
-      "description": "Economic disruption",
-      "context": "A major market failure, bubble burst, or economic shock affecting technology funding, adoption, or the viability of key players.",
-      "symbols": ["Crash", "Disruption", "Instability"]
-    },
-    {
-      "id": "event-09",
       "name": "Talent Exodus",
-      "description": "Brain drain",
+      "description": "Brain drain where key experts leave a country, sector, or organization",
       "context": "Mass migration of key researchers, engineers, or experts away from a region, organization, or field, shifting the balance of capability.",
       "symbols": ["Migration", "Brain Drain", "Talent Shift"]
     },
     {
+      "id": "event-05",
+      "name": "International Treaty",
+      "description": "A global agreement that enables or restricts certain technologies or practices",
+      "context": "A binding international agreement establishing norms, restrictions, or cooperation frameworks for technology development or use.",
+      "symbols": ["Accord", "Cooperation", "Global Norm"]
+    },
+    {
+      "id": "event-06",
+      "name": "Maturity Tipping Point",
+      "description": "The moment a technology becomes reliable, affordable, and scalable for widespread use",
+      "context": "When a technology crosses the threshold from experimental to mainstream. Cost drops, reliability improves, and adoption accelerates rapidly.",
+      "symbols": ["Adoption Curve", "Critical Mass", "Mainstream"]
+    },
+    {
+      "id": "event-07",
+      "name": "Loss of Control",
+      "description": "When a system or process produces unintended consequences or becomes unmanageable",
+      "context": "A system escapes its intended boundaries, producing cascading effects, unintended behaviors, or consequences beyond human ability to manage.",
+      "symbols": ["Cascade", "Runaway", "Unintended"]
+    },
+    {
+      "id": "event-08",
+      "name": "Public Scandal",
+      "description": "An exposure or revelation that triggers public outrage and demands for change",
+      "context": "A revelation of misconduct, failure, or harm that captures public attention and creates pressure for accountability and reform.",
+      "symbols": ["Outrage", "Exposure", "Reckoning"]
+    },
+    {
+      "id": "event-09",
+      "name": "Market Collapse",
+      "description": "Economic disruption that reveals hidden dependencies or causes sudden shifts in power",
+      "context": "A major market failure, bubble burst, or economic shock affecting technology funding, adoption, or the viability of key players.",
+      "symbols": ["Crash", "Disruption", "Instability"]
+    },
+    {
       "id": "event-10",
-      "name": "Open Source Release",
-      "description": "Democratized access",
-      "context": "A powerful technology or model released openly, democratizing access and enabling rapid global proliferation and adaptation.",
-      "symbols": ["Open Access", "Proliferation", "Commons"]
-    },
-    {
-      "id": "event-11",
-      "name": "War",
-      "description": "Armed conflict erupts",
-      "context": "Military conflict between states or major armed groups. Reshapes priorities, accelerates certain technologies, disrupts supply chains, and creates new threat landscapes.",
-      "symbols": ["Conflict", "Mobilization", "Destruction"]
-    },
-    {
-      "id": "event-12",
-      "name": "Leak",
-      "description": "Secrets exposed",
-      "context": "Unauthorized disclosure of confidential information—trade secrets, government documents, or private communications. Changes public understanding and power dynamics.",
-      "symbols": ["Whistleblower", "Disclosure", "Exposure"]
-    },
-    {
-      "id": "event-13",
-      "name": "Natural Disaster",
-      "description": "Catastrophic event strikes",
-      "context": "Earthquake, pandemic, extreme weather, or other natural catastrophe. Tests resilience, redirects resources, and reveals vulnerabilities in technological systems.",
-      "symbols": ["Catastrophe", "Resilience", "Recovery"]
-    }
-  ],
-
-  "wellbeing": [
-    {
-      "id": "well-01",
-      "name": "Autonomy",
-      "description": "Freedom to choose",
-      "positive": "Enhanced self-determination, more choices, greater personal agency",
-      "negative": "Manipulation, loss of free will, algorithmic control of decisions"
-    },
-    {
-      "id": "well-02",
-      "name": "Safety",
-      "description": "Freedom from harm",
-      "positive": "Better protection, early warning systems, reduced accidents",
-      "negative": "New dangers, unforeseen risks, systemic vulnerabilities"
-    },
-    {
-      "id": "well-03",
-      "name": "Security",
-      "description": "Protection and stability",
-      "positive": "Stronger defenses, privacy protection, stable institutions",
-      "negative": "Surveillance, vulnerability, erosion of trust"
-    },
-    {
-      "id": "well-04",
-      "name": "Comfort",
-      "description": "Ease and convenience",
-      "positive": "Reduced friction, automated tasks, improved quality of life",
-      "negative": "Dependency, atrophy of skills, loss of resilience"
-    },
-    {
-      "id": "well-05",
-      "name": "Community",
-      "description": "Belonging and connection",
-      "positive": "Stronger bonds, new forms of community, inclusive participation",
-      "negative": "Isolation, fragmentation, erosion of social fabric"
-    },
-    {
-      "id": "well-06",
-      "name": "Beauty",
-      "description": "Aesthetic experience",
-      "positive": "New art forms, enhanced perception, creative flourishing",
-      "negative": "Homogenization, loss of authenticity, aesthetic pollution"
-    },
-    {
-      "id": "well-07",
-      "name": "Competence",
-      "description": "Skill and mastery",
-      "positive": "Augmented abilities, new skills, enhanced learning",
-      "negative": "Deskilling, obsolescence, learned helplessness"
-    },
-    {
-      "id": "well-08",
-      "name": "Fitness",
-      "description": "Health and vitality",
-      "positive": "Better health outcomes, longevity, enhanced physical capability",
-      "negative": "New health risks, sedentary lifestyle, biological vulnerabilities"
-    },
-    {
-      "id": "well-09",
-      "name": "Impact",
-      "description": "Making a difference",
-      "positive": "Greater leverage, scaled influence, meaningful contribution",
-      "negative": "Powerlessness, irrelevance, unintended consequences"
-    },
-    {
-      "id": "well-10",
-      "name": "Purpose",
-      "description": "Meaning and direction",
-      "positive": "New missions, clearer goals, meaningful work",
-      "negative": "Existential crisis, loss of meaning, purposelessness"
-    },
-    {
-      "id": "well-11",
-      "name": "Relatedness",
-      "description": "Human connection",
-      "positive": "Deeper understanding, empathy, strengthened relationships",
-      "negative": "Alienation, superficial connections, loss of intimacy"
-    },
-    {
-      "id": "well-12",
-      "name": "Stimulation",
-      "description": "Engagement and novelty",
-      "positive": "New experiences, curiosity satisfied, engagement",
-      "negative": "Overwhelm, addiction, sensory overload"
-    },
-    {
-      "id": "well-13",
-      "name": "Privacy",
-      "description": "Control over personal information",
-      "positive": "Data sovereignty, selective disclosure, personal boundaries respected",
-      "negative": "Total surveillance, data exploitation, no place to hide"
-    },
-    {
-      "id": "well-14",
-      "name": "Trust",
-      "description": "Confidence in systems and others",
-      "positive": "Reliable institutions, verified information, dependable relationships",
-      "negative": "Pervasive deception, institutional collapse, nothing is as it seems"
-    },
-    {
-      "id": "well-15",
-      "name": "Fairness",
-      "description": "Just and equitable treatment",
-      "positive": "Equal opportunity, unbiased systems, justice for all",
-      "negative": "Algorithmic discrimination, winner-take-all, systemic injustice"
-    },
-    {
-      "id": "well-16",
-      "name": "Livelihood",
-      "description": "Means of earning a living",
-      "positive": "New job opportunities, augmented productivity, economic security",
-      "negative": "Mass unemployment, precarious work, economic obsolescence"
-    },
-    {
-      "id": "well-17",
-      "name": "Identity",
-      "description": "Sense of self and belonging",
-      "positive": "Authentic self-expression, recognized individuality, cultural continuity",
-      "negative": "Identity theft, forced conformity, loss of human distinctiveness"
+      "name": "Blank Card",
+      "description": "Space for participants to write their own trigger",
+      "context": "An open slot for workshop participants to introduce a trigger event relevant to their specific context or scenario.",
+      "symbols": ["Your Choice", "Custom Trigger", "Write Your Own"]
     }
   ]
 }

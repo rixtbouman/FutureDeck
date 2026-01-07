@@ -3,7 +3,7 @@
  * Render Emerging Technologies Futures cards
  *
  * Specifications:
- * - Size: 1050x1750 pixels (print-ready with bleed)
+ * - Size: A6 (105x148mm at 300 DPI = 1240x1748 pixels)
  * - Output: assets/cards-emerging/
  */
 
@@ -22,16 +22,15 @@ const CARDS_DATA = require('./cards-emerging-tech.json');
 const ARTWORK_DIR = path.join(PROJECT_DIR, 'assets', 'artwork-emerging');
 const OUTPUT_DIR = path.join(PROJECT_DIR, 'assets', 'cards-emerging');
 
-// Print dimensions
-const CARD_WIDTH = 1050;
-const CARD_HEIGHT = 1750;
+// A6 at 300 DPI: 105mm x 148mm = 1240 x 1748 pixels
+const CARD_WIDTH = 1240;
+const CARD_HEIGHT = 1748;
 
-// Category color styles - fresh, lighter aesthetic
+// Category styles - solid background colors, black text
 const categoryStyles = {
-  technology: { bg: 'linear-gradient(to bottom, #e0f2fe, #bae6fd)', color: '#0369a1', textColor: '#0c4a6e', name: 'Technology' },
-  actors:     { bg: 'linear-gradient(to bottom, #f3e8ff, #e9d5ff)', color: '#7c3aed', textColor: '#5b21b6', name: 'Actor' },
-  events:     { bg: 'linear-gradient(to bottom, #ffedd5, #fed7aa)', color: '#c2410c', textColor: '#7c2d12', name: 'Event' },
-  wellbeing:  { bg: 'linear-gradient(to bottom, #dcfce7, #bbf7d0)', color: '#15803d', textColor: '#14532d', name: 'Wellbeing' }
+  technology: { bg: '#EBEBFF', name: 'TECHNOLOGY' },
+  actors:     { bg: '#FFE7FF', name: 'ACTOR' },
+  events:     { bg: '#FFEBEB', name: 'EVENT' }
 };
 
 // Build card list from JSON
@@ -44,8 +43,7 @@ function buildCardList() {
       category: 'technology',
       name: card.name,
       description: card.description,
-      context: card.context,
-      symbols: card.symbols
+      isBlank: card.name === 'Blank Card'
     });
   }
 
@@ -55,8 +53,7 @@ function buildCardList() {
       category: 'actors',
       name: card.name,
       description: card.description,
-      context: card.context,
-      symbols: card.symbols
+      isBlank: card.name === 'Blank Card'
     });
   }
 
@@ -66,19 +63,7 @@ function buildCardList() {
       category: 'events',
       name: card.name,
       description: card.description,
-      context: card.context,
-      symbols: card.symbols
-    });
-  }
-
-  for (const card of CARDS_DATA.wellbeing) {
-    cards.push({
-      id: card.id,
-      category: 'wellbeing',
-      name: card.name,
-      description: card.description,
-      positive: card.positive,
-      negative: card.negative
+      isBlank: card.name === 'Blank Card'
     });
   }
 
@@ -89,47 +74,107 @@ function generateCardHTML(card, imageDataUrl) {
   const style = categoryStyles[card.category];
   const hasImage = !!imageDataUrl;
 
-  // For wellbeing cards, show positive/negative outcomes
-  let contextHTML = '';
-  if (card.positive && card.negative) {
-    contextHTML = `
-      <div class="outcomes">
-        <div class="outcome positive">+ ${card.positive}</div>
-        <div class="outcome negative">- ${card.negative}</div>
-      </div>`;
-  } else if (card.context) {
-    contextHTML = `<div class="context">${card.context}</div>`;
-  }
-
-  // Scale factor from 900x1500 reference to 1050x1750
-  const scale = CARD_WIDTH / 900;
-
-  return `
+  // For blank cards: show category, no title, "Write your own input" at bottom
+  if (card.isBlank) {
+    return `
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       width: ${CARD_WIDTH}px;
       height: ${CARD_HEIGHT}px;
       overflow: hidden;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Roboto Mono', monospace;
     }
     .card {
       width: 100%;
       height: 100%;
-      background: #fafafa;
+      background: ${style.bg};
       display: flex;
       flex-direction: column;
       overflow: hidden;
     }
     .artwork {
-      height: ${Math.round(1050 * scale)}px;
+      height: ${CARD_WIDTH}px;
       overflow: hidden;
-      background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+      background: #e0e0e0;
+      position: relative;
+    }
+    .artwork img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .text-panel {
+      flex: 1;
+      padding: 56px 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .category {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 42px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #000000;
+    }
+    .write-prompt {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 36px;
+      font-weight: 400;
+      color: #000000;
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="artwork">
+      ${hasImage ? `<img src="${imageDataUrl}" alt="${style.name}">` : ''}
+    </div>
+    <div class="text-panel">
+      <div class="category">${style.name}</div>
+      <div class="write-prompt">Write your own input</div>
+    </div>
+  </div>
+</body>
+</html>`;
+  }
+
+  // Regular card
+  return `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: ${CARD_WIDTH}px;
+      height: ${CARD_HEIGHT}px;
+      overflow: hidden;
+      font-family: 'Roboto Mono', monospace;
+    }
+    .card {
+      width: 100%;
+      height: 100%;
+      background: ${style.bg};
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .artwork {
+      height: ${CARD_WIDTH}px;
+      overflow: hidden;
+      background: #e0e0e0;
       position: relative;
     }
     .artwork img {
@@ -144,62 +189,41 @@ function generateCardHTML(card, imageDataUrl) {
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: ${Math.round(72 * scale)}px;
-      color: ${style.color};
-      opacity: 0.3;
+      font-size: 72px;
+      color: #000000;
+      opacity: 0.2;
     }
     .text-panel {
-      padding: ${Math.round(36 * scale)}px ${Math.round(70 * scale)}px ${Math.round(24 * scale)}px;
-      background: ${style.bg};
-      border-top: ${Math.round(5 * scale)}px solid ${style.color};
+      flex: 1;
+      padding: 56px 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
     .category {
-      font-family: 'Inter', sans-serif;
-      font-size: ${Math.round(26 * scale)}px;
-      font-weight: 600;
-      letter-spacing: 0.15em;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 42px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      margin-bottom: ${Math.round(10 * scale)}px;
-      color: ${style.color};
+      margin-bottom: 20px;
+      color: #000000;
     }
     .title {
       font-family: 'Roboto Mono', monospace;
-      font-size: ${Math.round(68 * scale)}px;
+      font-size: 72px;
       font-weight: 700;
-      color: ${style.textColor};
+      color: #000000;
       line-height: 1.1;
+      margin-bottom: 20px;
     }
     .subtitle {
-      font-size: ${Math.round(36 * scale)}px;
-      color: ${style.textColor};
-      opacity: 0.7;
-      margin-top: ${Math.round(10 * scale)}px;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 36px;
       font-weight: 400;
+      color: #000000;
+      line-height: 1.35;
     }
-    .content {
-      padding: ${Math.round(28 * scale)}px ${Math.round(70 * scale)}px ${Math.round(70 * scale)}px;
-      background: ${style.bg};
-      flex: 1;
-    }
-    .context {
-      font-size: ${Math.round(34 * scale)}px;
-      line-height: 1.45;
-      color: ${style.textColor};
-      opacity: 0.85;
-    }
-    .outcomes {
-      display: flex;
-      flex-direction: column;
-      gap: ${Math.round(14 * scale)}px;
-    }
-    .outcome {
-      font-size: ${Math.round(30 * scale)}px;
-      line-height: 1.4;
-      padding: ${Math.round(14 * scale)}px ${Math.round(18 * scale)}px;
-      border-radius: ${Math.round(10 * scale)}px;
-    }
-    .positive { background: rgba(22, 163, 74, 0.15); color: #15803d; }
-    .negative { background: rgba(220, 38, 38, 0.12); color: #b91c1c; }
   </style>
 </head>
 <body>
@@ -215,28 +239,30 @@ function generateCardHTML(card, imageDataUrl) {
       <div class="title">${card.name}</div>
       <div class="subtitle">${card.description || ''}</div>
     </div>
-    <div class="content">
-      ${contextHTML}
-    </div>
   </div>
 </body>
 </html>`;
 }
 
-function generateCardBackHTML() {
-  const scale = CARD_WIDTH / 900;
+function generateCardBackHTML(category) {
+  const backgrounds = {
+    technology: '#EBEBFF',
+    actors: '#FFE7FF',
+    events: '#FFEBEB'
+  };
+  const bg = backgrounds[category] || '#EBEBFF';
 
   return `
 <!DOCTYPE html>
 <html>
 <head>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       width: ${CARD_WIDTH}px;
       height: ${CARD_HEIGHT}px;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Roboto Mono', monospace;
       overflow: hidden;
     }
     .card-back {
@@ -246,61 +272,46 @@ function generateCardBackHTML() {
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 50%, #e0f2fe 100%);
-      border: ${Math.round(4 * scale)}px solid rgba(3, 105, 161, 0.3);
+      background: ${bg};
     }
     .pattern {
       position: absolute;
       width: 100%;
       height: 100%;
-      opacity: 0.08;
+      opacity: 0.04;
       background-image:
-        repeating-linear-gradient(45deg, #0369a1 0, #0369a1 1px, transparent 1px, transparent ${Math.round(40 * scale)}px),
-        repeating-linear-gradient(-45deg, #0369a1 0, #0369a1 1px, transparent 1px, transparent ${Math.round(40 * scale)}px);
+        repeating-linear-gradient(45deg, #000 0, #000 1px, transparent 1px, transparent 50px),
+        repeating-linear-gradient(-45deg, #000 0, #000 1px, transparent 1px, transparent 50px);
     }
-    .logo {
+    .content {
       position: relative;
       z-index: 1;
       text-align: center;
     }
-    .logo-symbol {
-      font-size: ${Math.round(180 * scale)}px;
-      color: #0369a1;
-      margin-bottom: ${Math.round(40 * scale)}px;
-    }
-    .logo-text {
+    .title {
       font-family: 'Roboto Mono', monospace;
-      font-size: ${Math.round(64 * scale)}px;
+      font-size: 72px;
       font-weight: 700;
-      color: #0c4a6e;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      color: #000000;
+      letter-spacing: 0.02em;
+      line-height: 1.15;
     }
-    .logo-subtitle {
+    .byline {
       font-family: 'Roboto Mono', monospace;
-      font-size: ${Math.round(42 * scale)}px;
-      font-weight: 500;
-      color: #0369a1;
-      letter-spacing: 0.1em;
-      margin-top: ${Math.round(16 * scale)}px;
-    }
-    .logo-tagline {
-      font-size: ${Math.round(26 * scale)}px;
-      color: #0c4a6e;
-      opacity: 0.7;
-      letter-spacing: 0.05em;
-      margin-top: ${Math.round(30 * scale)}px;
+      font-size: 32px;
+      font-weight: 400;
+      color: #000000;
+      opacity: 0.6;
+      margin-top: 40px;
     }
   </style>
 </head>
 <body>
   <div class="card-back">
     <div class="pattern"></div>
-    <div class="logo">
-      <div class="logo-symbol">&#x25C8;</div>
-      <div class="logo-text">Emerging Tech</div>
-      <div class="logo-subtitle">Futures</div>
-      <div class="logo-tagline">A Disruption Scenario Deck</div>
+    <div class="content">
+      <div class="title">Emerging Tech<br>Futures</div>
+      <div class="byline">by Quantum Delta</div>
     </div>
   </div>
 </body>
@@ -319,7 +330,7 @@ async function renderCard(browser, html, outputPath) {
 async function main() {
   console.log('Emerging Technologies Futures - Card Renderer');
   console.log('='.repeat(50));
-  console.log(`\nOutput size: ${CARD_WIDTH}x${CARD_HEIGHT} pixels`);
+  console.log(`\nOutput size: ${CARD_WIDTH}x${CARD_HEIGHT} pixels (A6 @ 300 DPI)`);
   console.log(`Output: ${OUTPUT_DIR}\n`);
 
   if (!fs.existsSync(OUTPUT_DIR)) {
@@ -367,17 +378,20 @@ async function main() {
     console.log(`[${i + 1}/${cards.length}] ${card.name} ${status}`);
   }
 
-  // Render card back
-  console.log('\nRendering card back...');
-  const backHtml = generateCardBackHTML();
-  const backPath = path.join(OUTPUT_DIR, 'card-back.png');
-  await renderCard(browser, backHtml, backPath);
-  console.log('✓ card-back.png');
+  // Render category-specific card backs
+  console.log('\nRendering card backs...');
+  const categories = ['technology', 'actors', 'events'];
+  for (const category of categories) {
+    const backHtml = generateCardBackHTML(category);
+    const backPath = path.join(OUTPUT_DIR, `card-back-${category}.png`);
+    await renderCard(browser, backHtml, backPath);
+    console.log(`✓ card-back-${category}.png`);
+  }
 
   await browser.close();
 
   console.log('\n' + '='.repeat(50));
-  console.log(`Done! Rendered ${cards.length + 1} cards to:`);
+  console.log(`Done! Rendered ${cards.length} cards + 3 backs to:`);
   console.log(OUTPUT_DIR);
 }
 
