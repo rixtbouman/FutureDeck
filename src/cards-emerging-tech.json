@@ -30,7 +30,7 @@
     {
       "id": "tech-04",
       "name": "Climate Tech",
-      "description": "Technologies designed to monitor, mitigate, or adapt to climate change, from carbon capture to weather prediction",
+      "description": "Technologies that intervene in Earth's climate systems, from manipulating weather patterns to geoengineering the atmosphere",
       "context": "Systems for measuring environmental change, capturing carbon, generating clean energy, and engineering resilience. Balancing urgency with unintended consequences.",
       "symbols": ["Carbon Capture", "Solar Array", "Climate Model"]
     },

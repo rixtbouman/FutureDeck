@@ -55,7 +55,7 @@ const CARDS = [
   {
     id: 'tech-04',
     name: 'Climate Tech',
-    prompt: `${BASE_STYLE} Massive carbon capture facility with towering atmospheric processors against dramatic sky, direct air capture machines drawing CO2 from atmosphere, renewable energy arrays spanning the horizon, climate modeling supercomputer visualizing Earth's future, geoengineering technology addressing planetary crisis, climate greens and atmospheric blues.`
+    prompt: `${BASE_STYLE} Massive geoengineering installation in the sky, solar radiation management, stratospheric aerosol injection, giant reflective mirrors in orbit, weather manipulation towers, dramatic scale of planetary intervention, humans playing god with Earth's atmosphere, ominous yet awe-inspiring, blue and orange dramatic lighting, science fiction becoming reality.`
   },
   {
     id: 'tech-05',
